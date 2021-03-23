@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Phone;
 
+use App\Http\Helpers\JwtDecoderHelper;
+use App\Model\DhammaSchoolHasPhone;
 use App\Model\Phone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,11 +17,17 @@ class DhammaSchoolPhoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $PN = Phone:: get();
+        $SESSION_KEY_TOKEN = $request->header('Session-Key');
+        $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
 
-        return response()->json(["message"=>"Find all DhammaSchool Phone Numbers","status"=>$PN],200);
+        $DMHP = DhammaSchoolHasPhone::join('phone','dhamma_school_has_phone.phone_id','=','phone.id')
+            ->where('dhamma_school_has_phone.dhamma_school_id','=',$userid)
+            ->select('phone.id as id','phone.phoneName','phone.isPrimary','dhamma_school_has_phone.id as temporaryPhoneId')
+            ->get();
+
+        return response()->json(["message"=>"Find all Dhamma School phone","response"=>$DMHP],200);
     }
 
     /**
@@ -43,6 +51,8 @@ class DhammaSchoolPhoneController extends Controller
         $rule = [
 
             'phoneName' => 'required|min:1|max:15',
+            'isPrimary' => 'required',
+            'dhamma_school_id'  => 'required|numeric'
 
         ];
         $validator = Validator::make(
@@ -54,7 +64,8 @@ class DhammaSchoolPhoneController extends Controller
 
         } else {
             $phoneName = $request->phoneName;
-            $isPrimary =false;
+            $isPrimary = $request ->isPrimary;
+            $dhamma_school_id = $request ->dhamma_school_id;
 
 
             $PN = new Phone();
@@ -62,7 +73,12 @@ class DhammaSchoolPhoneController extends Controller
             $PN->isPrimary = $isPrimary ;
             $PN->save();
 
-            return response()->json(["message"=>"Successfully Insert DhammaSchool Phone Number"],200);
+            $DMHP = new DhammaSchoolHasPhone();
+            $DMHP  ->phone_id = $PN -> id;
+            $DMHP  ->dhamma_school_id = $dhamma_school_id;
+            $DMHP  ->save();
+
+            return response()->json(["message"=>"Successfully Insert Dhamma School Phone Number"],200);
 
         }
     }
@@ -75,11 +91,13 @@ class DhammaSchoolPhoneController extends Controller
      */
     public function show($id)
     {
-        $PN = Phone :: where('isPrimary',0)
-            -> where('id',$id)
-            -> first();
+        $DMHP = DhammaSchoolHasPhone::join('phone','dhamma_school_has_phone.phone_id','=','phone.id')
+            ->where('dhamma_school_has_phone.id','=' , $id)
+            ->select('phone.id as id','phone.phoneName','phone.isPrimary','dhamma_school_has_phone.id as temporaryPhoneId')
+            ->first();
 
-        return response()->json(["message"=>"Find one DhammaSchool Phone","status"=>$PN],200);
+        return response()->json(["message"=>"Find all DhammaSchool phone","response"=>$DMHP],200);
+
     }
 
     /**
@@ -105,6 +123,7 @@ class DhammaSchoolPhoneController extends Controller
         $rule = [
 
             'phoneName' => 'required|min:1|max:15',
+            'isPrimary' => 'required'
 
         ];
         $validator = Validator::make(
@@ -116,15 +135,16 @@ class DhammaSchoolPhoneController extends Controller
 
         } else {
             $phoneName = $request->phoneName;
-            $isPrimary =false;
+            $isPrimary =$request ->isPrimary;
 
+            $DMHP = DhammaSchoolHasPhone::find($id);
 
-            $PN = Phone::find($id);
+            $PN = Phone::find($DMHP->phone_id);
             $PN->phoneName = $phoneName ;
             $PN->isPrimary = $isPrimary ;
             $PN->update();
 
-            return response()->json(["message"=>"Successfully Update DhammaSchool Phone Number"],200);
+            return response()->json(["message"=>"Successfully Update Dhamma School Phone Number"],200);
 
         }
     }
@@ -137,10 +157,16 @@ class DhammaSchoolPhoneController extends Controller
      */
     public function destroy($id)
     {
-        $PN = Phone:: where('isPrimary',0)
-            -> where('id',$id)
-            -> delete();
+        $DMHP = DhammaSchoolHasPhone::find($id);
 
-        return response()->json(["message"=>"Delete DhammaSchool Phone Number "],200);
+        $PN = Phone::find($DMHP->phone_id);
+        if($PN->isPrimary){
+            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $DMHP->delete();
+            $PN->delete();
+            return response()->json(["message"=>"Delete DhammaSchool Phone Number "],200);
+        }
+
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Middleware\Authentication;
 use App\ExtraData\DefaultData;
 use Closure;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
+use App\Http\Helpers\JwtDecoderHelper;
 class SessionKeyChecker
 {
     /**
@@ -34,7 +34,7 @@ class SessionKeyChecker
                 //JWT Verification
                 JWTAuth::setToken($sessionKeyToken);
                 if (JWTAuth::getPayload()) {
-                    //$userID=JwtDecoderHelper::decode($sessionKeyToken)['claims']['userID'];;
+                   // $userID=JwtDecoderHelper::decode($sessionKeyToken)['claims']['userID'];;
                     return $next($request);
                 }else {
                     //JWT payload not found

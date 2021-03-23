@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Phone;
 
+
+use App\Http\Helpers\JwtDecoderHelper;
+use App\Model\BfHasPhone;
+use App\Model\BuddhistFollowers;
 use App\Model\Phone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,11 +18,17 @@ class BuddhistFollowersPhoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $PN = Phone:: get();
+        $SESSION_KEY_TOKEN = $request->header('Session-Key');
+        $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
 
-        return response()->json(["message"=>"Find all BuddhistFollowers Phone Numbers","status"=>$PN],200);
+        $BFHP = BfHasPhone::join('phone','bf_has_phone.phone_id','=','phone.id')
+            ->where('bf_has_phone.buddhist_followers_id','=',$userid)
+            ->select('phone.id as id','phone.phoneName','phone.isPrimary','bf_has_phone.id as temporaryPhoneId')
+            ->get();
+
+        return response()->json(["message"=>"Find all Buddhist Followers phone","response"=>$BFHP],200);
     }
 
     /**
@@ -42,6 +52,8 @@ class BuddhistFollowersPhoneController extends Controller
         $rule = [
 
             'phoneName' => 'required|min:1|max:15',
+            'isPrimary' => 'required',
+            'buddhist_followers_id'  => 'required|numeric'
 
         ];
         $validator = Validator::make(
@@ -53,7 +65,8 @@ class BuddhistFollowersPhoneController extends Controller
 
         } else {
             $phoneName = $request->phoneName;
-            $isPrimary =false;
+            $isPrimary = $request ->isPrimary;
+            $buddhist_followers_id = $request ->buddhist_followers_id;
 
 
             $PN = new Phone();
@@ -61,7 +74,13 @@ class BuddhistFollowersPhoneController extends Controller
             $PN->isPrimary = $isPrimary ;
             $PN->save();
 
-            return response()->json(["message"=>"Successfully Insert BuddhistFollowers Phone Number"],200);
+            $BFHP = new BfHasPhone();
+
+            $BFHP ->phone_id = $PN -> id;
+            $BFHP ->buddhist_followers_id = $buddhist_followers_id;
+            $BFHP ->save();
+
+            return response()->json(["message"=>"Successfully Insert Buddhist Followers Phone Number"],200);
 
         }
     }
@@ -74,11 +93,12 @@ class BuddhistFollowersPhoneController extends Controller
      */
     public function show($id)
     {
-        $PN = Phone :: where('isPrimary',0)
-            -> where('id',$id)
-            -> first();
+        $BFHP = BfHasPhone::join('phone','bf_has_phone.phone_id','=','phone.id')
+            ->where('bf_has_phone.id','=' , $id)
+            ->select('phone.id as id','phone.phoneName','phone.isPrimary','bf_has_phone.id as temporaryPhoneId')
+            ->first();
 
-        return response()->json(["message"=>"Find one BuddhistFollowers Phone","status"=>$PN],200);
+        return response()->json(["message"=>"Find one Buddhist Followers phone","response"=>$BFHP],200);
     }
 
     /**
@@ -104,6 +124,7 @@ class BuddhistFollowersPhoneController extends Controller
         $rule = [
 
             'phoneName' => 'required|min:1|max:15',
+            'isPrimary' => 'required'
 
         ];
         $validator = Validator::make(
@@ -115,15 +136,16 @@ class BuddhistFollowersPhoneController extends Controller
 
         } else {
             $phoneName = $request->phoneName;
-            $isPrimary =false;
+            $isPrimary =$request ->isPrimary;
 
+            $BFHP = WelfareHasPhone::find($id);
 
-            $PN = Phone::find($id);
+            $PN = Phone::find($BFHP->phone_id);
             $PN->phoneName = $phoneName ;
             $PN->isPrimary = $isPrimary ;
             $PN->update();
 
-            return response()->json(["message"=>"Successfully Update BuddhistFollowers Phone Number"],200);
+            return response()->json(["message"=>"Successfully Update Welfare Phone Number"],200);
 
         }
     }
@@ -136,10 +158,15 @@ class BuddhistFollowersPhoneController extends Controller
      */
     public function destroy($id)
     {
-        $PN = Phone:: where('isPrimary',0)
-            -> where('id',$id)
-            -> delete();
+        $BFHP = BfHasPhone::find($id);
 
-        return response()->json(["message"=>"Delete BuddhistFollowers Phone Number "],200);
+        $PN = Phone::find($BFHP ->phone_id);
+        if($PN->isPrimary){
+            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $BFHP ->delete();
+            $PN->delete();
+            return response()->json(["message"=>"Delete Temple Phone Number "],200);
+        }
     }
 }

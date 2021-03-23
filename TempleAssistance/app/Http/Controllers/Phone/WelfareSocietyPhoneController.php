@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Phone;
 
+use App\Http\Helpers\JwtDecoderHelper;
 use App\Model\Phone;
+use App\Model\WelfareHasPhone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,11 +17,17 @@ class WelfareSocietyPhoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $PN = Phone:: get();
+        $SESSION_KEY_TOKEN = $request->header('Session-Key');
+        $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
 
-        return response()->json(["message"=>"Find all Welfare Society Phone Numbers","status"=>$PN],200);
+        $WSHP = WelfareHasPhone::join('phone','welfare_has_phone.phone_id','=','phone.id')
+            ->where('welfare_has_phone.welfare_id','=',$userid)
+            ->select('phone.id as id','phone.phoneName','phone.isPrimary','welfare_has_phone.id as temporaryPhoneId')
+            ->get();
+
+        return response()->json(["message"=>"Find all Welfare phone","response"=>$WSHP],200);
     }
 
     /**
@@ -43,6 +51,8 @@ class WelfareSocietyPhoneController extends Controller
         $rule = [
 
             'phoneName' => 'required|min:1|max:15',
+            'isPrimary' => 'required',
+            'welfare_id'  => 'required|numeric'
 
         ];
         $validator = Validator::make(
@@ -54,13 +64,20 @@ class WelfareSocietyPhoneController extends Controller
 
         } else {
             $phoneName = $request->phoneName;
-            $isPrimary =false;
+            $isPrimary = $request ->isPrimary;
+
+            $welfare_id = $request ->welfare_id;
 
 
             $PN = new Phone();
             $PN->phoneName = $phoneName ;
             $PN->isPrimary = $isPrimary ;
             $PN->save();
+
+            $WSHP = new WelfareHasPhone();
+            $WSHP ->phone_id = $PN -> id;
+            $WSHP ->welfare_id = $welfare_id;
+            $WSHP ->save();
 
             return response()->json(["message"=>"Successfully Insert Welfare Society Phone Number"],200);
 
@@ -75,11 +92,12 @@ class WelfareSocietyPhoneController extends Controller
      */
     public function show($id)
     {
-        $PN = Phone :: where('isPrimary',0)
-            -> where('id',$id)
-            -> first();
+        $WSHP = WelfareHasPhone::join('phone','welfare_has_phone.phone_id','=','phone.id')
+            ->where('welfare_has_phone.id','=' , $id)
+            ->select('phone.id as id','phone.phoneName','phone.isPrimary','welfare_has_phone.id as temporaryPhoneId')
+            ->first();
 
-        return response()->json(["message"=>"Find one Welfare Society Phone","status"=>$PN],200);
+        return response()->json(["message"=>"Find one Welfare Phone phone","response"=>$WSHP],200);
     }
 
     /**
@@ -105,6 +123,7 @@ class WelfareSocietyPhoneController extends Controller
         $rule = [
 
             'phoneName' => 'required|min:1|max:15',
+            'isPrimary' => 'required'
 
         ];
         $validator = Validator::make(
@@ -116,10 +135,11 @@ class WelfareSocietyPhoneController extends Controller
 
         } else {
             $phoneName = $request->phoneName;
-            $isPrimary =false;
+            $isPrimary =$request ->isPrimary;
 
+            $WSHP = WelfareHasPhone::find($id);
 
-            $PN = Phone::find($id);
+            $PN = Phone::find($WSHP->phone_id);
             $PN->phoneName = $phoneName ;
             $PN->isPrimary = $isPrimary ;
             $PN->update();
@@ -137,10 +157,11 @@ class WelfareSocietyPhoneController extends Controller
      */
     public function destroy($id)
     {
-        $PN = Phone:: where('isPrimary',0)
-            -> where('id',$id)
-            -> delete();
+        $WSHP = WelfareHasPhone::join('phone','welfare_has_phone.phone_id','=','phone.id')
+            ->where('welfare_has_phone.id','=' , $id)
+            ->select('phone.id as id','phone.phoneName','phone.isPrimary','welfare_has_phone.id as temporaryPhoneId')
+            ->first();
 
-        return response()->json(["message"=>"Delete Welfare Society Phone Number "],200);
+        return response()->json(["message"=>"Find all Temple phone","response"=>$WSHP],200);
     }
 }

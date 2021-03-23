@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Email;
 
+use App\Http\Helpers\JwtDecoderHelper;
 use App\Model\Email;
+use App\Model\WelfareHasEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,11 +17,17 @@ class WelfareSocietyEmailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $EM = Email:: get();
+        $SESSION_KEY_TOKEN = $request->header('Session-Key');
+        $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
 
-        return response()->json(["message"=>"Find all Welfare Society Emails","status"=>$EM],200);
+        $WSHE = WelfareHasEmail::join('email','welfare_has_email.email_id','=','email.id')
+            ->where('welfare_has_email.email_id','=',$userid)
+            ->select('email.id as id','email.emailName','email.isPrimary','welfare_has_email.id as temporaryEmailId')
+            ->get();
+
+        return response()->json(["message"=>"Find all Welafare Society Emails","response"=>$WSHE],200);
     }
 
     /**
@@ -42,7 +50,9 @@ class WelfareSocietyEmailController extends Controller
     {
         $rule = [
 
-            'emailName' => 'required|min:1|max:15',
+            'emailName' => 'required|min:8|max:100',
+            'isPrimary' => 'required',
+            'welfare_id'  => 'required|numeric'
 
         ];
         $validator = Validator::make(
@@ -54,13 +64,20 @@ class WelfareSocietyEmailController extends Controller
 
         } else {
             $emailName = $request->emailName;
-            $isPrimary =false;
+            $isPrimary =$request->isPrimary;
+
+            $welfare_id = $request ->welfare_id;
 
 
             $EM = new Email();
             $EM->emailName = $emailName ;
             $EM->isPrimary = $isPrimary ;
             $EM->save();
+
+            $WSHE = new WelfareHasEmail();
+            $WSHE -> email_id  =  $EM -> id;
+            $WSHE -> welfare_id = $welfare_id;
+            $WSHE -> save();
 
             return response()->json(["message"=>"Successfully Insert Welfare Society Email"],200);
 
@@ -75,11 +92,12 @@ class WelfareSocietyEmailController extends Controller
      */
     public function show($id)
     {
-        $EM = Email :: where('isPrimary',0)
-            -> where('id',$id)
-            -> first();
+        $WSHE = WelfareHasEmail::join('email','welfare_has_email.email_id','=','email.id')
+            ->where('welfare_has_email.id','=' , $id)
+            ->select('email.id as id','email.emailName','email.isPrimary','welfare_has_email.id as temporaryEmailId')
+            ->first();
 
-        return response()->json(["message"=>"Find one Welfare Society","status"=>$EM],200);
+        return response()->json(["message"=>"Find one WelfareSociety Email","response"=>$WSHE],200);
     }
 
     /**
@@ -104,7 +122,8 @@ class WelfareSocietyEmailController extends Controller
     {
         $rule = [
 
-            'emailName' => 'required|min:1|max:15',
+            'emailName' => 'required|min:8|max:100',
+            'isPrimary' => 'required'
 
         ];
         $validator = Validator::make(
@@ -116,15 +135,16 @@ class WelfareSocietyEmailController extends Controller
 
         } else {
             $emailName = $request->emailName;
-            $isPrimary =false;
+            $isPrimary =$request->isPrimary;
 
-
-            $EM= Email::find($id);
+            $WSHE = WelfareHasEmail::find($id);
+            $EM = Email::find($WSHE -> email_id);
             $EM->emailName = $emailName ;
             $EM->isPrimary = $isPrimary ;
             $EM->update();
 
-            return response()->json(["message"=>"Successfully update Welfare SocietyEmail"],200);
+
+            return response()->json(["message"=>"Successfully Update WelfareSociety Email"],200);
 
         }
     }
@@ -137,10 +157,15 @@ class WelfareSocietyEmailController extends Controller
      */
     public function destroy($id)
     {
-        $EM = Email:: where('isPrimary',0)
-            -> where('id',$id)
-            -> delete();
+        $WSHE = WelfareHasEmail::find($id);
 
-        return response()->json(["message"=>"Delete Welfare Society Email "],200);
+        $EM = Email::find($WSHE -> email_id);
+        if($EM->isPrimary){
+            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $WSHE->delete();
+            $EM->delete();
+            return response()->json(["message"=>"Delete WelfareSociety Email "],200);
+        }
     }
 }

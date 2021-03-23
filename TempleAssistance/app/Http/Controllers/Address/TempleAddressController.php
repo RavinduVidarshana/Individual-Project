@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Address;
 
-
 use App\Model\Address;
-
 use App\Model\TempleHasAddress;
-use App\Model\Temple;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\JwtDecoderHelper;
 
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -20,11 +18,22 @@ class TempleAddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $AD = Address:: get();
+        $SESSION_KEY_TOKEN = $request->header('Session-Key');
+        $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
 
-        return response()->json(["message"=>"Find all Temple Address","status"=>$AD],200);
+        $TMHA = TempleHasAddress::join('address','temple_has_address.address_id','=','address.id')
+            ->join('city','address.city_id','=','city.id')
+            ->join('district','city.district_id','=','district.id')
+            ->join('province','district.province_id','=','province.id')
+            ->where('temple_has_address.temple_id','=',$userid)
+            ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
+            ->get();
+
+
+        return response()->json(["message"=>"Find all Temple Address","response"=>$TMHA],200);
+
     }
 
     /**
@@ -72,10 +81,10 @@ class TempleAddressController extends Controller
             $AD->city_id  = $city_id ;
             $AD->save();
 
-            $TAD = new TempleHasAddress();
-            $TAD ->address_id = $AD ->id;
-            $TAD -> temple_id = $temple_id;
-            $TAD->save();
+            $TMHA = new TempleHasAddress();
+            $TMHA ->address_id = $AD ->id;
+            $TMHA -> temple_id = $temple_id;
+            $TMHA->save();
 
 
 
@@ -91,9 +100,19 @@ class TempleAddressController extends Controller
      */
     public function show($id)
     {
-        $AD = Address::find($id);
+//        $TMHA = TempleHasAddress::find($id);
+//        $AD= Address::find($TMHA->address_id);
 
-        return response()->json(["message"=>"Find One Temple Address","status"=>$AD],200);
+        $TMHA = TempleHasAddress::join('address','temple_has_address.address_id','=','address.id')
+            ->join('city','address.city_id','=','city.id')
+            ->join('district','city.district_id','=','district.id')
+            ->join('province','district.province_id','=','province.id')
+            ->where('temple_has_address.id','=',$id)
+            ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
+            ->first();
+
+
+        return response()->json(["message"=>"Find one Temple Address","response"=>$TMHA],200);
     }
 
     /**
@@ -136,7 +155,9 @@ class TempleAddressController extends Controller
             $city_id =$request->city_id;
 
 
-            $AD= Address::find($id);
+            $TMHA = TempleHasAddress::find($id);
+
+            $AD= Address::find($TMHA->address_id);
             $AD->addressLine1 = $addressLine1 ;
             $AD->addressLine2 = $addressLine2 ;
             $AD->city_id = $city_id ;
@@ -158,5 +179,7 @@ class TempleAddressController extends Controller
         $AD = Address::find($id);
         $AD -> delete();
         return response()->json(["message"=>"Delete Successfully Temple Address"],200);
+
+
     }
 }

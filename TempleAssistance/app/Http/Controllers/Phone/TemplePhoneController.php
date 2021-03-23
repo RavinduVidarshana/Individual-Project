@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Phone;
 
+use App\Http\Helpers\JwtDecoderHelper;
 use App\Model\Phone;
+use App\Model\TempleHasPhone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,11 +17,17 @@ class TemplePhoneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $PN = Phone:: get();
+        $SESSION_KEY_TOKEN = $request->header('Session-Key');
+        $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
 
-        return response()->json(["message"=>"Find all Temple Phone Numbers","status"=>$PN],200);
+        $TMHP = TempleHasPhone::join('phone','temple_has_phone.phone_id','=','phone.id')
+            ->where('temple_has_phone.temple_id','=',$userid)
+            ->select('phone.id as id','phone.phoneName','phone.isPrimary','temple_has_phone.id as temporaryPhoneId')
+            ->get();
+
+        return response()->json(["message"=>"Find all Temple phone","response"=>$TMHP],200);
     }
 
     /**
@@ -43,6 +51,8 @@ class TemplePhoneController extends Controller
         $rule = [
 
             'phoneName' => 'required|min:1|max:15',
+            'isPrimary' => 'required',
+            'temple_id'  => 'required|numeric'
 
         ];
         $validator = Validator::make(
@@ -54,13 +64,20 @@ class TemplePhoneController extends Controller
 
         } else {
             $phoneName = $request->phoneName;
-            $isPrimary =false;
+            $isPrimary = $request ->isPrimary;
+
+            $temple_id = $request ->temple_id;
 
 
             $PN = new Phone();
             $PN->phoneName = $phoneName ;
             $PN->isPrimary = $isPrimary ;
             $PN->save();
+
+            $TMHP = new TempleHasPhone();
+            $TMHP ->phone_id = $PN -> id;
+            $TMHP ->temple_id = $temple_id;
+            $TMHP ->save();
 
             return response()->json(["message"=>"Successfully Insert Temple Phone Number"],200);
 
@@ -75,11 +92,13 @@ class TemplePhoneController extends Controller
      */
     public function show($id)
     {
-        $PN = Phone :: where('isPrimary',0)
-            -> where('id',$id)
-            -> first();
 
-        return response()->json(["message"=>"Find one Temple Phone","status"=>$PN],200);
+        $TMHP = TempleHasPhone::join('phone','temple_has_phone.phone_id','=','phone.id')
+            ->where('temple_has_phone.id','=' , $id)
+            ->select('phone.id as id','phone.phoneName','phone.isPrimary','temple_has_phone.id as temporaryPhoneId')
+            ->first();
+
+        return response()->json(["message"=>"Find one Temple phone","response"=>$TMHP],200);
     }
 
     /**
@@ -105,6 +124,7 @@ class TemplePhoneController extends Controller
         $rule = [
 
             'phoneName' => 'required|min:1|max:15',
+            'isPrimary' => 'required'
 
         ];
         $validator = Validator::make(
@@ -116,10 +136,11 @@ class TemplePhoneController extends Controller
 
         } else {
             $phoneName = $request->phoneName;
-            $isPrimary =false;
+            $isPrimary =$request ->isPrimary;
 
+            $TMHP = TempleHasPhone::find($id);
 
-            $PN = Phone::find($id);
+            $PN = Phone::find($TMHP->phone_id);
             $PN->phoneName = $phoneName ;
             $PN->isPrimary = $isPrimary ;
             $PN->update();
@@ -137,10 +158,17 @@ class TemplePhoneController extends Controller
      */
     public function destroy($id)
     {
-        $PN = Phone:: where('isPrimary',0)
-            -> where('id',$id)
-            -> delete();
+        $TMHP = TempleHasPhone::find($id);
 
-        return response()->json(["message"=>"Delete Temple Phone Number "],200);
+        $PN = Phone::find($TMHP->phone_id);
+        if($PN->isPrimary){
+            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $TMHP->delete();
+            $PN->delete();
+            return response()->json(["message"=>"Delete Temple Phone Number "],200);
+        }
+
+
     }
 }

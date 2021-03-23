@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Email;
 
 use App\Model\Email;
+use App\Model\TempleHasEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\JwtDecoderHelper;
 
 use Validator;
 
@@ -15,11 +17,17 @@ class TempleEmailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $EM = Email:: get();
+        $SESSION_KEY_TOKEN = $request->header('Session-Key');
+        $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
 
-        return response()->json(["message"=>"Find all Temple Emails","status"=>$EM],200);
+        $TMHE = TempleHasEmail::join('email','temple_has_email.email_id','=','email.id')
+            ->where('temple_has_email.email_id','=',$userid)
+            ->select('email.id as id','email.emailName','email.isPrimary','temple_has_email.id as temporaryEmailId')
+            ->get();
+
+        return response()->json(["message"=>"Find all Temple Emails","response"=>$TMHE],200);
     }
 
     /**
@@ -42,7 +50,9 @@ class TempleEmailController extends Controller
     {
         $rule = [
 
-            'emailName' => 'required|min:1|max:15',
+            'emailName' => 'required|min:8|max:100',
+            'isPrimary' => 'required',
+            'temple_id'  => 'required|numeric'
 
         ];
         $validator = Validator::make(
@@ -54,13 +64,21 @@ class TempleEmailController extends Controller
 
         } else {
             $emailName = $request->emailName;
-            $isPrimary =false;
+            $isPrimary =$request->isPrimary;
+
+
+            $temple_id = $request ->temple_id;
 
 
             $EM = new Email();
             $EM->emailName = $emailName ;
             $EM->isPrimary = $isPrimary ;
             $EM->save();
+
+            $TMHE = new TempleHasEmail();
+            $TMHE -> email_id  =  $EM -> id;
+            $TMHE ->temple_id = $temple_id;
+            $TMHE -> save();
 
             return response()->json(["message"=>"Successfully Insert Temple Email"],200);
 
@@ -75,11 +93,12 @@ class TempleEmailController extends Controller
      */
     public function show($id)
     {
-        $EM = Email :: where('isPrimary',0)
-            -> where('id',$id)
-            -> first();
+        $TMHE = TempleHasEmail::join('email','temple_has_email.email_id','=','email.id')
+            ->where('temple_has_email.id','=' , $id)
+            ->select('email.id as id','email.emailName','email.isPrimary','temple_has_email.id as temporaryEmailId')
+            ->first();
 
-        return response()->json(["message"=>"Find one Temple","status"=>$EM],200);
+        return response()->json(["message"=>"Find one Temple Email","response"=>$TMHE],200);
     }
 
     /**
@@ -104,7 +123,9 @@ class TempleEmailController extends Controller
     {
         $rule = [
 
-            'emailName' => 'required|min:1|max:15',
+            'emailName' => 'required|min:8|max:100',
+            'isPrimary' => 'required',
+            'buddhist_followers_id'  => 'required|numeric'
 
         ];
         $validator = Validator::make(
@@ -116,15 +137,16 @@ class TempleEmailController extends Controller
 
         } else {
             $emailName = $request->emailName;
-            $isPrimary =false;
+            $isPrimary =$request->isPrimary;
 
-
-            $EM= Email::find($id);
+            $TMHE = TempleHasEmail::find($id);
+            $EM = Email::find($TMHE -> email_id);
             $EM->emailName = $emailName ;
             $EM->isPrimary = $isPrimary ;
             $EM->update();
 
-            return response()->json(["message"=>"Successfully update Temple Email"],200);
+
+            return response()->json(["message"=>"Successfully Update Temple Email"],200);
 
         }
     }
@@ -137,10 +159,16 @@ class TempleEmailController extends Controller
      */
     public function destroy($id)
     {
-        $EM = Email:: where('isPrimary',0)
-            -> where('id',$id)
-            -> delete();
+        $TMHE = TempleHasEmail::find($id);
 
-        return response()->json(["message"=>"Delete Temple Email "],200);
+        $EM = Email::find($TMHE -> email_id);
+        if($EM->isPrimary){
+            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $TMHE->delete();
+            $EM->delete();
+            return response()->json(["message"=>"Delete Temple Email "],200);
+        }
+
     }
 }

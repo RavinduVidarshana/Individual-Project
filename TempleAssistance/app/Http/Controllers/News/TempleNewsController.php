@@ -16,9 +16,13 @@ class TempleNewsController extends Controller
      */
     public function index()
     {
-        $NS = News:: get();
 
-        return response()->json(["message"=>"Find all News","status"=>$NS],200);
+        $NS = News ::join('temple','news.temple_id','=','temple.id')
+            ->where('news.isActive',1)
+            ->select('news.id as id','news.title','news.description','news.publishDate','temple.id as temple_id','temple.templeName')
+            -> get();
+
+        return response()->json(["message"=>"Find one News","status"=>$NS],200);
     }
 
     /**
@@ -41,14 +45,10 @@ class TempleNewsController extends Controller
     {
         $rule = [
 
-
             'title' => 'required|min:1|max:45',
             'description' => 'required|min:1|max:345',
             'publishDate' => 'required|date_format:Y-m-d',
             'temple_id' => 'required|numeric'
-
-
-
         ];
         $validator = Validator::make(
             $request->all(), $rule
@@ -62,7 +62,7 @@ class TempleNewsController extends Controller
             $description = $request->description;
             $publishDate= $request->publishDate;
             $temple_id = $request->temple_id;
-            $isActive= false;
+            $isActive= true;
             $isApproved =false;
 
 
@@ -88,8 +88,11 @@ class TempleNewsController extends Controller
      */
     public function show($id)
     {
-        $NS = News :: where('isActive','isApproved',0)
-            -> where('id',$id)
+
+        $NS = News ::join('temple','news.temple_id','=','temple.id')
+            ->where('news.isActive',1)
+            -> where('news.id',$id)
+            ->select('news.id as id','news.title','news.description','news.publishDate','temple.id as temple_id','temple.templeName')
             -> first();
 
         return response()->json(["message"=>"Find one News","status"=>$NS],200);
@@ -117,12 +120,9 @@ class TempleNewsController extends Controller
     {
         $rule = [
 
-
             'title' => 'required|min:1|max:45',
             'description' => 'required|min:1',
             'publishDate' => 'required|date_format:Y-m-d',
-            'temple_id' => 'required|numeric'
-
 
 
         ];
@@ -137,8 +137,7 @@ class TempleNewsController extends Controller
             $title = $request->title;
             $description = $request->description;
             $publishDate= $request->publishDate;
-            $temple_id = $request->temple_id;
-            $isActive= false;
+            $isActive= true;
             $isApproved =false;
 
 
@@ -146,7 +145,6 @@ class TempleNewsController extends Controller
             $NS->title = $title;
             $NS->description = $description;
             $NS->publishDate= $publishDate;
-            $NS->temple_id = $temple_id;
             $NS->isActive= $isActive;
             $NS->isApproved = $isApproved ;
             $NS->update();

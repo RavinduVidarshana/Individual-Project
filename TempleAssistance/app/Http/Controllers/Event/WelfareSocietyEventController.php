@@ -295,16 +295,11 @@ class WelfareSocietyEventController extends Controller
     public function destroy($id)
     {
 
-        Event :: join('event_catergory','event_catergory.id','=','event.event_catergory_id')
-            ->join('event_organized','event_organized.id','=','event.event_organized_id')
-            ->join('welfare','welfare.id','=','event.welfare_id')
-            ->where('event.id',$id)
-            ->delete();
-
+        Event:: where('eventIsActive','isApproved',1)
+            -> where('id',$id)
+            -> delete();
 
         return response()->json(["message"=>"Delete Event "],200);
-
-
-
     }
+
 }

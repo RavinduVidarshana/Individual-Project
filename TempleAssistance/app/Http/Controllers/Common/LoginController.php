@@ -85,7 +85,7 @@ class LoginController extends Controller
                     'userRoleID' => $UL->user_role_id,
                     'iss' => new Issuer('Temple Assistance'),
                     'iat' => new IssuedAt(Carbon::now('UTC')),
-                    'exp' => new Expiration(Carbon::now('UTC')->addDays(1)),
+                    'exp' => new Expiration(Carbon::now('UTC')->addDays(3)),
                     'nbf' => new NotBefore(Carbon::now('UTC')),
                     'sub' => new Subject('Test App'),
                     'jti' => new JwtId("APP542141"),

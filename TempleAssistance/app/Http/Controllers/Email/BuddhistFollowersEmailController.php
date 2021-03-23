@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Email;
 
+use App\Model\BfHasEmail;
 use App\Model\Email;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\JwtDecoderHelper;
 
 use Validator;
 class BuddhistFollowersEmailController extends Controller
@@ -14,11 +16,17 @@ class BuddhistFollowersEmailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $EM = Email:: get();
+        $SESSION_KEY_TOKEN = $request->header('Session-Key');
+        $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
 
-        return response()->json(["message"=>"Find all Buddhist Followers Emails","status"=>$EM],200);
+        $BFHE = BfHasEmail::join('email','bf_has_email.email_id','=','email.id')
+            ->where('bf_has_email.buddhist_followers_id','=',$userid)
+            ->select('email.id as id','email.emailName','email.isPrimary','bf_has_email.id as temporaryEmailId')
+            ->get();
+
+        return response()->json(["message"=>"Find all Buddhist Followers Emails","response"=>$BFHE],200);
     }
 
     /**
@@ -41,7 +49,9 @@ class BuddhistFollowersEmailController extends Controller
     {
         $rule = [
 
-            'emailName' => 'required|min:1|max:15',
+            'emailName' => 'required|min:8|max:100',
+            'isPrimary' => 'required',
+            'buddhist_followers_id'  => 'required|numeric'
 
         ];
         $validator = Validator::make(
@@ -53,13 +63,20 @@ class BuddhistFollowersEmailController extends Controller
 
         } else {
             $emailName = $request->emailName;
-            $isPrimary =false;
+            $isPrimary =$request->isPrimary;
+
+            $buddhist_followers_id = $request ->buddhist_followers_id;
 
 
             $EM = new Email();
             $EM->emailName = $emailName ;
             $EM->isPrimary = $isPrimary ;
             $EM->save();
+
+            $BFHE = new BfHasEmail();
+            $BFHE -> email_id  =  $EM -> id;
+            $BFHE ->buddhist_followers_id = $buddhist_followers_id;
+            $BFHE -> save();
 
             return response()->json(["message"=>"Successfully Insert Buddhist Followers Email"],200);
 
@@ -74,11 +91,12 @@ class BuddhistFollowersEmailController extends Controller
      */
     public function show($id)
     {
-        $EM = Email :: where('isPrimary',0)
-            -> where('id',$id)
-            -> first();
+        $BFHE = BfHasEmail::join('email','bf_has_email.email_id','=','email.id')
+            ->where('bf_has_email.id','=' , $id)
+            ->select('email.id as id','email.emailName','email.isPrimary','bf_has_email.id as temporaryEmailId')
+            ->first();
 
-        return response()->json(["message"=>"Find one Buddhist Followers","status"=>$EM],200);
+        return response()->json(["message"=>"Find one Buddhist Followers Email","response"=>$BFHE],200);
     }
 
     /**
@@ -103,7 +121,8 @@ class BuddhistFollowersEmailController extends Controller
     {
         $rule = [
 
-            'emailName' => 'required|min:1|max:15',
+            'emailName' => 'required|min:8|max:100',
+            'isPrimary' => 'required'
 
         ];
         $validator = Validator::make(
@@ -115,16 +134,16 @@ class BuddhistFollowersEmailController extends Controller
 
         } else {
             $emailName = $request->emailName;
-            $isPrimary =false;
+            $isPrimary = $request->isPrimary;
 
-
-            $EM= Email::find($id);
-            $EM->emailName = $emailName ;
-            $EM->isPrimary = $isPrimary ;
+            $BFHE = BfHasEmail::find($id);
+            $EM = Email::find($BFHE->email_id);
+            $EM->emailName = $emailName;
+            $EM->isPrimary = $isPrimary;
             $EM->update();
 
-            return response()->json(["message"=>"Successfully update Buddhist Followers Email"],200);
 
+            return response()->json(["message" => "Successfully Update Buddhist Followers Email"], 200);
         }
     }
 
@@ -136,10 +155,15 @@ class BuddhistFollowersEmailController extends Controller
      */
     public function destroy($id)
     {
-        $EM = Email:: where('isPrimary',0)
-            -> where('id',$id)
-            -> delete();
+        $BFHE = BfHasEmail::find($id);
 
-        return response()->json(["message"=>"Delete Buddhist Followers Email "],200);
+        $EM = Email::find($BFHE -> email_id);
+        if($EM->isPrimary){
+            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $BFHE->delete();
+            $EM->delete();
+            return response()->json(["message"=>"Delete Buddhist Followers Email "],200);
+        }
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string     $firstName
  * @property string     $lastName
  * @property string     $NIC
+ * @property int        $temple_id
  * @property boolean    $isApproved
  */
 class BuddhistFollowers extends Model
@@ -32,7 +33,7 @@ class BuddhistFollowers extends Model
      * @var array
      */
     protected $fillable = [
-        'firstName', 'lastName', 'NIC', 'isApproved'
+        'firstName', 'lastName', 'NIC', 'temple_id', 'isApproved'
     ];
 
     /**
@@ -50,7 +51,7 @@ class BuddhistFollowers extends Model
      * @var array
      */
     protected $casts = [
-        'firstName' => 'string', 'lastName' => 'string', 'NIC' => 'string', 'isApproved' => 'boolean'
+        'firstName' => 'string', 'lastName' => 'string', 'NIC' => 'string', 'temple_id' => 'int', 'isApproved' => 'boolean'
     ];
 
     /**

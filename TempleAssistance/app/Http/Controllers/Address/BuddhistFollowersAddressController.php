@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Address;
 
+use App\Http\Helpers\JwtDecoderHelper;
 use App\Model\Address;
+use App\Model\BfHasAddress;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,11 +17,22 @@ class BuddhistFollowersAddressController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $AD = Address:: get();
+        $SESSION_KEY_TOKEN = $request->header('Session-Key');
+        $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
 
-        return response()->json(["message"=>"Find all BuddhistFollowers addresses","status"=>$AD],200);
+        $BFHA = BfHasAddress::join('address','bf_has_address.address_id','=','address.id')
+            ->join('city','address.city_id','=','city.id')
+            ->join('district','city.district_id','=','district.id')
+            ->join('province','district.province_id','=','province.id')
+            ->where('bf_has_address.buddhist_followers_id','=',$userid)
+            ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
+            ->get();
+
+
+        return response()->json(["message"=>"Find all Temple Address","response"=>$BFHA],200);
+
     }
 
     /**
@@ -44,6 +57,7 @@ class BuddhistFollowersAddressController extends Controller
             'addressLine1' => 'required|min:2|max:145',
             'addressLine2' =>'required|min:2|max:145',
             'city_id' => 'required|numeric',
+            'buddhist_followers_id' => 'required|numeric',
 
         ];
         $validator = Validator::make(
@@ -57,6 +71,7 @@ class BuddhistFollowersAddressController extends Controller
             $addressLine1 = $request->addressLine1;
             $addressLine2 = $request->addressLine2;
             $city_id = $request->city_id;
+            $buddhist_followers_id = $request->buddhist_followers_id;
 
 
             $AD = new Address();
@@ -65,14 +80,14 @@ class BuddhistFollowersAddressController extends Controller
             $AD->city_id  = $city_id ;
             $AD->save();
 
-//            $TAD = new TempleHasAddress();
-//            $TAD ->address_id = $AD ->id;
-//            $TM = Temple:: get($id);
-//            $TAD -> temple_id = $TM ->id;
-//            $TAD->save();
+            $BFHA = new BfHasAddress();
+            $BFHA ->address_id = $AD ->id;
+            $BFHA -> buddhist_followers_id = $buddhist_followers_id;
+            $BFHA->save();
 
 
-            return response()->json(["message" => "Successfully Insert BuddhistFollowers Address"], 200);
+
+            return response()->json(["message" => "Successfully Insert Buddhist Followers Address"], 200);
         }
     }
 
@@ -84,9 +99,19 @@ class BuddhistFollowersAddressController extends Controller
      */
     public function show($id)
     {
-        $AD = Address::find($id);
 
-        return response()->json(["message"=>"Find One BuddhistFollowers Address","status"=>$AD],200);
+        $BFHA = BfHasAddress::join('address','bf_has_address.address_id','=','address.id')
+            ->join('city','address.city_id','=','city.id')
+            ->join('district','city.district_id','=','district.id')
+            ->join('province','district.province_id','=','province.id')
+            ->where('bf_has_address.id','=',$id)
+            ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
+            ->first();
+
+
+        return response()->json(["message"=>"Find one Temple Address","response"=>$BFHA],200);
+
+
     }
 
     /**
@@ -129,13 +154,15 @@ class BuddhistFollowersAddressController extends Controller
             $city_id =$request->city_id;
 
 
-            $AD= Address::find($id);
+            $BFHA = BfHasAddress::find($id);
+
+            $AD= Address::find($BFHA->address_id);
             $AD->addressLine1 = $addressLine1 ;
             $AD->addressLine2 = $addressLine2 ;
             $AD->city_id = $city_id ;
             $AD->update();
 
-            return response()->json(["message"=>"Successfully Update BuddhistFollowers Address"],200);
+            return response()->json(["message"=>"Successfully Update Buddhist Followers Address"],200);
 
         }
     }

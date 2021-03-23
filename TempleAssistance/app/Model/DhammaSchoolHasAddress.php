@@ -5,7 +5,6 @@ namespace app\Model;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int        $iddhamma_school_has_address
  * @property int        $address_id
  * @property int        $dhamma_school_id
  */
@@ -31,7 +30,7 @@ class DhammaSchoolHasAddress extends Model
      * @var array
      */
     protected $fillable = [
-        'iddhamma_school_has_address', 'address_id', 'dhamma_school_id'
+        'address_id', 'dhamma_school_id'
     ];
 
     /**
@@ -49,7 +48,7 @@ class DhammaSchoolHasAddress extends Model
      * @var array
      */
     protected $casts = [
-        'iddhamma_school_has_address' => 'int', 'address_id' => 'int', 'dhamma_school_id' => 'int'
+        'address_id' => 'int', 'dhamma_school_id' => 'int'
     ];
 
     /**

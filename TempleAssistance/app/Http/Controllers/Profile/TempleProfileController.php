@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Profile;
 
-use App\ExtraData\DefaultData;
+
+use App\Http\Helpers\JwtDecoderHelper;
 use App\Model\Temple;
-use App\Model\UserLogin;
+use App\Model\TempleHasAddress;
+use app\Model\TempleHasEmail;
+use App\Model\TempleHasPhone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -49,39 +52,47 @@ class TempleProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
-         $DS = DhammaSchool::find($id);
-        $DSHP = DhammaSchoolHasPhone::join('phone','dhamma_school_has_phone.phone_id','=','phone.id')
-            ->select('phone.id as id','phone.phoneName','phone.isPrimary')
-            ->get();
+        $SESSION_KEY_TOKEN = $request->header('Session-Key');
+        $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
 
-        $DSHE = DhammaSchoolHasEmail::join('email','dhamma_school_has_email.email_id','=','email.id')
-            ->select('email.id as id','email.emailName','email.isPrimary')
-            ->get();
+        $TMP = Temple::join('temple_category','temple.temple_category_id','=','temple_category.id')
+            -> where('temple.id','=',$userid)
+            ->select('temple.id as id','temple.templeName','temple.templeInfo','temple.mainMonk','temple.longitude','temple.longitude','temple.latitude','temple.monkCount','temple.vegMonkCount','temple.nonVegMonkCount','temple_category.id as templeCategoryId','temple_category.templeCategoryName')
+            ->first();
 
-        $DSHA = DhammaSchoolHasAddress::join('address','dhamma_school_has_address.address_id','=','address.id')
+
+        $TMHA = TempleHasAddress::join('address','temple_has_address.address_id','=','address.id')
             ->join('city','address.city_id','=','city.id')
             ->join('district','city.district_id','=','district.id')
             ->join('province','district.province_id','=','province.id')
+            ->where('temple_has_address.temple_id','=',$userid)
             ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
             ->get();
 
-        $res = [
-            'dshp' => $DSHP,
-            'dshe' => $DSHE,
-            'dsha' => $DSHA,
-            "dhammaSchoolName" => $DS->dhammaSchoolName,
-            "dhammaSchoolRegnum" => $DS->dhammaSchoolRegnum,
-            "dhammaSchoolPrinciple" => $DS->dhammaSchoolPrinciple,
-            "studentCount" => $DS->studentCount,
-            "temple_id" => $DS->temple_id,
+        $TMHP = TempleHasPhone::join('phone','temple_has_phone.phone_id','=','phone.id')
+            ->where('temple_has_phone.temple_id','=',$userid)
+            ->select('phone.id as id','phone.phoneName','phone.isPrimary','temple_has_phone.id as tempPhoneId')
+            ->get();
+
+
+        $TMHE = TempleHasEmail::join('email','temple_has_email.email_id','=','email.id')
+            ->where('temple_has_email.email_id','=',$userid)
+            ->select('email.id as id','email.emailName','email.isPrimary','temple_has_email.id as temporaryEmailId')
+            ->get();
+
+        $res=[
+            'id'=>$TMP->id,
+            'templeName'=>$TMP->templeName,
+            'TMHA'=>$TMHA,
+            'TMHP'=>$TMHP,
+            'TMHE' => $TMHE
 
         ];
 
-        return response()->json(["message"=>"Find one Dhamma School","response"=>$res],200);
+             return response()->json(["message" => "One Temple" ,"response" => $res], 200);
 
-        return response()->json(["message" => "Find one Dane Schedule", "response" => $res], 200);
     }
 
     /**
@@ -115,8 +126,6 @@ class TempleProfileController extends Controller
             'longitude' => 'required',
             'latitude' => 'required',
             'temple_category_id' => 'required|numeric',
-            'userName' => 'required|min:5|max:45',
-            'password' => 'required|min:8|max:345'
 
         ];
         $validator = Validator::make(
@@ -127,6 +136,10 @@ class TempleProfileController extends Controller
             return  response() -> json($validator ->errors(),400);
 
         }else {
+            $SESSION_KEY_TOKEN = $request->header('Session-Key');
+            $userid = JwtDecoderHelper::decode($SESSION_KEY_TOKEN)['claims']['userID'];
+
+
             $templeName = $request->templeName;
             $templeInfo = $request->templeInfo;
             $mainMonk = $request->mainMonk;
@@ -137,12 +150,9 @@ class TempleProfileController extends Controller
             $nonVegMonkCount = $request->nonVegMonkCount;
             $temple_category_id = $request->temple_category_id;
             $isApproved = false;
-            $userName = $request ->userName;
-            $password = $request ->password;
-            $user_role_id = DefaultData::$USER_ROLE_TEMPLE_MAIN_MONK;
 
 
-            $TM = new Temple();
+            $TM = Temple::find($userid);
             $TM->templeName = $templeName;
             $TM->templeInfo = $templeInfo;
             $TM->mainMonk = $mainMonk;
@@ -154,13 +164,6 @@ class TempleProfileController extends Controller
             $TM->temple_category_id = $temple_category_id;
             $TM->isApproved = $isApproved;
             $TM->update();
-
-            $UL = new UserLogin();
-            $UL-> userName = $userName;
-            $UL -> password = $password;
-            $UL -> user_role_id = $user_role_id;
-            $UL -> temple_id = $TM -> id;
-            $UL ->update();
 
 
             return response()->json(["message" => "Successfully update Temple"], 200);
