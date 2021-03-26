@@ -47,6 +47,13 @@ class TempleManageController extends Controller
             $res = [
                 'id' =>$item ->id,
                 'templeName'=>$item->templeName,
+                'templeInfo'=>$item->templeInfo,
+                'mainMonk'=>$item->mainMonk,
+                'longitude'=>$item->longitude,
+                'latitude'=>$item->latitude,
+                'monkCount'=>$item->monkCount,
+                'vegMonkCount'=>$item->vegMonkCount,
+                'nonVegMonkCount'=>$item->nonVegMonkCount,
                 'TMHA'=>$TMHA,
                 'TMHP'=>$TMHP,
                 'TMHE' => $TMHE
@@ -116,8 +123,16 @@ class TempleManageController extends Controller
             ->get();
 
         $res=[
-            'id'=>$TMP->id,
+            'id' =>$TMP ->id,
             'templeName'=>$TMP->templeName,
+            'templeInfo'=>$TMP->templeInfo,
+            'mainMonk'=>$TMP->mainMonk,
+            'longitude'=>$TMP->longitude,
+            'latitude'=>$TMP->latitude,
+            'monkCount'=>$TMP->monkCount,
+            'vegMonkCount'=>$TMP->vegMonkCount,
+            'nonVegMonkCount'=>$TMP->nonVegMonkCount,
+
             'TMHA'=>$TMHA,
             'TMHP'=>$TMHP,
             'TMHE' => $TMHE
