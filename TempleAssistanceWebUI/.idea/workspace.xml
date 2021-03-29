@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="41867978-f5a1-4f6a-a685-e21a33f19cf3" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,12 +114,30 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public\images" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\resources\views" />
+      <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public" />
+      <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public\js" />
+      <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public\css" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -131,6 +150,13 @@
       <option name="presentableId" value="Default" />
       <updated>1616439500510</updated>
       <workItem from="1616439502426" duration="3376000" />
+      <workItem from="1616776462104" duration="11930000" />
+      <workItem from="1616791821013" duration="156000" />
+      <workItem from="1616934797740" duration="4506000" />
+      <workItem from="1616948463389" duration="214000" />
+      <workItem from="1616955686431" duration="6740000" />
+      <workItem from="1616994223536" duration="9853000" />
+      <workItem from="1617014000950" duration="1718000" />
     </task>
     <servers />
   </component>
@@ -138,9 +164,9 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1616442569476">
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1616784540410">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1616442569476" />
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1616784540410" />
   </component>
 </project>
