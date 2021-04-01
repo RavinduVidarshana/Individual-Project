@@ -19,6 +19,7 @@ Route::get('/','Common\LoginController@index');
 //*********************************************************************Temple
 
 Route::get('/templeDaneSchedule','Temple\DaneScheduleManageController@index');
+Route::post('/templeDaneScheduleSave','Temple\DaneScheduleManageController@save');
 Route::get('/templeDashboard','Temple\DashboardController@index');
 
 Route::get('/templeDhammaSchool','Temple\DSchManageController@index');

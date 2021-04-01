@@ -2592,7 +2592,7 @@ select[multiple].input-lg,
 }
 
 .btn:hover, .btn:focus, .btn.focus {
-  color: #fff;
+  /*color: #fff;*/
   text-decoration: none;
   -webkit-transform: translate3d(0, -1px, 0);
           transform: translate3d(0, -1px, 0);

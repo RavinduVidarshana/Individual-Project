@@ -61,7 +61,7 @@
                         <ul class="dropdown-menu settings-menu">
                             <li><a href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
                             <li><a href="/templeProfile"><i class="fa fa-user fa-lg"></i> Profile</a></li>
-                            <li><a href="/userLogin"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                            <li><a href="/"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
                         </ul>
                     </li>
                 </ul>

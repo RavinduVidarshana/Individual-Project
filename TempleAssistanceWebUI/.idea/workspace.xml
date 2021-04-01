@@ -114,17 +114,17 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="E:/FinalProject/TempleAssistance" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public\images" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\resources\views" />
       <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public" />
       <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public\js" />
       <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public\css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public\images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -157,6 +157,15 @@
       <workItem from="1616955686431" duration="6740000" />
       <workItem from="1616994223536" duration="9853000" />
       <workItem from="1617014000950" duration="1718000" />
+      <workItem from="1617025731204" duration="9102000" />
+      <workItem from="1617164707869" duration="20257000" />
+      <workItem from="1617227778244" duration="1040000" />
+      <workItem from="1617253359555" duration="6792000" />
+      <workItem from="1617275896834" duration="6770000" />
+      <workItem from="1617293969756" duration="192000" />
+      <workItem from="1617294196791" duration="918000" />
+      <workItem from="1617295937234" duration="1497000" />
+      <workItem from="1617298357423" duration="10867000" />
     </task>
     <servers />
   </component>

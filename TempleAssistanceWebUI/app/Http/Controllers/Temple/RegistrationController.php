@@ -8,8 +8,11 @@ use App\Http\Controllers\Controller;
 class RegistrationController extends Controller
 {
     public function index(Request $request)
-    {
+    {     $res = [
+        'name' => 'Temple Registration',
 
-        return view('templeRegistration');
+    ];
+        return view('templeRegistration',['response'=>$res]);
+
     }
 }
