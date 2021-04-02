@@ -60,7 +60,7 @@
                                             aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a>
                         <ul class="dropdown-menu settings-menu">
 {{--                            <li><a href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>--}}
-                            <li><a href="/templeProfile"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+{{--                            <li><a href="/templeProfile"><i class="fa fa-user fa-lg"></i> Profile</a></li>--}}
                             <li><a href="/"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
                         </ul>
                     </li>
@@ -77,34 +77,32 @@
                                                   src="images/user.png"
                                                   alt="User Image"></div>
                 <div class="pull-left info">
-                    <p><a href="/templeProfile">Temple Name</a></p>
-                    <p class="designation">Main Monk Name</p>
+                    <p><a href=" ">Admin</a></p>
+                    <p class="designation">Admin Name</p>
                 </div>
             </div>
             <!-- Sidebar Menu-->
             <ul class="sidebar-menu">
 
-                <li class="active"><a href="/templeDashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
-                <li><a href="/templeDaneSchedule"><i class="fa fa-calendar"></i><span>Dane Schedule</span></a></li>
-                <li><a href="/templeEventManage"><i class="fa fa-globe"></i><span>Events</span></a></li>
-                <li><a href="/templeNews"><i class="fa fa-info-circle"></i><span>News</span></a></li>
+                <li class="active"><a href="/adminDashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
 
+                <li><a href="/adminUsers"><i class="fa fa-user-circle"></i><span>Users</span></a></li>
 
-                <li class="treeview"><a href="#"><i class="fa fa-book"></i><span>Dhamma School</span><i
+                <li class="treeview"><a href="#"><i class="fa fa-home"></i><span>Temple</span><i
                             class="fa fa-angle-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="/templeDhammaSchool"><i class="fa fa-wrench"></i>Management</a>
-                        <li><a href="/templeDhammaEvent"><i class="fa fa-globe"></i>Events</a></li>
+                        <li><a href="/adminTemple"><i class="fa fa-wrench"></i>Management</a>
+                        <li><a href="/adminNews"><i class="fa fa-info-circle"></i>News</a></li>
                     </ul>
                 </li>
 
-                <li class="treeview"><a href="#"><i class="fa fa-users"></i><span>Welfare Society</span><i
-                            class="fa fa-angle-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="templeWelfareEvent"><i class="fa fa-wrench"></i>Management</a>
-                        <li><a href=" /templeWelfareSociety"><i class="fa fa-globe"></i>Events</a></li>
-                    </ul>
-                </li>
+
+                <li><a href="/adminDhammaSchool"><i class="fa fa-book"></i><span>Dhamma School</span></a></li>
+                <li><a href="/adminWelfareSociety"><i class="fa fa-users"></i><span>Welfare Society</span></a></li>
+                <li><a href="/adminBuddhistFollowers"><i class="fa fa-user"></i><span>Buddhist Followers</span></a></li>
+
+                <li><a href="/adminEvent"><i class="fa fa-globe"></i><span>Events</span></a></li>
+
 
             </ul>
         </section>
@@ -118,11 +116,11 @@
 
 
 <!-- Javascripts-->
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/plugins/pace.min.js"></script>
-<script src="js/main.js"></script>
-@yield('js-content')
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/pace.min.js"></script>
+    <script src="js/main.js"></script>
+    @yield('js-content')
 
 </div>
 

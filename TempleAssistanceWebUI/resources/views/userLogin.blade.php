@@ -35,7 +35,8 @@
 
                 <a href="/templeRegistration"><u>Create an account</u></a>
                 <br>
-                <a href="/templeDashboard">Dashboard</a>
+                <a href="/templeDashboard"><i>TempleDashboard</i></a>
+                <a href="/adminDashboard"><b>AdminDashboard</b></a>
 
             </form>
             <form class="forget-form" action="index.html">

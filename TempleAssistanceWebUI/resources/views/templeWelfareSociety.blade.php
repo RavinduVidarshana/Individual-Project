@@ -220,7 +220,7 @@
                                 <div class="col-md-7">
                                     <input class="form-control col-md-7" type="text" id="welfareSocietyEmail" name="welfareSocietyEmail" placeholder="Enter Welfare Society Email"></input>
                                 </div>
-                                <label class="control-label col-md-5">This is Primary Emailr</label>
+                                <label class="control-label col-md-5">This is Primary Email</label>
                                 <div class="col-md-7">
                                     <div class="toggle lg">
                                         <label>
@@ -524,7 +524,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Welfare Society Province</label>
+                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society About</u></label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Province</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="welfareSocietyProvince" name="welfareSocietyProvince" ></p>
                                     </div>
@@ -534,7 +538,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Welfare Society District</label>
+                                    <label class="control-label col-md-4">District</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="welfareSocietyDistrict" name="welfareSocietyDistrict" ></p>
                                     </div>
@@ -544,7 +548,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Welfare Society Address</label>
+                                    <label class="control-label col-md-4">Address</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="welfareSocietyAddress" name="welfareSocietyAddress" ></p>
                                     </div>
@@ -554,7 +558,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Welfare Society Phone</label>
+                                    <label class="control-label col-md-4">Phone</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="welfareSocietyPhone" name="welfareSocietyPhone" ></p>
                                     </div>
@@ -564,7 +568,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Welfare Society Email</label>
+                                    <label class="control-label col-md-4">Email</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="welfareSocietyEmail" name="welfareSocietyEmail" ></p>
                                     </div>
@@ -574,7 +578,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Welfare Society UserName</label>
+                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society Permission</u></label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">UserName</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="welfareSocietyUN" name="welfareSocietyUN" ></p>
                                     </div>

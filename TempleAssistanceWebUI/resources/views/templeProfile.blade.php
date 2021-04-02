@@ -209,7 +209,7 @@
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-                                <button class="btn btn-success btn-block"data-toggle="modal" href="#addModel">Edit Profile</button>
+                                <button class="btn btn-success btn-block"data-toggle="modal" href="#updateModel">Edit Profile</button>
 
                             </div>
                     </div>
@@ -219,8 +219,8 @@
     </div>
 
 
-    {{-----------------------------------------------------------------------------------------------------Create Temple--}}
-    <div class="modal fade" id="addModel" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    {{-----------------------------------------------------------------------------------------------------UPdate Temple--}}
+    <div class="modal fade" id="updateModel" data-backdrop="static" data-keyboard="false" tabindex="-1"
          aria-labelledby="daneModelLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

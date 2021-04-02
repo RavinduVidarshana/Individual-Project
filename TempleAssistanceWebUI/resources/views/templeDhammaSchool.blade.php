@@ -200,7 +200,7 @@
                                 <div class="col-md-7">
                                     <input class="form-control col-md-7" type="text" id="dhammaSchEmail" name="dhammaSchEmail" placeholder="Enter Dhamma School Email"></input>
                                 </div>
-                                <label class="control-label col-md-5">This is Primary Emailr</label>
+                                <label class="control-label col-md-5">This is Primary Email</label>
                                 <div class="col-md-7">
                                     <div class="toggle lg">
                                         <label>
@@ -363,7 +363,7 @@
                                 <div class="col-md-7">
                                     <input class="form-control col-md-7" type="text" id="dhammaSchEmail" name="dhammaSchEmail" placeholder="Enter Dhamma School Email"></input>
                                 </div>
-                                <label class="control-label col-md-5">This is Primary Emailr</label>
+                                <label class="control-label col-md-5">This is Primary Email</label>
                                 <div class="col-md-7">
                                     <div class="toggle lg">
                                         <label>
@@ -399,7 +399,7 @@
                         </div>
                         <div class="modal-footer">
                             <a href="#" data-dismiss="modal" class="btn">Close</a>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </div>
                 </form>
@@ -415,7 +415,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="daneModelLabel" align="center">Welfare Society</h4>
+                    <h4 class="modal-title" id="daneModelLabel" align="center">Dhamma School</h4>
                 </div>
                 <form method="PUT" action="">
                     @csrf
@@ -465,7 +465,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Dhamma School Province</label>
+                                    <label class="control-label col-md-12" for="inputSmall"><u>Dhamma School About</u></label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">Province</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="dhammaSchProvince" name="dhammaSchProvince" ></p>
                                     </div>
@@ -475,7 +479,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Dhamma School District</label>
+                                    <label class="control-label col-md-4">District</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="dhammaSchDistrict" name="dhammaSchDistrict" ></p>
                                     </div>
@@ -485,7 +489,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Dhamma School Address</label>
+                                    <label class="control-label col-md-4">Address</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="dhammaSchAddress" name="dhammaSchAddress" ></p>
                                     </div>
@@ -495,7 +499,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Dhamma School Phone</label>
+                                    <label class="control-label col-md-4">Phone</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="dhammaSchPhone" name="dhammaSchPhone" ></p>
                                     </div>
@@ -505,7 +509,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Dhamma School Email</label>
+                                    <label class="control-label col-md-4">Email</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="dhammaSchEmail" name="dhammaSchEmail" ></p>
                                     </div>
@@ -515,7 +519,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4">Dhamma School UserName</label>
+                                    <label class="control-label col-md-12" for="inputSmall"><u>Dhamma School Permission</u></label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4">UserName</label>
                                     <div class="col-md-8">
                                         <p class="form-control col-md-8"  type="text" id="dhammaSchUN" name="dhammaSchUN" ></p>
                                     </div>

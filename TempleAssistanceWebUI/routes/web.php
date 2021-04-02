@@ -41,6 +41,7 @@ Route::get('/adminDashboard','Admin\DashboardController@index');
 
 Route::get('/adminDhammaSchool','Admin\DhammaSchManageController@index');
 Route::get('/adminNews','Admin\NewsManageController@index');
+Route::get('/adminEvent','Admin\EventManageController@index');
 Route::get('/adminTemple','Admin\TempleManageController@index');
 
 Route::get('/adminWelfareSociety','Admin\WelfareSocManageController@index');

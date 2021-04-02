@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TempleManageController extends Controller
+class EventManageController extends Controller
 {
     public function index(Request $request){
         $res = [
-            'name' => 'Temple Manage',
+            'name' => 'Event Manage',
 
         ];
-        return view('adminTemple',['response'=>$res]);
+        return view('adminEvent',['response'=>$res]);
     }
 }
