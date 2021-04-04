@@ -1,6 +1,6 @@
 @extends('layout.appAdmin')
 
-@section('title','Welfare Society Manage')
+@section('title','Users Manage')
 
 @section('body-content')
 
@@ -55,8 +55,8 @@
                             <td>Prakash</td>
                             <td>
                                 <button class="btn btn-success"data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
+{{--                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>--}}
+{{--                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>--}}
 
                             </td>
                         </tr>
@@ -67,8 +67,8 @@
                             <td>RathanaPala</td>
                             <td>
                                 <button class="btn btn-success"data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
+{{--                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>--}}
+{{--                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>--}}
 
                             </td>
                         </tr>
@@ -109,18 +109,18 @@
                                 </div>
 
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >Select User Role</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="userRole" name="userRole">
-                                            <option value="0">Admin</option>
-                                            <option value="1">Temple Main Monk</option>
-                                            <option value="2">Welfare Society President</option>
-                                            <option value="3">Dhamma School Principle</option>
-                                            <option value="4">Buddhist Followers</option>
-                                        </select>
-                                    </div>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >Select User Role</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="userRole" name="userRole">--}}
+{{--                                            <option value="0">Admin</option>--}}
+{{--                                            <option value="1">Temple Main Monk</option>--}}
+{{--                                            <option value="2">Welfare Society President</option>--}}
+{{--                                            <option value="3">Dhamma School Principle</option>--}}
+{{--                                            <option value="4">Buddhist Followers</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
@@ -155,80 +155,80 @@
     </div>
 
 
-    {{-----------------------------------------------------------------------------------------------------Update user--}}
-    <div class="modal fade" id="updateModel" data-backdrop="static" data-keyboard="false" tabindex="-1"
-         aria-labelledby="daneModelLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="daneModelLabel" align="center">Update User</h4>
-                </div>
-                <form method="POST" action=" ">
-                    @csrf
-                    <div class="model-body">
-                        <div class="row" >
-                            <div class="col-md-12">
+{{--    --}}{{-----------------------------------------------------------------------------------------------------Update user--}}
+{{--    <div class="modal fade" id="updateModel" data-backdrop="static" data-keyboard="false" tabindex="-1"--}}
+{{--         aria-labelledby="daneModelLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header">--}}
+{{--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--}}
+{{--                    <h4 class="modal-title" id="daneModelLabel" align="center">Update User</h4>--}}
+{{--                </div>--}}
+{{--                <form method="POST" action=" ">--}}
+{{--                    @csrf--}}
+{{--                    <div class="model-body">--}}
+{{--                        <div class="row" >--}}
+{{--                            <div class="col-md-12">--}}
 
 
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5">Full Name</label>
-                                    <div class="col-md-7">
-                                        <textarea class="form-control" rows="2" type="text" id="fullName" name="fullName" placeholder="Enter User Full Name"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5">Full Name</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <textarea class="form-control" rows="2" type="text" id="fullName" name="fullName" placeholder="Enter User Full Name"></textarea>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >Select User Role</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="userRole" name="userRole">
-                                            <option value="0">Admin</option>
-                                            <option value="1">Temple Main Monk</option>
-                                            <option value="2">Welfare Society President</option>
-                                            <option value="3">Dhamma School Principle</option>
-                                            <option value="4">Buddhist Followers</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >Select User Role</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="userRole" name="userRole">--}}
+{{--                                            <option value="0">Admin</option>--}}
+{{--                                            <option value="1">Temple Main Monk</option>--}}
+{{--                                            <option value="2">Welfare Society President</option>--}}
+{{--                                            <option value="3">Dhamma School Principle</option>--}}
+{{--                                            <option value="4">Buddhist Followers</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
 
-                                <label class="control-label col-md-5">User Name</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="userName" name="userName" placeholder="Enter User Name"></input>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">User Name</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="userName" name="userName" placeholder="Enter User Name"></input>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Password</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="password"  id="password" name="password" placeholder="Enter Password"></input>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">Password</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="password"  id="password" name="password" placeholder="Enter Password"></input>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" data-dismiss="modal" class="btn">Close</a>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-footer">--}}
+{{--                            <a href="#" data-dismiss="modal" class="btn">Close</a>--}}
+{{--                            <button type="submit" class="btn btn-primary">Save Changes</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-    {{-----------------------------------------------------------------------------------------------------View Dhamma School--}}
+    {{-----------------------------------------------------------------------------------------------------View User School--}}
     <div class="modal fade" id="viewModel" data-backdrop="static" data-keyboard="false" tabindex="-1"
          aria-labelledby="daneModelLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -285,37 +285,37 @@
             </div>
         </div>
     </div>
-    {{-----------------------------------------------------------------------------------------------------Delete News Model--}}
-    <div class="modal fade" id="deleteModel" data-backdrop="static" data-keyboard="false" tabindex="-1"
-         aria-labelledby="daneModelLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 class="login-head"align="center"><i class="fa fa-times-circle" ></i>Are you sure?</h3>
+{{--    --}}{{-----------------------------------------------------------------------------------------------------Delete Users Model--}}
+{{--    <div class="modal fade" id="deleteModel" data-backdrop="static" data-keyboard="false" tabindex="-1"--}}
+{{--         aria-labelledby="daneModelLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header">--}}
+{{--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--}}
+{{--                    <h3 class="login-head"align="center"><i class="fa fa-times-circle" ></i>Are you sure?</h3>--}}
 
-                </div>
-                <form method="POST" action=" ">
-                    @csrf
-                    <div class="model-body">
-                        <div class="row" >
-                            <div class="col-md-12">
-                                <div class="form-group">
+{{--                </div>--}}
+{{--                <form method="POST" action=" ">--}}
+{{--                    @csrf--}}
+{{--                    <div class="model-body">--}}
+{{--                        <div class="row" >--}}
+{{--                            <div class="col-md-12">--}}
+{{--                                <div class="form-group">--}}
 
-                                    <div class="col-md-10">
-                                        <h5>Do you really want to delete these user? This process cannot be undone.</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" data-dismiss="modal" class="btn">Close</a>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+{{--                                    <div class="col-md-10">--}}
+{{--                                        <h5>Do you really want to delete these user? This process cannot be undone.</h5>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-footer">--}}
+{{--                            <a href="#" data-dismiss="modal" class="btn">Close</a>--}}
+{{--                            <button type="submit" class="btn btn-danger">Delete</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 @endsection

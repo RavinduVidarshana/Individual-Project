@@ -12,4 +12,25 @@ class LoginController extends Controller
 
         return view('userLogin');
     }
+
+    public function userLogin(Request $request)
+    {
+        $username=$request->username;
+        $password=$request->password;
+        if(empty($username) || empty($username)){
+            return redirect('/');
+        }else{
+            if($username=='Admin' && $password=='123'){
+                return redirect('/adminDashboard');
+            }elseif ($username=='User' && $password=='123') {
+                return redirect('/templeDashboard');
+            }elseif ($username=='Dhamma' && $password=='123'){
+                return redirect('/dSchDashboard');
+            }elseif ($username=='Welfare' && $password=='123'){
+                return redirect('/wsDashboard');
+            }else{
+                return redirect('/');
+            }
+        }
+    }
 }

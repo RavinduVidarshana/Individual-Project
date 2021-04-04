@@ -12,6 +12,15 @@ class ProfileUpdateController extends Controller
             'name' => 'Temple Profile',
 
         ];
-        return view('templeProfile',['response'=>$res]);
+        return view('templeProfileNew',['response'=>$res]);
     }
+//    public function index2(Request $request){
+//        $res = [
+//            'name' => 'Temple Profile',
+//
+//        ];
+//        return view('templeProfile',['response'=>$res]);
+//    }
+
+
 }

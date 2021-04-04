@@ -62,7 +62,7 @@
                             </td>
                             <td>
                                 <button class="btn btn-success" data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
+{{--                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>--}}
                             </td>
                         </tr>
                         <tr>
@@ -82,7 +82,7 @@
                             </td>
                             <td>
                                 <button class="btn btn-success" data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
+{{--                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>--}}
                             </td>
                         </tr>
                         <tr>
@@ -102,7 +102,7 @@
                             </td>
                             <td>
                                 <button class="btn btn-success" data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
+{{--                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>--}}
                             </td>
                         </tr>
                         </tbody>
@@ -113,72 +113,72 @@
     </div>
 
 
-    {{-----------------------------------------------------------------------------------------------------Update News Model--}}
-    <div class="modal fade" id="updateModel" data-backdrop="static" data-keyboard="false" tabindex="-1"
-         aria-labelledby="daneModelLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title" id="daneModelLabel" align="center">Update News</h4>
-                </div>
-                <form method="POST" action=" ">
-                    @csrf
-                    <div class="model-body">
-                        <div class="row" >
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" for="inputSmall">News Title</label>
-                                    <div class="col-md-7">
-                                        <textarea class="form-control" rows="3"  type="text" id="newsTitle" name="newsTitle" placeholder="Enter News Title" ></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--    --}}{{-----------------------------------------------------------------------------------------------------Update News Model--}}
+{{--    <div class="modal fade" id="updateModel" data-backdrop="static" data-keyboard="false" tabindex="-1"--}}
+{{--         aria-labelledby="daneModelLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header">--}}
+{{--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--}}
+{{--                    <h4 class="modal-title" id="daneModelLabel" align="center">Update News</h4>--}}
+{{--                </div>--}}
+{{--                <form method="POST" action=" ">--}}
+{{--                    @csrf--}}
+{{--                    <div class="model-body">--}}
+{{--                        <div class="row" >--}}
+{{--                            <div class="col-md-12">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" for="inputSmall">News Title</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <textarea class="form-control" rows="3"  type="text" id="newsTitle" name="newsTitle" placeholder="Enter News Title" ></textarea>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >News Description</label>
-                                    <div class="col-md-7">
-                                        <textarea class="form-control" rows="10" type="text" id="newsInfo" name="newsInfo" placeholder="Enter News Description"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >News Description</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <textarea class="form-control" rows="10" type="text" id="newsInfo" name="newsInfo" placeholder="Enter News Description"></textarea>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" for="inputSmall">Publish Date</label>
-                                    <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm"  type="Date" id="newsDate" name="newsDate" >
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" for="inputSmall">Publish Date</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <input class="form-control col-md-7 input-sm"  type="Date" id="newsDate" name="newsDate" >--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" for="inputSmall">News Image</label>
-                                    <div class="col-md-7">
-                                        <input class="form-control col-md-7" id="newsImage" name="newsImage" type="file">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" for="inputSmall">News Image</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <input class="form-control col-md-7" id="newsImage" name="newsImage" type="file">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" data-dismiss="modal" class="btn">Close</a>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-footer">--}}
+{{--                            <a href="#" data-dismiss="modal" class="btn">Close</a>--}}
+{{--                            <button type="submit" class="btn btn-primary">Save Changes</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 
     {{-----------------------------------------------------------------------------------------------------View News Model--}}

@@ -140,77 +140,77 @@
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" for="inputSmall"><u>Dhamma School About</u></label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >Dhamma School Province</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="dhammaSchProvince" name="dhammaSchProvince">
-                                            <option value="0">Western</option>
-                                            <option value="1">Central</option>
-                                            <option value="2">Eastern</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Dhamma School About</u></label>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >Dhamma School Province</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="dhammaSchProvince" name="dhammaSchProvince">--}}
+{{--                                            <option value="0">Western</option>--}}
+{{--                                            <option value="1">Central</option>--}}
+{{--                                            <option value="2">Eastern</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >Dhamma School District</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="dhammaSchDistrict" name="dhammaSchDistrict">
-                                            <option value="0">Gampaha</option>
-                                            <option value="1">Kandy</option>
-                                            <option value="2">Colombo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >Dhamma School District</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="dhammaSchDistrict" name="dhammaSchDistrict">--}}
+{{--                                            <option value="0">Gampaha</option>--}}
+{{--                                            <option value="1">Kandy</option>--}}
+{{--                                            <option value="2">Colombo</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Dhamma School Address</label>
-                                <div class="col-md-7">
-                                    <textarea class="form-control" rows="4" type="text" id="dhammaSchAddress" name="dhammaSchAddress" placeholder="Enter Dhamma School Address"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">Dhamma School Address</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <textarea class="form-control" rows="4" type="text" id="dhammaSchAddress" name="dhammaSchAddress" placeholder="Enter Dhamma School Address"></textarea>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Dhamma School Phone</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="dhammaSchPhone" name="dhammaSchPhone" placeholder="Enter Dhamma School Phone"></input>
-                                </div>
-                                <label class="control-label col-md-5">This is Primary Phone Number</label>
-                                <div class="col-md-7">
-                                    <div class="toggle lg">
-                                        <label>
-                                            <input type="checkbox" id="dhammaSchPhonePrimary" name="dhammaSchPhonePrimary"><span class="button-indecator"></span>
-                                        </label>
-                                    </div>
-                                </div>
+{{--                                <label class="control-label col-md-5">Dhamma School Phone</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="dhammaSchPhone" name="dhammaSchPhone" placeholder="Enter Dhamma School Phone"></input>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">This is Primary Phone Number</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <div class="toggle lg">--}}
+{{--                                        <label>--}}
+{{--                                            <input type="checkbox" id="dhammaSchPhonePrimary" name="dhammaSchPhonePrimary"><span class="button-indecator"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Dhamma School Email</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="dhammaSchEmail" name="dhammaSchEmail" placeholder="Enter Dhamma School Email"></input>
-                                </div>
-                                <label class="control-label col-md-5">This is Primary Email</label>
-                                <div class="col-md-7">
-                                    <div class="toggle lg">
-                                        <label>
-                                            <input type="checkbox" id="dhammaSchEmailPrimary" name="dhammaSchEmailPrimary"><span class="button-indecator"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">Dhamma School Email</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="dhammaSchEmail" name="dhammaSchEmail" placeholder="Enter Dhamma School Email"></input>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">This is Primary Email</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <div class="toggle lg">--}}
+{{--                                        <label>--}}
+{{--                                            <input type="checkbox" id="dhammaSchEmailPrimary" name="dhammaSchEmailPrimary"><span class="button-indecator"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
 
 
@@ -303,77 +303,77 @@
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" for="inputSmall"><u>Dhamma School About</u></label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >Dhamma School Province</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="dhammaSchProvince" name="dhammaSchProvince">
-                                            <option value="0">Western</option>
-                                            <option value="1">Central</option>
-                                            <option value="2">Eastern</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Dhamma School About</u></label>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >Dhamma School Province</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="dhammaSchProvince" name="dhammaSchProvince">--}}
+{{--                                            <option value="0">Western</option>--}}
+{{--                                            <option value="1">Central</option>--}}
+{{--                                            <option value="2">Eastern</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >Dhamma School District</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="dhammaSchDistrict" name="dhammaSchDistrict">
-                                            <option value="0">Gampaha</option>
-                                            <option value="1">Kandy</option>
-                                            <option value="2">Colombo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >Dhamma School District</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="dhammaSchDistrict" name="dhammaSchDistrict">--}}
+{{--                                            <option value="0">Gampaha</option>--}}
+{{--                                            <option value="1">Kandy</option>--}}
+{{--                                            <option value="2">Colombo</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Dhamma School Address</label>
-                                <div class="col-md-7">
-                                    <textarea class="form-control" rows="4" type="text" id="dhammaSchAddress" name="dhammaSchAddress" placeholder="Enter Dhamma School Address"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">Dhamma School Address</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <textarea class="form-control" rows="4" type="text" id="dhammaSchAddress" name="dhammaSchAddress" placeholder="Enter Dhamma School Address"></textarea>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Dhamma School Phone</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="dhammaSchPhone" name="dhammaSchPhone" placeholder="Enter Dhamma School Phone"></input>
-                                </div>
-                                <label class="control-label col-md-5">This is Primary Phone Number</label>
-                                <div class="col-md-7">
-                                    <div class="toggle lg">
-                                        <label>
-                                            <input type="checkbox" id="dhammaSchPhonePrimary" name="dhammaSchPhonePrimary"><span class="button-indecator"></span>
-                                        </label>
-                                    </div>
-                                </div>
+{{--                                <label class="control-label col-md-5">Dhamma School Phone</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="dhammaSchPhone" name="dhammaSchPhone" placeholder="Enter Dhamma School Phone"></input>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">This is Primary Phone Number</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <div class="toggle lg">--}}
+{{--                                        <label>--}}
+{{--                                            <input type="checkbox" id="dhammaSchPhonePrimary" name="dhammaSchPhonePrimary"><span class="button-indecator"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Dhamma School Email</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="dhammaSchEmail" name="dhammaSchEmail" placeholder="Enter Dhamma School Email"></input>
-                                </div>
-                                <label class="control-label col-md-5">This is Primary Email</label>
-                                <div class="col-md-7">
-                                    <div class="toggle lg">
-                                        <label>
-                                            <input type="checkbox" id="dhammaSchEmailPrimary" name="dhammaSchEmailPrimary"><span class="button-indecator"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">Dhamma School Email</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="dhammaSchEmail" name="dhammaSchEmail" placeholder="Enter Dhamma School Email"></input>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">This is Primary Email</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <div class="toggle lg">--}}
+{{--                                        <label>--}}
+{{--                                            <input type="checkbox" id="dhammaSchEmailPrimary" name="dhammaSchEmailPrimary"><span class="button-indecator"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
 
 

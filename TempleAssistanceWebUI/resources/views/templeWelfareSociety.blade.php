@@ -160,77 +160,77 @@
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society About</u></label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >Welfare Society Province</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="welfareSocietyProvince" name="welfareSocietyProvince">
-                                            <option value="0">Western</option>
-                                            <option value="1">Central</option>
-                                            <option value="2">Eastern</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society About</u></label>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >Welfare Society Province</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="welfareSocietyProvince" name="welfareSocietyProvince">--}}
+{{--                                            <option value="0">Western</option>--}}
+{{--                                            <option value="1">Central</option>--}}
+{{--                                            <option value="2">Eastern</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >Welfare Society District</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="welfareSocietyDistrict" name="welfareSocietyDistrict">
-                                            <option value="0">Gampaha</option>
-                                            <option value="1">Kandy</option>
-                                            <option value="2">Colombo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >Welfare Society District</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="welfareSocietyDistrict" name="welfareSocietyDistrict">--}}
+{{--                                            <option value="0">Gampaha</option>--}}
+{{--                                            <option value="1">Kandy</option>--}}
+{{--                                            <option value="2">Colombo</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Welfare Society Address</label>
-                                <div class="col-md-7">
-                                    <textarea class="form-control" rows="4" type="text" id="welfareSocietyAddress" name="welfareSocietyAddress" placeholder="Enter Welfare Society Address"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">Welfare Society Address</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <textarea class="form-control" rows="4" type="text" id="welfareSocietyAddress" name="welfareSocietyAddress" placeholder="Enter Welfare Society Address"></textarea>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Welfare Society Phone</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="welfareSocietyPhone" name="welfareSocietyPhone" placeholder="Enter Welfare Society Phone"></input>
-                                </div>
-                                <label class="control-label col-md-5">This is Primary Phone Number</label>
-                                <div class="col-md-7">
-                                    <div class="toggle lg">
-                                        <label>
-                                            <input type="checkbox" id="welfareSocietyPhonePrimary" name="welfareSocietyPhonePrimary"><span class="button-indecator"></span>
-                                        </label>
-                                    </div>
-                                </div>
+{{--                                <label class="control-label col-md-5">Welfare Society Phone</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="welfareSocietyPhone" name="welfareSocietyPhone" placeholder="Enter Welfare Society Phone"></input>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">This is Primary Phone Number</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <div class="toggle lg">--}}
+{{--                                        <label>--}}
+{{--                                            <input type="checkbox" id="welfareSocietyPhonePrimary" name="welfareSocietyPhonePrimary"><span class="button-indecator"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Welfare Society Email</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="welfareSocietyEmail" name="welfareSocietyEmail" placeholder="Enter Welfare Society Email"></input>
-                                </div>
-                                <label class="control-label col-md-5">This is Primary Email</label>
-                                <div class="col-md-7">
-                                    <div class="toggle lg">
-                                        <label>
-                                            <input type="checkbox" id="welfareSocietyEmailPrimary" name="welfareSocietyEmailPrimary"><span class="button-indecator"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">Welfare Society Email</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="welfareSocietyEmail" name="welfareSocietyEmail" placeholder="Enter Welfare Society Email"></input>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">This is Primary Email</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <div class="toggle lg">--}}
+{{--                                        <label>--}}
+{{--                                            <input type="checkbox" id="welfareSocietyEmailPrimary" name="welfareSocietyEmailPrimary"><span class="button-indecator"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
 
 
@@ -341,77 +341,77 @@
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society About</u></label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >Welfare Society Province</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="welfareSocietyProvince" name="welfareSocietyProvince">
-                                            <option value="0">Western</option>
-                                            <option value="1">Central</option>
-                                            <option value="2">Eastern</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society About</u></label>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >Welfare Society Province</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="welfareSocietyProvince" name="welfareSocietyProvince">--}}
+{{--                                            <option value="0">Western</option>--}}
+{{--                                            <option value="1">Central</option>--}}
+{{--                                            <option value="2">Eastern</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" >Welfare Society District</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control" id="welfareSocietyDistrict" name="welfareSocietyDistrict">
-                                            <option value="0">Gampaha</option>
-                                            <option value="1">Kandy</option>
-                                            <option value="2">Colombo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" >Welfare Society District</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <select class="form-control" id="welfareSocietyDistrict" name="welfareSocietyDistrict">--}}
+{{--                                            <option value="0">Gampaha</option>--}}
+{{--                                            <option value="1">Kandy</option>--}}
+{{--                                            <option value="2">Colombo</option>--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Welfare Society Address</label>
-                                <div class="col-md-7">
-                                    <textarea class="form-control" rows="4" type="text" id="welfareSocietyAddress" name="welfareSocietyAddress" placeholder="Enter Welfare Society Address"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">Welfare Society Address</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <textarea class="form-control" rows="4" type="text" id="welfareSocietyAddress" name="welfareSocietyAddress" placeholder="Enter Welfare Society Address"></textarea>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Welfare Society Phone</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="welfareSocietyPhone" name="welfareSocietyPhone" placeholder="Enter Welfare Society Phone"></input>
-                                </div>
-                                <label class="control-label col-md-5">This is Primary Phone Number</label>
-                                <div class="col-md-7">
-                                    <div class="toggle lg">
-                                        <label>
-                                            <input type="checkbox" id="welfareSocietyPhonePrimary" name="welfareSocietyPhonePrimary"><span class="button-indecator"></span>
-                                        </label>
-                                    </div>
-                                </div>
+{{--                                <label class="control-label col-md-5">Welfare Society Phone</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="welfareSocietyPhone" name="welfareSocietyPhone" placeholder="Enter Welfare Society Phone"></input>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">This is Primary Phone Number</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <div class="toggle lg">--}}
+{{--                                        <label>--}}
+{{--                                            <input type="checkbox" id="welfareSocietyPhonePrimary" name="welfareSocietyPhonePrimary"><span class="button-indecator"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Welfare Society Email</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="welfareSocietyEmail" name="welfareSocietyEmail" placeholder="Enter Welfare Society Email"></input>
-                                </div>
-                                <label class="control-label col-md-5">This is Primary Email</label>
-                                <div class="col-md-7">
-                                    <div class="toggle lg">
-                                        <label>
-                                            <input type="checkbox" id="welfareSocietyEmailPrimary" name="welfareSocietyEmailPrimary"><span class="button-indecator"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">Welfare Society Email</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="welfareSocietyEmail" name="welfareSocietyEmail" placeholder="Enter Welfare Society Email"></input>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">This is Primary Email</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <div class="toggle lg">--}}
+{{--                                        <label>--}}
+{{--                                            <input type="checkbox" id="welfareSocietyEmailPrimary" name="welfareSocietyEmailPrimary"><span class="button-indecator"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
 
 
