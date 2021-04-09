@@ -18,9 +18,9 @@ class DaneScheduleController extends Controller
      */
     public function index()
     {
-        $DAN = DaneShedule:: get();
-//        select("monkCount","isBook","vegMonkCount","nonVegMonkCount","bfCount","temple_id","dane_time_id", DB::raw("DATE_FORMAT(date,'%d-%b-%Y') as date"))
-//        ->get();
+        $DAN = DaneShedule:: join('dane_time', 'dane_shedule.dane_time_id', '=', 'dane_time.id')
+        ->select("dane_shedule.id as id","dane_shedule.monkCount","dane_shedule.isBook","dane_shedule.vegMonkCount","dane_shedule.nonVegMonkCount","dane_shedule.bfCount","dane_shedule.date","dane_shedule.temple_id","dane_time.id as dane_time_id","dane_time.daneTimeName")
+        ->get();
 
         $DANAY = array();
         foreach ($DAN as $item) {
@@ -28,11 +28,18 @@ class DaneScheduleController extends Controller
                 ->where('dane_schedule_has_bf.dane_shedule_id', $item->id)
                 ->select('buddhist_followers.id as bfid', 'buddhist_followers.firstName', 'buddhist_followers.lastName', 'buddhist_followers.NIC')
                 ->get();
-            $sub = array('dshb' => $DANS, "date" => $item->date->format('d-m-Y'), "monkCount" => $item->monkCount, "isBook" => $item->isBook, "vegMonkCount" => $item->vegMonkCount, "nonVegMonkCount" => $item->nonVegMonkCount, "bfCount" => $item->bfCount, "temple_id" => $item->temple_id, "dane_time_id" => $item->dane_time_id);
+            $sub = array('dshb' => $DANS, "date" => $item->date->format('d-m-Y'), "monkCount" => $item->monkCount, "isBook" => $item->isBook, "vegMonkCount" => $item->vegMonkCount, "nonVegMonkCount" => $item->nonVegMonkCount, "bfCount" => $item->bfCount, "temple_id" => $item->temple_id, "dane_time_id" => $item->dane_time_id, "daneTimeName" =>$item->daneTimeName);
             array_push($DANAY, $sub);
         }
 
-        return response()->json(["message" => "Find all Dane Shedule", "status" => $DANAY], 200);
+        $JsonRes=[
+            "message" => "Find all Dane Schedule",
+            "status" => 200,
+            "response" => $DANAY,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message" => "Find all Dane Shedule", "status" => $DANAY], 200);
     }
 
     /**
@@ -92,8 +99,13 @@ class DaneScheduleController extends Controller
             $DAN->isBook = $isBook;
             $DAN->save();
 
-
-            return response()->json(["message" => "Successfully Insert Dane Shedule"], 200);
+            $JsonRes=[
+                "message" => "Successfully Insert Dane Schedule",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message" => "Successfully Insert Dane Shedule"], 200);
         }
     }
 
@@ -105,8 +117,13 @@ class DaneScheduleController extends Controller
      */
     public function show($id)
     {
-        $DAN = DaneShedule::  where('id', $id)
+
+
+        $DAN = DaneShedule:: join('dane_time', 'dane_shedule.dane_time_id', '=', 'dane_time.id')
+            ->select("dane_shedule.id as id","dane_shedule.monkCount","dane_shedule.isBook","dane_shedule.vegMonkCount","dane_shedule.nonVegMonkCount","dane_shedule.bfCount","dane_shedule.date","dane_shedule.temple_id","dane_time.id as dane_time_id","dane_time.daneTimeName")
+           -> where('dane_shedule.id', $id)
             ->first();
+
 
         $DANS = DaneScheduleHasBf:: join('buddhist_followers', 'dane_schedule_has_bf.buddhist_followers_id', '=', 'buddhist_followers.id')
             ->where('dane_schedule_has_bf.dane_shedule_id', $id)
@@ -122,10 +139,18 @@ class DaneScheduleController extends Controller
             "nonVegMonkCount" => $DAN->nonVegMonkCount,
             "bfCount" => $DAN->bfCount,
             "temple_id" => $DAN->temple_id,
-            "dane_time_id" => $DAN->dane_time_id
+            "dane_time_id" => $DAN->dane_time_id,
+            "daneTimeName" => $DAN->daneTimeName
         ];
 
-        return response()->json(["message" => "Find one Dane Schedule", "response" => $res], 200);
+        $JsonRes=[
+            "message" => "Find one Dane Schedule",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+
+
     }
 
     /**
@@ -182,10 +207,13 @@ class DaneScheduleController extends Controller
             $DAN->isBook = $isBook;
             $DAN->update();
 
-
-            return response()->json(["message" => "Successfully Update Dane Schedule"], 200);
-
-
+            $JsonRes=[
+                "message" => "Successfully Update Dane Schedule",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message" => "Successfully Update Dane Schedule"], 200);
 
         }
     }
@@ -202,6 +230,12 @@ class DaneScheduleController extends Controller
             ->where('id', $id)
             ->delete();
 
-        return response()->json(["message" => "Delete Dane Shedule "], 200);
+        $JsonRes=[
+            "message" => "Delete Dane Shedule",
+            "status" => 200,
+            "response" => "",
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Delete Dane Shedule "], 200);
     }
 }

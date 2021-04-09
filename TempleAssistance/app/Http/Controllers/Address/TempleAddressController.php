@@ -31,8 +31,13 @@ class TempleAddressController extends Controller
             ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
             ->get();
 
-
-        return response()->json(["message"=>"Find all Temple Address","response"=>$TMHA],200);
+        $JsonRes=[
+            "message" => "Find all Temple Address",
+            "status" => 200,
+            "response" => $TMHA,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find all Temple Address","response"=>$TMHA],200);
 
     }
 
@@ -86,9 +91,14 @@ class TempleAddressController extends Controller
             $TMHA -> temple_id = $temple_id;
             $TMHA->save();
 
+            $JsonRes=[
+                "message" => "Successfully Insert Temple Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
 
-
-            return response()->json(["message" => "Successfully Insert Temple Address"], 200);
+//            return response()->json(["message" => "Successfully Insert Temple Address"], 200);
         }
     }
 
@@ -111,8 +121,13 @@ class TempleAddressController extends Controller
             ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
             ->first();
 
-
-        return response()->json(["message"=>"Find one Temple Address","response"=>$TMHA],200);
+        $JsonRes=[
+            "message" => "Find one Temple Address",
+            "status" => 200,
+            "response" => $TMHA,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find one Temple Address","response"=>$TMHA],200);
     }
 
     /**
@@ -163,7 +178,14 @@ class TempleAddressController extends Controller
             $AD->city_id = $city_id ;
             $AD->update();
 
-            return response()->json(["message"=>"Successfully Update Temple Address"],200);
+            $JsonRes=[
+                "message" => "Successfully Update Temple Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
+//            return response()->json(["message"=>"Successfully Update Temple Address"],200);
 
         }
     }
@@ -176,10 +198,41 @@ class TempleAddressController extends Controller
      */
     public function destroy($id)
     {
-        $AD = Address::find($id);
-        $AD -> delete();
-        return response()->json(["message"=>"Delete Successfully Temple Address"],200);
+//        $AD = Address::find($id);
+//        $AD -> delete();
+//
+//
+//        $JsonRes=[
+//            "message" => "Delete Successfully Temple Address",
+//            "status" => 200,
+//            "response" => "",
+//        ];
+//        return response()->json($JsonRes, 200);
+////        return response()->json(["message"=>"Delete Successfully Temple Address"],200);
 
+        $TMHA = TempleHasAddress::find($id);
+        $AD= Address::find($TMHA->address_id);
+        if($AD->isPrimary){
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $TMHA->delete();
+            $AD->delete();
+
+            $JsonRes=[
+                "message" => "Delete Temple Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete Temple Address "],200);
+        }
 
     }
 }

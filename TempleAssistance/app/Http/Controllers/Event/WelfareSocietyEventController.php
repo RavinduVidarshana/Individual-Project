@@ -71,8 +71,13 @@ class WelfareSocietyEventController extends Controller
 
             array_push($EVARY,$res);
         }
-
-        return response()->json(["message"=>"Find all WelfareSociety  Events","status"=>$EV],200);
+        $JsonRes=[
+            "message" => "Find all Temple Events",
+            "status" => 200,
+            "response" => $EVARY,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find all WelfareSociety  Events","status"=>$EVARY],200);
     }
 
     /**
@@ -145,7 +150,14 @@ class WelfareSocietyEventController extends Controller
             $EV->isApproved = $isApproved ;
             $EV->save();
 
-            return response()->json(["message"=>"Successfully Insert WelfareSociety  Event"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert WelfareSociety  Event",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
+//            return response()->json(["message"=>"Successfully Insert WelfareSociety  Event"],200);
 
         }
     }
@@ -206,7 +218,14 @@ class WelfareSocietyEventController extends Controller
 
         ];
 
-        return response()->json(["message"=>"Find one WelfareSociety Event","response"=>$res],200);
+        $JsonRes=[
+            "message" => "Find one WelfareSociety Event",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message"=>"Find one WelfareSociety Event","response"=>$res],200);
 
     }
 
@@ -240,8 +259,6 @@ class WelfareSocietyEventController extends Controller
             'longitude' => 'required',
             'latitude' => 'required',
             'event_catergory_id' => 'required|numeric',
-
-
 
 
         ];
@@ -281,7 +298,13 @@ class WelfareSocietyEventController extends Controller
             $EV->isApproved = $isApproved ;
             $EV->update();
 
-            return response()->json(["message"=>"Successfully Update WelfareSociety Event"],200);
+            $JsonRes=[
+                "message" => "Successfully Update WelfareSociety Event",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update WelfareSociety Event"],200);
 
         }
     }
@@ -298,8 +321,13 @@ class WelfareSocietyEventController extends Controller
         Event:: where('eventIsActive','isApproved',1)
             -> where('id',$id)
             -> delete();
-
-        return response()->json(["message"=>"Delete Event "],200);
+        $JsonRes=[
+            "message" => "Delete Event",
+            "status" => 200,
+            "response" => "",
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Delete Event "],200);
     }
 
 }

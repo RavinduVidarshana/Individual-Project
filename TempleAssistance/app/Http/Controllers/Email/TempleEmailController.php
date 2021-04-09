@@ -26,8 +26,13 @@ class TempleEmailController extends Controller
             ->where('temple_has_email.email_id','=',$userid)
             ->select('email.id as id','email.emailName','email.isPrimary','temple_has_email.id as temporaryEmailId')
             ->get();
-
-        return response()->json(["message"=>"Find all Temple Emails","response"=>$TMHE],200);
+        $JsonRes=[
+            "message" => "Find all Temple Emails",
+            "status" => 200,
+            "response" => $TMHE,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find all Temple Emails","response"=>$TMHE],200);
     }
 
     /**
@@ -80,7 +85,14 @@ class TempleEmailController extends Controller
             $TMHE ->temple_id = $temple_id;
             $TMHE -> save();
 
-            return response()->json(["message"=>"Successfully Insert Temple Email"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Temple Emai",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
+//            return response()->json(["message"=>"Successfully Insert Temple Email"],200);
 
         }
     }
@@ -97,8 +109,13 @@ class TempleEmailController extends Controller
             ->where('temple_has_email.id','=' , $id)
             ->select('email.id as id','email.emailName','email.isPrimary','temple_has_email.id as temporaryEmailId')
             ->first();
-
-        return response()->json(["message"=>"Find one Temple Email","response"=>$TMHE],200);
+        $JsonRes=[
+            "message" => "Find one Temple Email",
+            "status" => 200,
+            "response" => $TMHE,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find one Temple Email","response"=>$TMHE],200);
     }
 
     /**
@@ -145,8 +162,13 @@ class TempleEmailController extends Controller
             $EM->isPrimary = $isPrimary ;
             $EM->update();
 
-
-            return response()->json(["message"=>"Successfully Update Temple Email"],200);
+            $JsonRes=[
+                "message" => "Successfully Update Temple Email",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update Temple Email"],200);
 
         }
     }
@@ -163,11 +185,25 @@ class TempleEmailController extends Controller
 
         $EM = Email::find($TMHE -> email_id);
         if($EM->isPrimary){
-            return response()->json(["message"=>"Can not delete primary values "],401);
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
         }else{
             $TMHE->delete();
             $EM->delete();
-            return response()->json(["message"=>"Delete Temple Email "],200);
+
+            $JsonRes=[
+                "message" => "Delete Temple Email",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete Temple Email "],200);
         }
 
     }

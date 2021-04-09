@@ -71,8 +71,13 @@ class TempleEventController extends Controller
 
             array_push($EVARY,$res);
         }
-
-        return response()->json(["message"=>"Find all Temple Events","status"=>$EVARY],200);
+        $JsonRes=[
+            "message" => "Find all Temple Events",
+            "status" => 200,
+            "response" => $EVARY,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find all Temple Events","status"=>$EVARY],200);
 
     }
 
@@ -146,7 +151,15 @@ class TempleEventController extends Controller
             $EV->isApproved = $isApproved ;
             $EV->save();
 
-            return response()->json(["message"=>"Successfully Insert Temple Event"],200);
+//            return response()->json(["message"=>"Successfully Insert Temple Event"],200);
+
+            $JsonRes=[
+                "message" => "Successfully Insert Temple Event",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
 
         }
     }
@@ -207,7 +220,14 @@ class TempleEventController extends Controller
 
         ];
 
-        return response()->json(["message"=>"Find one Temple Event","response"=>$res],200);
+        $JsonRes=[
+            "message" => "Find one Temple Event",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message"=>"Find one Temple Event","response"=>$res],200);
     }
 
     /**
@@ -279,7 +299,13 @@ class TempleEventController extends Controller
             $EV->isApproved = $isApproved ;
             $EV->update();
 
-            return response()->json(["message"=>"Successfully Update Temple Event"],200);
+//            return response()->json(["message"=>"Successfully Update Temple Event"],200);
+            $JsonRes=[
+                "message" => "Successfully Update Temple Event",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
 
         }
     }
@@ -296,6 +322,14 @@ class TempleEventController extends Controller
             -> where('id',$id)
             -> delete();
 
-        return response()->json(["message"=>"Delete Event "],200);
+//        return response()->json(["message"=>"Delete Event "],200);
+        $JsonRes=[
+            "message" => "Delete Event",
+            "status" => 200,
+            "response" => "",
+        ];
+        return response()->json($JsonRes, 200);
+
+
     }
 }

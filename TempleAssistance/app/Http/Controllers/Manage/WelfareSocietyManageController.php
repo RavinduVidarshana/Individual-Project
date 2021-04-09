@@ -66,8 +66,13 @@ class WelfareSocietyManageController extends Controller
 
             array_push($WSARY,$res);
         }
-
-        return response()->json(["message" => "Success","response "=>$WSARY], 200);
+        $JsonRes=[
+            "message" => "Success",
+            "status" => 200,
+            "response" => $WSARY,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Success","response "=>$WSARY], 200);
     }
 
     /**
@@ -137,7 +142,14 @@ class WelfareSocietyManageController extends Controller
             'WSHE' => $WSHE
 
         ];
-        return response()->json(["message" => "Success","response "=>$res], 200);
+
+        $JsonRes=[
+            "message" => "Success",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Success","response "=>$res], 200);
     }
 
     /**
@@ -163,7 +175,13 @@ class WelfareSocietyManageController extends Controller
         $WS = Welfare::find($id);
         $WS->update();
 
-        return response()->json(["message" => "Status changed","response "=>$WS ], 200);
+        $JsonRes=[
+            "message" => "Status changed",
+            "status" => 200,
+            "response" => $WS,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Status changed","response "=>$WS ], 200);
     }
 
     /**

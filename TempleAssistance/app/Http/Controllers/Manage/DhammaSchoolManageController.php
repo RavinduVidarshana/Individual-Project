@@ -65,8 +65,13 @@ class DhammaSchoolManageController extends Controller
 
             array_push($DMARY,$res);
         }
-
-        return response()->json(["message" => "Success","response "=>$DMARY], 200);
+        $JsonRes=[
+            "message" => "Success",
+            "status" => 200,
+            "response" => $DMARY,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Success","response "=>$DMARY], 200);
     }
 
     /**
@@ -135,7 +140,14 @@ class DhammaSchoolManageController extends Controller
             'DMHE' => $DMHE
 
         ];
-        return response()->json(["message" => "Success","response "=>$res], 200);
+
+        $JsonRes=[
+            "message" => "Success",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Success","response "=>$res], 200);
     }
 
     /**
@@ -161,7 +173,13 @@ class DhammaSchoolManageController extends Controller
         $DM = DhammaSchool::find($id);
         $DM->update();
 
-        return response()->json(["message" => "Status changed","response "=>$DM ], 200);
+        $JsonRes=[
+            "message" => "Status changed",
+            "status" => 200,
+            "response" => $DM,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Status changed","response "=>$DM ], 200);
     }
 
     /**

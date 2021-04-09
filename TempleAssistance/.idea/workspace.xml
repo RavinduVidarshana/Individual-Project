@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c2f5a48-8719-4f86-8ab7-9bd8831853a6" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +13,23 @@
     <execution>
       <executable path="composer" />
     </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -118,6 +136,19 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -154,6 +185,27 @@
       <workItem from="1616428367418" duration="12555000" />
       <workItem from="1616693015426" duration="3689000" />
       <workItem from="1616735802163" duration="8986000" />
+      <workItem from="1616774634061" duration="1980000" />
+      <workItem from="1616791008831" duration="330000" />
+      <workItem from="1616791726658" duration="262000" />
+      <workItem from="1616828134758" duration="1197000" />
+      <workItem from="1616934709373" duration="898000" />
+      <workItem from="1616948340833" duration="156000" />
+      <workItem from="1617035264904" duration="4083000" />
+      <workItem from="1617164659771" duration="1264000" />
+      <workItem from="1617227737418" duration="621000" />
+      <workItem from="1617253149142" duration="852000" />
+      <workItem from="1617275821791" duration="83000" />
+      <workItem from="1617294728024" duration="89000" />
+      <workItem from="1617298630160" duration="228000" />
+      <workItem from="1617642327969" duration="45000" />
+      <workItem from="1617642784552" duration="624000" />
+      <workItem from="1617726766666" duration="3772000" />
+      <workItem from="1617817099197" duration="329000" />
+      <workItem from="1617864911443" duration="8769000" />
+      <workItem from="1617888067254" duration="5771000" />
+      <workItem from="1617950841888" duration="140000" />
+      <workItem from="1617985308397" duration="5087000" />
     </task>
     <servers />
   </component>
@@ -174,11 +226,11 @@
     </state>
     <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728/1366.0.1024.728@0.0.1366.728" timestamp="1616744763397" />
     <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1616438180570" />
-    <state x="463" y="146" key="FileChooserDialogImpl" timestamp="1616439461034">
+    <state x="463" y="146" key="FileChooserDialogImpl" timestamp="1616776451589">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="146" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1024.728@0.0.1366.728" timestamp="1615747141619" />
-    <state x="463" y="146" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1616439461034" />
+    <state x="463" y="146" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1616776451589" />
     <state x="456" y="178" key="NewPhpClassDialog" timestamp="1616174076328">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -187,11 +239,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1615224874262" />
-    <state x="379" y="215" key="com.intellij.ide.util.TipDialog" timestamp="1616736868794">
+    <state x="379" y="215" key="com.intellij.ide.util.TipDialog" timestamp="1616774635724">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="379" y="215" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1024.728@0.0.1366.728" timestamp="1616736868794" />
     <state x="1650" y="215" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1024.728@1366.0.1024.728" timestamp="1615810851772" />
-    <state x="379" y="215" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1616693035265" />
+    <state x="379" y="215" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1616774635724" />
   </component>
 </project>

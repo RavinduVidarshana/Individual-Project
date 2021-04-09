@@ -27,7 +27,14 @@ class TemplePhoneController extends Controller
             ->select('phone.id as id','phone.phoneName','phone.isPrimary','temple_has_phone.id as temporaryPhoneId')
             ->get();
 
-        return response()->json(["message"=>"Find all Temple phone","response"=>$TMHP],200);
+        $JsonRes=[
+            "message" => "Find all Temple phone",
+            "status" => 200,
+            "response" => $TMHP,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message"=>"Find all Temple phone","response"=>$TMHP],200);
     }
 
     /**
@@ -79,7 +86,14 @@ class TemplePhoneController extends Controller
             $TMHP ->temple_id = $temple_id;
             $TMHP ->save();
 
-            return response()->json(["message"=>"Successfully Insert Temple Phone Number"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Temple Phone Phone Number",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
+//            return response()->json(["message"=>"Successfully Insert Temple Phone Number"],200);
 
         }
     }
@@ -98,7 +112,14 @@ class TemplePhoneController extends Controller
             ->select('phone.id as id','phone.phoneName','phone.isPrimary','temple_has_phone.id as temporaryPhoneId')
             ->first();
 
-        return response()->json(["message"=>"Find one Temple phone","response"=>$TMHP],200);
+        $JsonRes=[
+            "message" => "Find one Temple phone",
+            "status" => 200,
+            "response" => $TMHP,
+        ];
+        return response()->json($JsonRes, 200);
+//
+//        return response()->json(["message"=>"Find one Temple phone","response"=>$TMHP],200);
     }
 
     /**
@@ -145,7 +166,13 @@ class TemplePhoneController extends Controller
             $PN->isPrimary = $isPrimary ;
             $PN->update();
 
-            return response()->json(["message"=>"Successfully Update Temple Phone Number"],200);
+            $JsonRes=[
+                "message" => "Successfully Update Temple Phone Number",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update Temple Phone Number"],200);
 
         }
     }
@@ -162,11 +189,25 @@ class TemplePhoneController extends Controller
 
         $PN = Phone::find($TMHP->phone_id);
         if($PN->isPrimary){
-            return response()->json(["message"=>"Can not delete primary values "],401);
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
         }else{
             $TMHP->delete();
             $PN->delete();
-            return response()->json(["message"=>"Delete Temple Phone Number "],200);
+
+            $JsonRes=[
+                "message" => "Delete Temple Phone Number ",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete Temple Phone Number "],200);
         }
 
 

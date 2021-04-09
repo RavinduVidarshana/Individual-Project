@@ -71,8 +71,13 @@ class DhammaSchoolEventController extends Controller
 
             array_push($EVARY,$res);
         }
-
-        return response()->json(["message"=>"Find all Dhamma School Events","status"=>$EVARY],200);
+        $JsonRes=[
+            "message" => "Find all Dhamma School Events",
+            "status" => 200,
+            "response" => $EVARY,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find all Dhamma School Events","status"=>$EVARY],200);
 
     }
 
@@ -146,7 +151,13 @@ class DhammaSchoolEventController extends Controller
             $EV->isApproved = $isApproved ;
             $EV->save();
 
-            return response()->json(["message"=>"Successfully Insert Dhamma School Event"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Dhamma School Event",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Insert Dhamma School Event"],200);
 
         }
     }
@@ -207,7 +218,14 @@ class DhammaSchoolEventController extends Controller
 
         ];
 
-        return response()->json(["message"=>"Find one Dhamma School Event","response"=>$res],200);
+        $JsonRes=[
+            "message" => "Find one Dhamma School Event",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message"=>"Find one Dhamma School Event","response"=>$res],200);
     }
 
     /**
@@ -280,7 +298,13 @@ class DhammaSchoolEventController extends Controller
             $EV->isApproved = $isApproved ;
             $EV->update();
 
-            return response()->json(["message"=>"Successfully Insert Dhamma School Event"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Dhamma School Event",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Insert Dhamma School Event"],200);
 
         }
     }
@@ -297,6 +321,12 @@ class DhammaSchoolEventController extends Controller
             -> where('id',$id)
             -> delete();
 
-        return response()->json(["message"=>"Delete Event "],200);
+        $JsonRes=[
+            "message" => "Delete Event",
+            "status" => 200,
+            "response" => "",
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Delete Event"],200);
     }
 }

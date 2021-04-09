@@ -26,8 +26,13 @@ class WelfareSocietyPhoneController extends Controller
             ->where('welfare_has_phone.welfare_id','=',$userid)
             ->select('phone.id as id','phone.phoneName','phone.isPrimary','welfare_has_phone.id as temporaryPhoneId')
             ->get();
-
-        return response()->json(["message"=>"Find all Welfare phone","response"=>$WSHP],200);
+        $JsonRes=[
+            "message" => "Find all Welfare phone",
+            "status" => 200,
+            "response" => $WSHP,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find all Welfare phone","response"=>$WSHP],200);
     }
 
     /**
@@ -79,7 +84,13 @@ class WelfareSocietyPhoneController extends Controller
             $WSHP ->welfare_id = $welfare_id;
             $WSHP ->save();
 
-            return response()->json(["message"=>"Successfully Insert Welfare Society Phone Number"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Welfare Society Phone Phone Number",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Insert Welfare Society Phone Number"],200);
 
         }
     }
@@ -96,8 +107,13 @@ class WelfareSocietyPhoneController extends Controller
             ->where('welfare_has_phone.id','=' , $id)
             ->select('phone.id as id','phone.phoneName','phone.isPrimary','welfare_has_phone.id as temporaryPhoneId')
             ->first();
-
-        return response()->json(["message"=>"Find one Welfare Phone phone","response"=>$WSHP],200);
+        $JsonRes=[
+            "message" => "Find one Welfare Phone phone",
+            "status" => 200,
+            "response" => $WSHP,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find one Welfare Phone phone","response"=>$WSHP],200);
     }
 
     /**
@@ -144,7 +160,13 @@ class WelfareSocietyPhoneController extends Controller
             $PN->isPrimary = $isPrimary ;
             $PN->update();
 
-            return response()->json(["message"=>"Successfully Update Welfare Society Phone Number"],200);
+            $JsonRes=[
+                "message" => "Successfully Update Welfare Society Phone Number",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update Welfare Society Phone Number"],200);
 
         }
     }
@@ -157,11 +179,36 @@ class WelfareSocietyPhoneController extends Controller
      */
     public function destroy($id)
     {
-        $WSHP = WelfareHasPhone::join('phone','welfare_has_phone.phone_id','=','phone.id')
-            ->where('welfare_has_phone.id','=' , $id)
-            ->select('phone.id as id','phone.phoneName','phone.isPrimary','welfare_has_phone.id as temporaryPhoneId')
-            ->first();
+//        $WSHP = WelfareHasPhone::join('phone','welfare_has_phone.phone_id','=','phone.id')
+//            ->where('welfare_has_phone.id','=' , $id)
+//            ->select('phone.id as id','phone.phoneName','phone.isPrimary','welfare_has_phone.id as temporaryPhoneId')
+//            ->first();
+//
+//        return response()->json(["message"=>"Find all Temple phone","response"=>$WSHP],200);
 
-        return response()->json(["message"=>"Find all Temple phone","response"=>$WSHP],200);
+        $WSHP = WelfareHasPhone::find($id);
+
+        $PN = Phone::find($WSHP->phone_id);
+        if($PN->isPrimary){
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $WSHP->delete();
+            $PN->delete();
+
+            $JsonRes=[
+                "message" => "Delete Welfare Society Phone Number ",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete Welfare Society Phone Number "],200);
+        }
     }
 }

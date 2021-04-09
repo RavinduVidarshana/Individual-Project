@@ -22,7 +22,14 @@ class TempleNewsController extends Controller
             ->select('news.id as id','news.title','news.description','news.publishDate','temple.id as temple_id','temple.templeName')
             -> get();
 
-        return response()->json(["message"=>"Find one News","status"=>$NS],200);
+        $JsonRes=[
+            "message" => "Find all News",
+            "status" => 200,
+            "response" => $NS,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message"=>"Find one News","status"=>$NS],200);
     }
 
     /**
@@ -75,7 +82,13 @@ class TempleNewsController extends Controller
             $NS->isApproved = $isApproved ;
             $NS->save();
 
-            return response()->json(["message"=>"Successfully Insert News"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert News",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Insert News"],200);
 
         }
     }
@@ -95,7 +108,14 @@ class TempleNewsController extends Controller
             ->select('news.id as id','news.title','news.description','news.publishDate','temple.id as temple_id','temple.templeName')
             -> first();
 
-        return response()->json(["message"=>"Find one News","status"=>$NS],200);
+        $JsonRes=[
+            "message" => "Find one News",
+            "status" => 200,
+            "response" => $NS,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message"=>"Find one News","status"=>$NS],200);
     }
 
     /**
@@ -149,7 +169,13 @@ class TempleNewsController extends Controller
             $NS->isApproved = $isApproved ;
             $NS->update();
 
-            return response()->json(["message"=>"Successfully Update News"],200);
+            $JsonRes=[
+                "message" => "Successfully Update News",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update News"],200);
 
         }
     }
@@ -167,6 +193,12 @@ class TempleNewsController extends Controller
             -> where('id',$id)
             -> delete();
 
-        return response()->json(["message"=>"Delete News "],200);
+        $JsonRes=[
+            "message" => "Delete News",
+            "status" => 200,
+            "response" => "",
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Delete News "],200);
     }
 }

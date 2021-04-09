@@ -27,8 +27,14 @@ class BuddhistFollowersPhoneController extends Controller
             ->where('bf_has_phone.buddhist_followers_id','=',$userid)
             ->select('phone.id as id','phone.phoneName','phone.isPrimary','bf_has_phone.id as temporaryPhoneId')
             ->get();
+        $JsonRes=[
+            "message" => "Find all Buddhist Followers phone",
+            "status" => 200,
+            "response" => $BFHP,
+        ];
+        return response()->json($JsonRes, 200);
 
-        return response()->json(["message"=>"Find all Buddhist Followers phone","response"=>$BFHP],200);
+//        return response()->json(["message"=>"Find all Buddhist Followers phone","response"=>$BFHP],200);
     }
 
     /**
@@ -79,8 +85,13 @@ class BuddhistFollowersPhoneController extends Controller
             $BFHP ->phone_id = $PN -> id;
             $BFHP ->buddhist_followers_id = $buddhist_followers_id;
             $BFHP ->save();
-
-            return response()->json(["message"=>"Successfully Insert Buddhist Followers Phone Number"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Buddhist Followers Phone Number",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Insert Buddhist Followers Phone Number"],200);
 
         }
     }
@@ -98,7 +109,13 @@ class BuddhistFollowersPhoneController extends Controller
             ->select('phone.id as id','phone.phoneName','phone.isPrimary','bf_has_phone.id as temporaryPhoneId')
             ->first();
 
-        return response()->json(["message"=>"Find one Buddhist Followers phone","response"=>$BFHP],200);
+        $JsonRes=[
+            "message" => "Find one Buddhist Followers phone",
+            "status" => 200,
+            "response" => $BFHP,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find one Buddhist Followers phone","response"=>$BFHP],200);
     }
 
     /**
@@ -144,8 +161,13 @@ class BuddhistFollowersPhoneController extends Controller
             $PN->phoneName = $phoneName ;
             $PN->isPrimary = $isPrimary ;
             $PN->update();
-
-            return response()->json(["message"=>"Successfully Update Welfare Phone Number"],200);
+            $JsonRes=[
+                "message" => "Successfully Update Buddhist Followers Phone Number",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update Buddhist Followers Phone Number"],200);
 
         }
     }
@@ -162,11 +184,25 @@ class BuddhistFollowersPhoneController extends Controller
 
         $PN = Phone::find($BFHP ->phone_id);
         if($PN->isPrimary){
-            return response()->json(["message"=>"Can not delete primary values "],401);
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
         }else{
             $BFHP ->delete();
             $PN->delete();
-            return response()->json(["message"=>"Delete Temple Phone Number "],200);
+
+            $JsonRes=[
+                "message" => "Delete Buddhist Followers Phone Number ",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete Buddhist Followers Phone Number "],200);
         }
     }
 }

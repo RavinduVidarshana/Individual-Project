@@ -63,8 +63,13 @@ class BuddhistFollowersManageController extends Controller
 
             array_push($BFARY,$res);
         }
-
-        return response()->json(["message" => "Success","response "=>$BFARY], 200);
+        $JsonRes=[
+            "message" => "Success",
+            "status" => 200,
+            "response" => $BFARY,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Success","response "=>$BFARY], 200);
     }
 
     /**
@@ -135,7 +140,14 @@ class BuddhistFollowersManageController extends Controller
                 'BFHE' => $BFHE
 
             ];
-            return response()->json(["message" => "Success","response "=>$res], 200);
+
+        $JsonRes=[
+            "message" => "Success",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+//            return response()->json(["message" => "Success","response "=>$res], 200);
 
     }
 
@@ -164,7 +176,13 @@ class BuddhistFollowersManageController extends Controller
         $BF->isApproved=!$approved_status;
         $BF->update();
 
-        return response()->json(["message" => "Status changed" ], 200);
+        $JsonRes=[
+            "message" => "Status changed",
+            "status" => 200,
+            "response" => "",
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Status changed" ], 200);
     }
 
     /**

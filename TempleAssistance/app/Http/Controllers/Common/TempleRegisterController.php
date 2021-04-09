@@ -97,8 +97,14 @@ class TempleRegisterController extends Controller
             $UL -> temple_id = $TM -> id;
             $UL ->save();
 
+            $JsonRes=[
+                "message" => "Successfully Insert Temple",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
 
-            return response()->json(["message" => "Successfully Insert Temple"], 200);
+//            return response()->json(["message" => "Successfully Insert Temple"], 200);
         }
     }
 

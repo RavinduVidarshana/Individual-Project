@@ -27,8 +27,13 @@ class DhammaSchoolEmailController extends Controller
             ->where('dhamma_school_has_email.email_id','=',$userid)
             ->select('email.id as id','email.emailName','email.isPrimary','dhamma_school_has_email.id as temporaryEmailId')
             ->get();
-
-        return response()->json(["message"=>"Find all Dahmma School Emails","response"=>$DMHE],200);
+        $JsonRes=[
+            "message" => "Find all Dahmma School Emails",
+            "status" => 200,
+            "response" => $DMHE,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find all Dahmma School Emails","response"=>$DMHE],200);
     }
 
     /**
@@ -78,8 +83,13 @@ class DhammaSchoolEmailController extends Controller
             $DMHE -> email_id  =  $EM -> id;
             $DMHE -> dhamma_school_id = $dhamma_school_id;
             $DMHE -> save();
-
-            return response()->json(["message"=>"Successfully Insert Dhamma School Email"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Dhamma School Email",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Insert Dhamma School Email"],200);
 
         }
     }
@@ -97,7 +107,14 @@ class DhammaSchoolEmailController extends Controller
             ->select('email.id as id','email.emailName','email.isPrimary','dhamma_school_has_email.id as temporaryEmailId')
             ->first();
 
-        return response()->json(["message"=>"Find one Dhamma School  Email","response"=>$DMHE],200);
+
+        $JsonRes=[
+            "message" => "Find one Dhamma School  Email",
+            "status" => 200,
+            "response" => $DMHE,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find one Dhamma School  Email","response"=>$DMHE],200);
     }
 
     /**
@@ -144,8 +161,13 @@ class DhammaSchoolEmailController extends Controller
             $EM->isPrimary = $isPrimary ;
             $EM->update();
 
-
-            return response()->json(["message"=>"Successfully Update Dhamma School  Email"],200);
+            $JsonRes=[
+                "message" => "Successfully Update Dhamma School  Email",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update Dhamma School  Email"],200);
 
         }
     }
@@ -162,11 +184,25 @@ class DhammaSchoolEmailController extends Controller
 
         $EM = Email::find($DMHE -> email_id);
         if($EM->isPrimary){
-            return response()->json(["message"=>"Can not delete primary values "],401);
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
         }else{
             $DMHE>delete();
             $EM->delete();
-            return response()->json(["message"=>"Delete Dhamma School  Email "],200);
+
+            $JsonRes=[
+                "message" => "Delete Dhamma School Email",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete Dhamma School Email"],200);
         }
     }
 }

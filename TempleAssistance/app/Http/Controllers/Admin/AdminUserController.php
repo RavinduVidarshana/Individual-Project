@@ -23,7 +23,14 @@ class AdminUserController extends Controller
             ->select('user.id as id','user.fullName','user_login.userName','user_login.password')
             ->get();
 
-        return response()->json(["message" => "Success","response "=>$U], 200);
+        $JsonRes=[
+            "message" => "Find all admin",
+            "status" => 200,
+            "response" => $U,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message" => "Success","response "=>$U], 200);
     }
 
     /**
@@ -65,7 +72,14 @@ class AdminUserController extends Controller
 
             $UL=UserLogin::where('userName',$userName)->first();
             if($UL){
-                return response()->json(["message" => "Username already used"], 400);
+
+                $JsonRes=[
+                    "message" => "Username already used",
+                    "status" => 401,
+                    "response" => "",
+                ];
+                return response()->json($JsonRes, 400);
+//                return response()->json(["message" => "Username already used"], 400);
             }else {
 
                 $U = new User();
@@ -80,7 +94,13 @@ class AdminUserController extends Controller
                 $UL->save();
 
 
-                return response()->json(["message" => "Successfully Insert User"], 200);
+                $JsonRes=[
+                    "message" => "Successfully Insert Admin User",
+                    "status" => 200,
+                    "response" => "",
+                ];
+                return response()->json($JsonRes, 200);
+//                return response()->json(["message" => "Successfully Insert User"], 200);
             }
         }
     }
@@ -98,7 +118,14 @@ class AdminUserController extends Controller
             ->select('user.id as id','user.fullName','user_login.userName','user_login.password')
             ->first();
 
-        return response()->json(["message" => "Success One","response "=>$U], 200);
+
+        $JsonRes=[
+            "message" => "Find one admin",
+            "status" => 200,
+            "response" => $U,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Success One","response "=>$U], 200);
     }
 
     /**
@@ -145,8 +172,14 @@ class AdminUserController extends Controller
                 $UL->password = $password;
                 $UL->update();
 
+            $JsonRes=[
+                "message" => "Successfully Update Admin User",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
 
-                return response()->json(["message" => "Successfully Update User"], 200);
+//                return response()->json(["message" => "Successfully Update User"], 200);
 
         }
     }

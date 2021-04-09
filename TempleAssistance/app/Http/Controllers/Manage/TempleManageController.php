@@ -63,9 +63,14 @@ class TempleManageController extends Controller
             array_push($TMPARY,$res);
         }
 
+        $JsonRes=[
+            "message" => "Success",
+            "status" => 200,
+            "response" => $TMPARY,
+        ];
+        return response()->json($JsonRes, 200);
 
-
-        return response()->json(["message" => "Success","response "=>$TMPARY], 200);
+//        return response()->json(["message" => "Success","response "=>$TMPARY], 200);
     }
 
     /**
@@ -139,7 +144,13 @@ class TempleManageController extends Controller
 
         ];
 
-        return response()->json(["message" => "One Temple" ,"response" => $res], 200);
+        $JsonRes=[
+            "message" => "Success",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "One Temple" ,"response" => $res], 200);
     }
 
     /**
@@ -167,7 +178,14 @@ class TempleManageController extends Controller
         $TMP->isApproved=!$approved_status;
         $TMP->update();
 
-        return response()->json(["message" => "Status changed" ], 200);
+        $JsonRes=[
+            "message" => "Status changed",
+            "status" => 200,
+            "response" => "",
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message" => "Status changed" ], 200);
     }
 
     /**

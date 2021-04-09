@@ -55,7 +55,14 @@ class ReservedController extends Controller
 
             array_push($DSARY,$res);
         }
-        return response()->json(["message" => "Find all Reserved Dane Schedule", "response" => $DSARY], 200);
+
+        $JsonRes=[
+            "message" => "Find all Reserved Dane Schedule",
+            "status" => 200,
+            "response" => $DSARY,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Find all Reserved Dane Schedule", "response" => $DSARY], 200);
     }
 
     /**
@@ -99,7 +106,20 @@ class ReservedController extends Controller
             $DANHB->buddhist_followers_id = $buddhist_followers_id;
             $DANHB->save();
 
-            return response()->json(["message" => "Successfully Reserved Dane Shedule"], 200);
+            $DS = DaneShedule::find($dane_shedule_id);
+            $BFCOUNT = $DS ->bfCount + 1;
+            $DS -> bfCount = $BFCOUNT;
+            $DS  -> isBook = true;
+            $DS -> update();
+
+            $JsonRes=[
+                "message" => "Successfully Reserved Dane Shedule",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
+//            return response()->json(["message" => "Successfully Reserved Dane Shedule"], 200);
         }
     }
 
@@ -131,7 +151,14 @@ class ReservedController extends Controller
             "dane_time_id" => $DAN->dane_time_id
         ];
 
-        return response()->json(["message" => "Find one Dane Schedule", "response" => $res], 200);
+        $JsonRes=[
+            "message" => "Find one Dane Schedule",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message" => "Find one Dane Schedule", "response" => $res], 200);
     }
 
     /**

@@ -30,8 +30,15 @@ class BuddhistFollowersAddressController extends Controller
             ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
             ->get();
 
+        $JsonRes=[
+            "message" => "Find all Buddhist Followers Address",
+            "status" => 200,
+            "response" => $BFHA,
+        ];
+        return response()->json($JsonRes, 200);
 
-        return response()->json(["message"=>"Find all Temple Address","response"=>$BFHA],200);
+
+//        return response()->json(["message"=>"Find all Buddhist Followers Address","response"=>$BFHA],200);
 
     }
 
@@ -86,8 +93,13 @@ class BuddhistFollowersAddressController extends Controller
             $BFHA->save();
 
 
-
-            return response()->json(["message" => "Successfully Insert Buddhist Followers Address"], 200);
+            $JsonRes=[
+                "message" => "Successfully Insert Buddhist Followers Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message" => "Successfully Insert Buddhist Followers Address"], 200);
         }
     }
 
@@ -109,7 +121,13 @@ class BuddhistFollowersAddressController extends Controller
             ->first();
 
 
-        return response()->json(["message"=>"Find one Temple Address","response"=>$BFHA],200);
+        $JsonRes=[
+            "message" => "Find one Buddhist Followers Address",
+            "status" => 200,
+            "response" => $BFHA,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find one Buddhist Followers Address","response"=>$BFHA],200);
 
 
     }
@@ -162,7 +180,14 @@ class BuddhistFollowersAddressController extends Controller
             $AD->city_id = $city_id ;
             $AD->update();
 
-            return response()->json(["message"=>"Successfully Update Buddhist Followers Address"],200);
+
+            $JsonRes=[
+                "message" => "Successfully Update Buddhist Followers Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update Buddhist Followers Address"],200);
 
         }
     }
@@ -175,8 +200,41 @@ class BuddhistFollowersAddressController extends Controller
      */
     public function destroy($id)
     {
-        $AD = Address::find($id);
-        $AD -> delete();
-        return response()->json(["message"=>"Delete Successfully BuddhistFollowers Address"],200);
+//        $AD = Address::find($id);
+//        $AD -> delete();
+//
+//
+//        $JsonRes=[
+//            "message" => "Delete Successfully BuddhistFollowers Address",
+//            "status" => 200,
+//            "response" => "",
+//        ];
+//        return response()->json($JsonRes, 200);
+////        return response()->json(["message"=>"Delete Successfully BuddhistFollowers Address"],200);
+
+
+        $BFHA = BfHasAddress::find($id);
+        $AD= Address::find($BFHA->address_id);
+        if($AD->isPrimary){
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $BFHA->delete();
+            $AD->delete();
+
+            $JsonRes=[
+                "message" => "Delete Buddhist Followers Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete Buddhist Followers Address "],200);
+        }
     }
 }

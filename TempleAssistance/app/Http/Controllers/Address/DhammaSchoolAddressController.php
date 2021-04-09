@@ -30,8 +30,15 @@ class DhammaSchoolAddressController extends Controller
             ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
             ->get();
 
+        $JsonRes=[
+            "message" => "Find all  Dhamma School Address",
+            "status" => 200,
+            "response" => $DMHA,
+        ];
+        return response()->json($JsonRes, 200);
 
-        return response()->json(["message"=>"Find all  Dhamma School Address","response"=>$DMHA],200);
+
+//        return response()->json(["message"=>"Find all  Dhamma School Address","response"=>$DMHA],200);
 
     }
 
@@ -85,7 +92,14 @@ class DhammaSchoolAddressController extends Controller
             $DMHA-> dhamma_school_id = $dhamma_school_id;
             $DMHA->save();
 
-            return response()->json(["message" => "Successfully Insert Dhamma School Address"], 200);
+            $JsonRes=[
+                "message" => "Successfully Insert Dhamma School Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
+//            return response()->json(["message" => "Successfully Insert Dhamma School Address"], 200);
         }
     }
 
@@ -105,8 +119,13 @@ class DhammaSchoolAddressController extends Controller
             ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
             ->first();
 
-
-        return response()->json(["message"=>"Find One Dhamma School School Address","status"=>$DMHA],200);
+        $JsonRes=[
+            "message" => "Find one Temple Address",
+            "status" => 200,
+            "response" => $DMHA,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find One Dhamma School School Address","status"=>$DMHA],200);
     }
 
     /**
@@ -157,7 +176,14 @@ class DhammaSchoolAddressController extends Controller
             $AD->city_id = $city_id ;
             $AD->update();
 
-            return response()->json(["message"=>"Successfully Update Dhamma School Address"],200);
+            $JsonRes=[
+                "message" => "Successfully Update Dhamma School Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
+            //return response()->json(["message"=>"Successfully Update Dhamma School Address"],200);
 
         }
     }
@@ -171,8 +197,40 @@ class DhammaSchoolAddressController extends Controller
     public function destroy($id)
     {
 
-        $AD = Address::find($id);
-        $AD -> delete();
-        return response()->json(["message"=>"Delete Successfully Buddhist School Address"],200);
+//        $AD = Address::find($id);
+//        $AD -> delete();
+//
+//        $JsonRes=[
+//            "message" => "Delete Successfully Dhamma School Address",
+//            "status" => 200,
+//            "response" => "",
+//        ];
+//        return response()->json($JsonRes, 200);
+//        //return response()->json(["message"=>"Delete Successfully Dhamma School Address"],200);
+
+        $DMHA = DhammaSchoolHasAddress::find($id);
+        $AD= Address::find($DMHA->address_id);
+        if($AD->isPrimary){
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $DMHA->delete();
+            $AD->delete();
+
+            $JsonRes=[
+                "message" => "Delete Dhamma School Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete Dhamma School Address "],200);
+        }
+
     }
 }

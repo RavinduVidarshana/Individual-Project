@@ -133,9 +133,25 @@ class SearchController extends Controller
         $res=$query->get();
 
         if($resultcount==0){
-            return response()->json(["message" => "No records found","response" =>$res], 401);
+
+            $JsonRes=[
+                "message" => "No records found",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 400);
+
+//            return response()->json(["message" => "No records found","response" =>$res], 401);
         }else{
-            return response()->json(["message" => "Records found","response" =>$res], 200);
+
+            $JsonRes=[
+                "message" => "Records found",
+                "status" => 200,
+                "response" => $res,
+            ];
+            return response()->json($JsonRes, 200);
+
+//            return response()->json(["message" => "Records found","response" =>$res], 200);
         }
 
     }
@@ -189,7 +205,14 @@ class SearchController extends Controller
             "dane_time_id" => $DAN->dane_time_id
         ];
 
-        return response()->json(["message" => "Find one Dane Schedule", "response" => $res], 200);
+        $JsonRes=[
+            "message" => "Find one Dane Schedule",
+            "status" => 200,
+            "response" => "",
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message" => "Find one Dane Schedule", "response" => $res], 200);
     }
 
     /**

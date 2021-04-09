@@ -26,7 +26,13 @@ class BuddhistFollowersEmailController extends Controller
             ->select('email.id as id','email.emailName','email.isPrimary','bf_has_email.id as temporaryEmailId')
             ->get();
 
-        return response()->json(["message"=>"Find all Buddhist Followers Emails","response"=>$BFHE],200);
+        $JsonRes=[
+            "message" => "Find all Buddhist Followers Emails",
+            "status" => 200,
+            "response" => $BFHE,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find all Buddhist Followers Emails","response"=>$BFHE],200);
     }
 
     /**
@@ -78,7 +84,14 @@ class BuddhistFollowersEmailController extends Controller
             $BFHE ->buddhist_followers_id = $buddhist_followers_id;
             $BFHE -> save();
 
-            return response()->json(["message"=>"Successfully Insert Buddhist Followers Email"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Buddhist Followers Email",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
+//            return response()->json(["message"=>"Successfully Insert Buddhist Followers Email"],200);
 
         }
     }
@@ -96,7 +109,13 @@ class BuddhistFollowersEmailController extends Controller
             ->select('email.id as id','email.emailName','email.isPrimary','bf_has_email.id as temporaryEmailId')
             ->first();
 
-        return response()->json(["message"=>"Find one Buddhist Followers Email","response"=>$BFHE],200);
+        $JsonRes=[
+            "message" => "Find one Buddhist Followers Email",
+            "status" => 200,
+            "response" => $BFHE,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find one Buddhist Followers Email","response"=>$BFHE],200);
     }
 
     /**
@@ -142,8 +161,13 @@ class BuddhistFollowersEmailController extends Controller
             $EM->isPrimary = $isPrimary;
             $EM->update();
 
-
-            return response()->json(["message" => "Successfully Update Buddhist Followers Email"], 200);
+            $JsonRes=[
+                "message" => "Successfully Update Buddhist Followers Email",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message" => "Successfully Update Buddhist Followers Email"], 200);
         }
     }
 
@@ -159,11 +183,24 @@ class BuddhistFollowersEmailController extends Controller
 
         $EM = Email::find($BFHE -> email_id);
         if($EM->isPrimary){
-            return response()->json(["message"=>"Can not delete primary values "],401);
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
         }else{
             $BFHE->delete();
             $EM->delete();
-            return response()->json(["message"=>"Delete Buddhist Followers Email "],200);
+
+            $JsonRes=[
+                "message" => "Delete Buddhist Followers Email",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+            //            return response()->json(["message"=>"Delete Buddhist Followers Email "],200);
         }
     }
 }

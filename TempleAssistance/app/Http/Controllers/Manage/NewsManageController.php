@@ -45,10 +45,15 @@ class NewsManageController extends Controller
 
             array_push($NSARY,$res);
         }
+        $JsonRes=[
+            "message" => "Success",
+            "status" => 200,
+            "response" => $NSARY,
+        ];
+        return response()->json($JsonRes, 200);
 
 
-
-        return response()->json(["message" => "Success","response "=>$NSARY], 200);
+//        return response()->json(["message" => "Success","response "=>$NSARY], 200);
     }
 
     /**
@@ -101,7 +106,14 @@ class NewsManageController extends Controller
             'NSI' => $NSI
 
         ];
-        return response()->json(["message" => "Success","response "=>$res], 200);
+
+        $JsonRes=[
+            "message" => "Success",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Success","response "=>$res], 200);
     }
 
     /**
@@ -129,7 +141,14 @@ class NewsManageController extends Controller
         $NS->isApproved=!$approved_status;
         $NS->update();
 
-        return response()->json(["message" => "Status changed" ], 200);
+
+        $JsonRes=[
+            "message" => "Status changed",
+            "status" => 200,
+            "response" => "",
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Status changed" ], 200);
     }
 
     /**

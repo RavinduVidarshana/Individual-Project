@@ -26,8 +26,14 @@ class DhammaSchoolPhoneController extends Controller
             ->where('dhamma_school_has_phone.dhamma_school_id','=',$userid)
             ->select('phone.id as id','phone.phoneName','phone.isPrimary','dhamma_school_has_phone.id as temporaryPhoneId')
             ->get();
+        $JsonRes=[
+            "message" => "Find all Dhamma School phone",
+            "status" => 200,
+            "response" => $DMHP,
+        ];
+        return response()->json($JsonRes, 200);
 
-        return response()->json(["message"=>"Find all Dhamma School phone","response"=>$DMHP],200);
+//        return response()->json(["message"=>"Find all Dhamma School phone","response"=>$DMHP],200);
     }
 
     /**
@@ -77,8 +83,13 @@ class DhammaSchoolPhoneController extends Controller
             $DMHP  ->phone_id = $PN -> id;
             $DMHP  ->dhamma_school_id = $dhamma_school_id;
             $DMHP  ->save();
-
-            return response()->json(["message"=>"Successfully Insert Dhamma School Phone Number"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Dhamma School Phone Number",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Insert Dhamma School Phone Number"],200);
 
         }
     }
@@ -95,8 +106,13 @@ class DhammaSchoolPhoneController extends Controller
             ->where('dhamma_school_has_phone.id','=' , $id)
             ->select('phone.id as id','phone.phoneName','phone.isPrimary','dhamma_school_has_phone.id as temporaryPhoneId')
             ->first();
-
-        return response()->json(["message"=>"Find all DhammaSchool phone","response"=>$DMHP],200);
+        $JsonRes=[
+            "message" => "Find one Dhamma School phone",
+            "status" => 200,
+            "response" => $DMHP,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find all DhammaSchool phone","response"=>$DMHP],200);
 
     }
 
@@ -143,8 +159,13 @@ class DhammaSchoolPhoneController extends Controller
             $PN->phoneName = $phoneName ;
             $PN->isPrimary = $isPrimary ;
             $PN->update();
-
-            return response()->json(["message"=>"Successfully Update Dhamma School Phone Number"],200);
+            $JsonRes=[
+                "message" => "Successfully Update Dhamma School Phone Number",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update Dhamma School Phone Number"],200);
 
         }
     }
@@ -161,11 +182,25 @@ class DhammaSchoolPhoneController extends Controller
 
         $PN = Phone::find($DMHP->phone_id);
         if($PN->isPrimary){
-            return response()->json(["message"=>"Can not delete primary values "],401);
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
         }else{
             $DMHP->delete();
             $PN->delete();
-            return response()->json(["message"=>"Delete DhammaSchool Phone Number "],200);
+
+            $JsonRes=[
+                "message" => "Delete Dhamma School Phone Number ",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete DhammaSchool Phone Number "],200);
         }
 
     }

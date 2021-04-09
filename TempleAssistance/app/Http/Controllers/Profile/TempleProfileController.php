@@ -90,8 +90,13 @@ class TempleProfileController extends Controller
             'TMHE' => $TMHE
 
         ];
-
-             return response()->json(["message" => "One Temple" ,"response" => $res], 200);
+        $JsonRes=[
+            "message" => "Find one One Temple",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+//             return response()->json(["message" => "One Temple" ,"response" => $res], 200);
 
     }
 
@@ -165,8 +170,13 @@ class TempleProfileController extends Controller
             $TM->isApproved = $isApproved;
             $TM->update();
 
-
-            return response()->json(["message" => "Successfully update Temple"], 200);
+            $JsonRes=[
+                "message" => "Successfully update Temple",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message" => "Successfully update Temple"], 200);
         }
     }
 

@@ -93,7 +93,14 @@ class WelfareSocietyController extends Controller
             $UL -> welfare_id  = $WF -> id;
             $UL ->save();
 
-            return response()->json(["message"=>"Successfully Insert Welfare Society"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Welfare Society",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
+//            return response()->json(["message"=>"Successfully Insert Welfare Society"],200);
         }
     }
 
@@ -134,7 +141,15 @@ class WelfareSocietyController extends Controller
             "temple_id" => $WF->temple_id,
 
         ];
-        return response()->json(["message"=>"Find one Welfare Society","response"=>$res],200);
+
+        $JsonRes=[
+            "message" => "Find one Welfare Society",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message"=>"Find one Welfare Society","response"=>$res],200);
 
     }
 
@@ -196,7 +211,13 @@ class WelfareSocietyController extends Controller
             $WF -> temple_id = $temple_id;
             $WF -> update();
 
-            return response()->json(["message"=>"Successfully Update Welfare Society"],200);
+            $JsonRes=[
+                "message" => "Successfully Update Welfare Society",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update Welfare Society"],200);
 
         }
     }

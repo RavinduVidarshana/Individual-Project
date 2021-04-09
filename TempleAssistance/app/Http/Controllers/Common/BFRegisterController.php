@@ -79,8 +79,13 @@ class BFRegisterController extends Controller
             $UL ->buddhist_followers_id = $BF -> id;
             $UL ->save();
 
-
-            return response()->json(["message" => "Successfully Insert Buddhist Followers"], 200);
+            $JsonRes=[
+                "message" => "Successfully Insert Buddhist Followers",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message" => "Successfully Insert Buddhist Followers"], 200);
         }
 
     }

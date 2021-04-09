@@ -31,7 +31,14 @@ class WelfareSocietyAddressController extends Controller
             ->get();
 
 
-            return response()->json(["message"=>"Find all WelfareSociety addresses","response"=>$WSHA],200);
+        $JsonRes=[
+            "message" => "Find all WelfareSociety addresses",
+            "status" => 200,
+            "response" => $WSHA,
+        ];
+        return response()->json($JsonRes, 200);
+
+//            return response()->json(["message"=>"Find all WelfareSociety addresses","response"=>$WSHA],200);
     }
 
     /**
@@ -84,9 +91,14 @@ class WelfareSocietyAddressController extends Controller
             $WSHA  -> welfare_id = $welfare_id;
             $WSHA ->save();
 
+            $JsonRes=[
+                "message" => "Successfully Insert Welfare Society Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
 
-
-            return response()->json(["message" => "Successfully Insert Welfare Society Address"], 200);
+//            return response()->json(["message" => "Successfully Insert Welfare Society Address"], 200);
         }
     }
 
@@ -106,8 +118,13 @@ class WelfareSocietyAddressController extends Controller
             ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
             ->first();
 
-
-        return response()->json(["message"=>"Find One WelfareSociety Address","response"=>$WSHA],200);
+        $JsonRes=[
+            "message" => "Find One WelfareSociety Address",
+            "status" => 200,
+            "response" => $WSHA,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find One WelfareSociety Address","response"=>$WSHA],200);
     }
 
     /**
@@ -158,7 +175,13 @@ class WelfareSocietyAddressController extends Controller
             $AD->city_id = $city_id ;
             $AD->update();
 
-            return response()->json(["message"=>"Successfully Update WelfareSociety Address"],200);
+            $JsonRes=[
+                "message" => "Successfully Update WelfareSociety Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update WelfareSociety Address"],200);
 
         }
     }
@@ -171,8 +194,39 @@ class WelfareSocietyAddressController extends Controller
      */
     public function destroy($id)
     {
-        $AD = Address::find($id);
-        $AD -> delete();
-        return response()->json(["message"=>"Delete Successfully WelfareSociety Address"],200);
+//        $AD = Address::find($id);
+//        $AD -> delete();
+//
+//        $JsonRes=[
+//            "message" => "Delete Successfully WelfareSociety Address",
+//            "status" => 200,
+//            "response" => "",
+//        ];
+//        return response()->json($JsonRes, 200);
+////        return response()->json(["message"=>"Delete Successfully WelfareSociety Address"],200);
+
+        $WSHA  = WelfareHasAddress::find($id);
+        $AD= Address::find($WSHA->address_id);
+        if($AD->isPrimary){
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
+        }else{
+            $WSHA->delete();
+            $AD->delete();
+
+            $JsonRes=[
+                "message" => "Delete Welfare Society Address",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete Welfare Society Address "],200);
+        }
     }
 }

@@ -27,7 +27,14 @@ class WelfareSocietyEmailController extends Controller
             ->select('email.id as id','email.emailName','email.isPrimary','welfare_has_email.id as temporaryEmailId')
             ->get();
 
-        return response()->json(["message"=>"Find all Welafare Society Emails","response"=>$WSHE],200);
+        $JsonRes=[
+            "message" => "Find all Welafare Society Emails",
+            "status" => 200,
+            "response" => $WSHE,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message"=>"Find all Welafare Society Emails","response"=>$WSHE],200);
     }
 
     /**
@@ -79,7 +86,13 @@ class WelfareSocietyEmailController extends Controller
             $WSHE -> welfare_id = $welfare_id;
             $WSHE -> save();
 
-            return response()->json(["message"=>"Successfully Insert Welfare Society Email"],200);
+            $JsonRes=[
+                "message" => "Successfully Insert Welfare Society Email",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Insert Welfare Society Email"],200);
 
         }
     }
@@ -97,7 +110,14 @@ class WelfareSocietyEmailController extends Controller
             ->select('email.id as id','email.emailName','email.isPrimary','welfare_has_email.id as temporaryEmailId')
             ->first();
 
-        return response()->json(["message"=>"Find one WelfareSociety Email","response"=>$WSHE],200);
+        $JsonRes=[
+            "message" => "Find one WelfareSociety Email",
+            "status" => 200,
+            "response" => $WSHE,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message"=>"Find one WelfareSociety Email","response"=>$WSHE],200);
     }
 
     /**
@@ -143,8 +163,13 @@ class WelfareSocietyEmailController extends Controller
             $EM->isPrimary = $isPrimary ;
             $EM->update();
 
-
-            return response()->json(["message"=>"Successfully Update WelfareSociety Email"],200);
+            $JsonRes=[
+                "message" => "Successfully Update WelfareSociety Email",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Successfully Update WelfareSociety Email"],200);
 
         }
     }
@@ -161,11 +186,24 @@ class WelfareSocietyEmailController extends Controller
 
         $EM = Email::find($WSHE -> email_id);
         if($EM->isPrimary){
-            return response()->json(["message"=>"Can not delete primary values "],401);
+
+            $JsonRes=[
+                "message" => "Can not delete primary values",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 401);
+//            return response()->json(["message"=>"Can not delete primary values "],401);
         }else{
             $WSHE->delete();
             $EM->delete();
-            return response()->json(["message"=>"Delete WelfareSociety Email "],200);
+            $JsonRes=[
+                "message" => "Delete Temple WelfareSociety Email ",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message"=>"Delete WelfareSociety Email "],200);
         }
     }
 }

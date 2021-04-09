@@ -91,7 +91,14 @@ class BuddhistFollowersProfileController extends Controller
 
         ];
 
-        return response()->json(["message" => "One Buddhist Followers" ,"response" => $res], 200);
+        $JsonRes=[
+            "message" => "Find one One Buddhist Followers",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+
+//        return response()->json(["message" => "One Buddhist Followers" ,"response" => $res], 200);
     }
 
     /**
@@ -150,8 +157,13 @@ class BuddhistFollowersProfileController extends Controller
             $BF->update();
 
 
-
-            return response()->json(["message" => "Successfully Update BuddhistFollower"], 200);
+            $JsonRes=[
+                "message" => "Successfully Update BuddhistFollower",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//            return response()->json(["message" => "Successfully Update BuddhistFollower"], 200);
         }
     }
 

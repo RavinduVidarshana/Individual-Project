@@ -85,7 +85,14 @@ class DhammaSchoolController extends Controller
             $UL -> dhamma_school_id  = $DS -> id;
             $UL ->save();
 
-            return response()->json(["message" => "Successfully Insert Dhamma School"], 200);
+            $JsonRes=[
+                "message" => "Successfully Insert Dhamma School",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+
+//            return response()->json(["message" => "Successfully Insert Dhamma School"], 200);
         }
     }
 
@@ -124,8 +131,13 @@ class DhammaSchoolController extends Controller
             "temple_id" => $DS->temple_id,
 
         ];
-
-        return response()->json(["message"=>"Find one Dhamma School","response"=>$res],200);
+        $JsonRes=[
+            "message" => "Find one Dhamma School",
+            "status" => 200,
+            "response" => $res,
+        ];
+        return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Find one Dhamma School","response"=>$res],200);
     }
 
     /**
@@ -181,9 +193,14 @@ class DhammaSchoolController extends Controller
             $DS->temple_id = $temple_id;
             $DS -> update();
 
+            $JsonRes=[
+                "message" => "Successfully Update Dhamma School",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
 
-
-            return response()->json(["message"=>"Successfully Update Dhamma School"],200);
+//            return response()->json(["message"=>"Successfully Update Dhamma School"],200);
         }
     }
 

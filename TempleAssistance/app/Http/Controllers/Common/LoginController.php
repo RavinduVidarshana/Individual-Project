@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Common;
 
 use App\ExtraData\DefaultData;
+use App\Model\BuddhistFollowers;
+use App\Model\DhammaSchool;
+use App\Model\Temple;
+use App\Model\User;
 use App\Model\UserLogin;
+use App\Model\Welfare;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -57,7 +62,13 @@ class LoginController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            $JsonRes=[
+                "message" => "Validation failure",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 400);
+//            return response()->json($validator->errors(), 400);
         } else {
             $userName = $request->userName;
             $password = $request->password;
@@ -67,16 +78,33 @@ class LoginController extends Controller
             if ($UL) {
 
                 $UserID = 0;
+                $loggedUser='';
+                $loggedUserRole='';
                 if ($UL->user_role_id == DefaultData::$USER_ROLE_ADMIN) {
                     $UserID = $UL->user_id;
+                    $loggedUserRole='Admin';
+                    $data=User::find($UserID);
+                    $loggedUser=$data->fullName;
                 } else if ($UL->user_role_id == DefaultData::$USER_ROLE_TEMPLE_MAIN_MONK) {
                     $UserID = $UL->temple_id;
+                    $loggedUserRole='Temple';
+                    $data=Temple::find($UserID);
+                    $loggedUser=$data->templeName;
                 }else if ($UL->user_role_id == DefaultData::$USER_ROLE_WELFARE_SOCIETY_PRESIDENT) {
                     $UserID = $UL->welfare_id;
+                    $loggedUserRole='Welfare';
+                    $data=Welfare::find($UserID);
+                    $loggedUser=$data->welfareName;
                 }else if ($UL->user_role_id == DefaultData::$USER_ROLE_DHAMMA_SCHOOL_PRINCIPLE) {
                     $UserID = $UL->dhamma_school_id;
+                    $loggedUserRole='Dhamma School';
+                    $data=DhammaSchool::find($UserID);
+                    $loggedUser=$data->dhammaSchoolName;
                 }else if ($UL->user_role_id == DefaultData::$USER_ROLE_BUDDHIST_FOLLOWERS) {
                     $UserID = $UL->buddhist_followers_id;
+                    $loggedUserRole='Buddhist Follower';
+                    $data=BuddhistFollowers::find($UserID);
+                    $loggedUser=$data->firstName.' '.$data->lastName;
                 }
 
                 $Factory = JWTFactory::customClaims([
@@ -94,10 +122,28 @@ class LoginController extends Controller
                 $payLoad = $Factory->make();
                 $session_Key = JWTAuth::encode($payLoad);
 
-                return response()->json(["message" => "Successfully Insert UserLogin", "Session_key" => $session_Key->get()], 200);
+                $res=[
+                    'userID' => $UserID,
+                    'loginID' => $UL->id,
+                    'userRoleID' => $UL->user_role_id,
+                    'loggedUserRole' => $loggedUserRole,
+                    'loggedUser' => $loggedUser,
+                    'session_Key' => $session_Key->get(),
+                ];
 
+                $JsonRes=[
+                    "message" => "Successfully Insert UserLogin",
+                    "status" => 200,
+                    "response" => $res,
+                ];
+                return response()->json($JsonRes, 200);
             } else {
-                return response()->json(["Message" => "User Name Password Not Mach"], 400);
+                $JsonRes=[
+                    "message" => "User Name Password Not Mach",
+                    "status" => 401,
+                    "response" => "",
+                ];
+                return response()->json($JsonRes, 400);
             }
         }
     }
