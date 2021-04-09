@@ -14,6 +14,9 @@
       <executable path="composer" />
     </execution>
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
@@ -103,6 +106,12 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
       <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
       <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
     </include_path>
   </component>
   <component name="ProjectId" id="1q7nT800Vge9QgpIMriA2ycMdDo" />
@@ -114,10 +123,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="E:/FinalProject/TempleAssistance" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\app" />
       <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\resources\views" />
       <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public" />
       <recent name="E:\WebInterfaceProject\TempleAssistanceWebUI\public\js" />
@@ -169,6 +180,13 @@
       <workItem from="1617339446341" duration="16053000" />
       <workItem from="1617378525470" duration="9421000" />
       <workItem from="1617518442745" duration="14316000" />
+      <workItem from="1617639508033" duration="8369000" />
+      <workItem from="1617726200153" duration="7474000" />
+      <workItem from="1617813308076" duration="573000" />
+      <workItem from="1617817076222" duration="356000" />
+      <workItem from="1617864503718" duration="1174000" />
+      <workItem from="1617950872960" duration="218000" />
+      <workItem from="1617984304805" duration="14191000" />
     </task>
     <servers />
   </component>

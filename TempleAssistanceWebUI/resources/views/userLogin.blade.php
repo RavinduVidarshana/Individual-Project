@@ -206,3 +206,20 @@
 
 
 @endsection
+
+@section('js-content')
+    @if(request()->get('msg'))
+    <script type="text/javascript">
+        $("document").ready(function () {
+            $.notify({
+                title: "Oops..!",
+                message: "{{request()->get('msg')}}",
+                icon: 'fa fa-check'
+            },{
+                type: "warning"
+            });
+        });
+
+    </script>
+    @endif
+@endsection

@@ -30,7 +30,7 @@
                                 <h4 class="text-center text-primary">Welfare Name</h4>
                                 <h6 class="text-center text-primary">President Name</h6>
                             </div>
-                            <div class="col-md-9" style="background-image: url(images/regImage.jpg);min-height: 200px">
+                            <div class="col-md-9" style="background-image: url(images/templeCover.jpg);min-height: 200px">
 
                             </div>
                         </div>
@@ -85,6 +85,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -93,29 +94,29 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <hr class="mt-3 mb-3">
-                                        <label class="control-label">Welfare Society Permission</label>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-12">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <hr class="mt-3 mb-3">--}}
+{{--                                        <label class="control-label">Welfare Society Permission</label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Welfare UserName</label>
-                                        <input class="form-control col-md-7" type="text" id="templeUN" name="templeUN" placeholder="Enter User Name"></input>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Welfare Password</label>
-                                        <input class="form-control col-md-7" type="password"  id="templePWD" name="templePWD" placeholder="Enter Password"></input>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label class="control-label">Welfare UserName</label>--}}
+{{--                                        <input class="form-control col-md-7" type="text" id="templeUN" name="templeUN" placeholder="Enter User Name"></input>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label class="control-label">Welfare Password</label>--}}
+{{--                                        <input class="form-control col-md-7" type="password"  id="templePWD" name="templePWD" placeholder="Enter Password"></input>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
 
 

@@ -49,42 +49,24 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($response['tableData'] as $row)
                         <tr>
-                            <td>1</td>
-                            <td>Damage Temple Property</td>
-                            <td>Mawanella for allegedly damaging a Buddha statue</td>
-                            <td>2018/12/26</td>
+                            <td>{{$row['id']}}</td>
+                            <td>{{$row['title']}}</td>
+                            <td>{{$row['description']}}</td>
+                            <td>{{$row['publishDate']}}</td>
                             <td><p class="text-success">Approved</p></td>
                             <td>
-                                <button class="btn btn-success" data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-success" data-toggle="modal" href="#viewModel"><i
+                                        class="fa fa-eye"></i></button>
+                                <button class="btn btn-warning" onclick="viewUpdateModel({{$row['id']}})"><i
+                                        class="fa fa-edit"></i></button>
+                                <button class="btn btn-danger" data-toggle="modal" href="#deleteModel"><i
+                                        class="fa fa-trash"></i></button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Damage Temple Property</td>
-                            <td>Mawanella for allegedly damaging a Buddha statue</td>
-                            <td>2018/12/26</td>
-                            <td><p class="text-success">Approved</p></td>
-                            <td>
-                                <button class="btn btn-success" data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Damage Temple Property</td>
-                            <td>Mawanella for allegedly damaging a Buddha statue</td>
-                            <td>2018/12/26</td>
-                            <td><p class="text-warning">Not-Approved</p></td>
-                            <td>
-                                <button class="btn btn-success" data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
@@ -101,50 +83,53 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">Create News</h4>
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeAddNews">
                     @csrf
                     <div class="model-body">
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">News Title</label>
                                     <div class="col-md-7">
-                                        <textarea class="form-control" rows="3"  type="text" id="newsTitle" name="newsTitle" placeholder="Enter News Title" ></textarea>
+                                        <textarea class="form-control" rows="3" type="text" id="newsTitle" name="title"
+                                                  placeholder="Enter News Title"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-5" >News Description</label>
+                                    <label class="control-label col-md-5">News Description</label>
                                     <div class="col-md-7">
-                                        <textarea class="form-control" rows="10" type="text" id="newsInfo" name="newsInfo" placeholder="Enter News Description"></textarea>
+                                        <textarea class="form-control" rows="10" type="text" id="newsInfo"
+                                                  name="description" placeholder="Enter News Description"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
 
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">Publish Date</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm"  type="Date" id="newsDate" name="newsDate" >
+                                        <input class="form-control col-md-7 input-sm" type="text" id="publishDate"
+                                               name="publishDate">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
+                                {{--                                <div class="form-group">--}}
+                                {{--                                    <label class="control-label col-md-5" for="inputSmall">News Image</label>--}}
+                                {{--                                    <div class="col-md-7">--}}
+                                {{--                                        <input class="form-control col-md-7" id="newsImage" name="newsImage" type="file">--}}
+                                {{--                                    </div>--}}
+                                {{--                                </div>--}}
                                 <div class="form-group">
-                                    <label class="control-label col-md-5" for="inputSmall">News Image</label>
-                                    <div class="col-md-7">
-                                        <input class="form-control col-md-7" id="newsImage" name="newsImage" type="file">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
                             </div>
@@ -168,50 +153,55 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">Update News</h4>
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeUpdateNews">
                     @csrf
                     <div class="model-body">
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-md-12">
+                                <input type="hidden" id="updateNewsID" name="id">
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">News Title</label>
                                     <div class="col-md-7">
-                                        <textarea class="form-control" rows="3"  type="text" id="newsTitle" name="newsTitle" placeholder="Enter News Title" ></textarea>
+                                        <textarea class="form-control" rows="3" type="text" id="updateTitle"
+                                                  name="title" placeholder="Enter News Title"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-5" >News Description</label>
+                                    <label class="control-label col-md-5">News Description</label>
                                     <div class="col-md-7">
-                                        <textarea class="form-control" rows="10" type="text" id="newsInfo" name="newsInfo" placeholder="Enter News Description"></textarea>
+                                        <textarea class="form-control" rows="10" type="text" id="updateDescription"
+                                                  name="description" placeholder="Enter News Description"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
 
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">Publish Date</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm"  type="Date" id="newsDate" name="newsDate" >
+                                        <input class="form-control col-md-7 input-sm" type="text" id="updatePublishDate"
+                                               name="publishDate">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" for="inputSmall">News Image</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <input class="form-control col-md-7" id="newsImage" name="newsImage"--}}
+{{--                                               type="file">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="form-group">
-                                    <label class="control-label col-md-5" for="inputSmall">News Image</label>
-                                    <div class="col-md-7">
-                                        <input class="form-control col-md-7" id="newsImage" name="newsImage" type="file">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
                             </div>
@@ -239,47 +229,49 @@
                 <form method="POST" action=" ">
                     @csrf
                     <div class="model-body">
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="inputSmall">News Title</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="newsTitle" name="newsTitle"></p>
+                                        <p class="form-control col-md-8" type="text" id="newsTitle"
+                                           name="newsTitle"></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-4" >News Description</label>
+                                    <label class="control-label col-md-4">News Description</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="newsInfo" name="newsInfo"></p>
+                                        <p class="form-control col-md-8" type="text" id="newsInfo" name="newsInfo"></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
 
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="inputSmall">Publish Date</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="newsDate" name="newsDate" ></p>
+                                        <p class="form-control col-md-8" type="text" id="newsDate" name="newsDate"></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="inputSmall">News Image</label>
                                     <div class="col-md-8">
-                                        <P class="form-control col-md-8" type="imageView"  id="newsImage" name="newsImage"></P>
+                                        <P class="form-control col-md-8" type="imageView" id="newsImage"
+                                           name="newsImage"></P>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
+                                    <label class="control-label col-md-12"></label>
                                 </div>
 
                             </div>
@@ -301,13 +293,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 class="login-head"align="center"><i class="fa fa-times-circle" ></i>Are you sure?</h3>
+                    <h3 class="login-head" align="center"><i class="fa fa-times-circle"></i>Are you sure?</h3>
 
                 </div>
                 <form method="POST" action=" ">
                     @csrf
                     <div class="model-body">
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
 
@@ -328,4 +320,52 @@
     </div>
 
 
+@endsection
+
+@section('js-content')
+    <script type="text/javascript">
+        $('#publishDate').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#updatePublishDate').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        function viewUpdateModel(id){
+            $.ajax({
+                type: "GET",
+                url: '/templeNews/'+id,
+            }).done(function(res) {
+
+                $('#updateNewsID').val(id);
+                $('#updateTitle').text(res['title']);
+                $('#updateDescription').text(res['description']);
+                $('#updatePublishDate').val(res['publishDate']);
+                $('#updateModel').modal('show');
+            });
+
+
+        }
+    </script>
+
+    @if(request()->get('msg'))
+        <script type="text/javascript">
+            $("document").ready(function () {
+                $.notify({
+                    title: "Oops..!",
+                    message: "{{request()->get('msg')}}",
+                    icon: 'fa fa-check'
+                }, {
+                    type: "warning"
+                });
+            });
+
+
+        </script>
+    @endif
 @endsection

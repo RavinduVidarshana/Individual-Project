@@ -14,4 +14,6 @@ class AdminUSManageController extends Controller
         ];
         return view('adminUsers',['response'=>$res]);
     }
+
+
 }

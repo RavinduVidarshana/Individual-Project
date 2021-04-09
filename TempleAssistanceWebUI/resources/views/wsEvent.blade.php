@@ -34,7 +34,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <h3> class="card-title"Welfare Society Events Table</h3>
+                    <h3 class="card-title">Welfare Society Events Table</h3>
                     <table class="table table-bordered">
                         <thead>
                         <tr>

@@ -109,18 +109,7 @@
                                 </div>
 
 
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-5" >Select User Role</label>--}}
-{{--                                    <div class="col-md-7">--}}
-{{--                                        <select class="form-control" id="userRole" name="userRole">--}}
-{{--                                            <option value="0">Admin</option>--}}
-{{--                                            <option value="1">Temple Main Monk</option>--}}
-{{--                                            <option value="2">Welfare Society President</option>--}}
-{{--                                            <option value="3">Dhamma School Principle</option>--}}
-{{--                                            <option value="4">Buddhist Followers</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>

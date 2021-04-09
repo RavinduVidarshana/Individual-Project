@@ -31,6 +31,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/plugins/pace.min.js"></script>
 <script src="js/main.js"></script>
+<script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
 
 @yield('js-content')
 </html>

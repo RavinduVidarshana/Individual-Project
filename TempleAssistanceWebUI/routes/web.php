@@ -29,6 +29,9 @@ Route::get('/templeDhammaEvent','Temple\DSEventManageController@index');
 
 Route::get('/templeEventManage','Temple\EventManageController@index');
 Route::get('/templeNews','Temple\NewsManageController@index');
+Route::get('/templeNews/{id}','Temple\NewsManageController@find');
+Route::post('/templeAddNews','Temple\NewsManageController@addNews');
+Route::post('/templeUpdateNews','Temple\NewsManageController@updateNews');
 Route::get('/templeProfile','Temple\ProfileUpdateController@index');
 //Route::get('/templeProfile2','Temple\ProfileUpdateController@index2');
 Route::get('/templeRegistration','Temple\RegistrationController@index');

@@ -31,7 +31,7 @@
                                 <h4 class="text-center text-primary">Temple Name</h4>
                                 <h6 class="text-center text-primary">Monk Name</h6>
                             </div>
-                            <div class="col-md-9" style="background-image: url(images/regImage.jpg);min-height: 200px">
+                            <div class="col-md-9" style="background-image: url(images/templeCover.jpg);min-height: 200px">
 
                             </div>
                         </div>
@@ -107,21 +107,21 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Monk Count</label>
-                                        <input class="form-control col-md-7" type="number" id="monkCount"  name="monkCount" placeholder="Enter Monk Count">
+                                        <input class="form-control" type="number" id="monkCount"  name="monkCount" placeholder="Enter Monk Count">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Vegetarian Monk Count</label>
-                                        <input class="form-control col-md-7" type="number" id="vegMonkCount"  name="vegMonkCount" placeholder="Enter Monk Count">
+                                        <input class="form-control" type="number" id="vegMonkCount"  name="vegMonkCount" placeholder="Enter Monk Count">
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label">Non-Vegetarian Monk Count</label>
-                                        <input class="form-control col-md-7" type="number" id="nonVegMonkCount"  name="nonVegMonkCount" placeholder="Enter Monk Count">
+                                        <input class="form-control" type="number" id="nonVegMonkCount"  name="nonVegMonkCount" placeholder="Enter Monk Count">
                                     </div>
                                 </div>
                             </div>
@@ -141,13 +141,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Longitude</label>
-                                        <input class="form-control col-md-7" type="text" id="templeLongitude" name="templeLongitude" placeholder="Enter Temple Longitude"></input>
+                                        <input class="form-control" type="text" id="templeLongitude" name="templeLongitude" placeholder="Enter Temple Longitude"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Latitude</label>
-                                        <input class="form-control col-md-7" type="text"  id="templeLatitude" name="templeLatitude" placeholder="Enter Temple Latitude"></input
+                                        <input class="form-control" type="text"  id="templeLatitude" name="templeLatitude" placeholder="Enter Temple Latitude"/>
                                     </div>
                                 </div>
                             </div>
@@ -165,13 +165,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Temple UserName</label>
-                                        <input class="form-control col-md-7" type="text" id="templeUN" name="templeUN" placeholder="Enter User Name"></input>
+                                        <input class="form-control " type="text" id="templeUN" name="templeUN" placeholder="Enter User Name"></input>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Temple Password</label>
-                                        <input class="form-control col-md-7" type="password"  id="templePWD" name="templePWD" placeholder="Enter Password"></input>
+                                        <input class="form-control" type="password"  id="templePWD" name="templePWD" placeholder="Enter Password"></input>
                                     </div>
                                 </div>
                             </div>

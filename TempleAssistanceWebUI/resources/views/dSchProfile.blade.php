@@ -30,7 +30,7 @@
                                 <h4 class="text-center text-primary">School Name</h4>
                                 <h6 class="text-center text-primary">Principle Name</h6>
                             </div>
-                            <div class="col-md-9" style="background-image: url(images/regImage.jpg);min-height: 200px">
+                            <div class="col-md-9" style="background-image: url(images/templeCover.jpg);min-height: 200px">
 
                             </div>
                         </div>
@@ -72,6 +72,13 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <label class="control-label col-md-12" ></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <label class="control-label">Principle Name</label>
                                         <input class="form-control"  type="text" id="dhammaSchPName"  name="dhammaSchPName" placeholder="Enter Principle Name"></input>
                                     </div>
@@ -104,29 +111,29 @@
 {{--                                </div>--}}
 {{--                            </div>--}}
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <hr class="mt-3 mb-3">
-                                        <label class="control-label">Dhamma School Permission</label>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-12">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <hr class="mt-3 mb-3">--}}
+{{--                                        <label class="control-label">Dhamma School Permission</label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Dhamma School UserName</label>
-                                        <input class="form-control col-md-7" type="text" id="templeUN" name="templeUN" placeholder="Enter User Name"></input>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Dhamma School Password</label>
-                                        <input class="form-control col-md-7" type="password"  id="templePWD" name="templePWD" placeholder="Enter Password"></input>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label class="control-label">Dhamma School UserName</label>--}}
+{{--                                        <input class="form-control col-md-7" type="text" id="templeUN" name="templeUN" placeholder="Enter User Name"></input>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label class="control-label">Dhamma School Password</label>--}}
+{{--                                        <input class="form-control col-md-7" type="password"  id="templePWD" name="templePWD" placeholder="Enter Password"></input>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
 
 

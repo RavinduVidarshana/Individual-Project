@@ -77,8 +77,8 @@
                                                   src="images/user.png"
                                                   alt="User Image"></div>
                 <div class="pull-left info">
-                    <p><a href="/templeProfile">Temple Name</a></p>
-                    <p class="designation">Main Monk Name</p>
+                    <p><a href=" ">{{session('loggedUserRole')}}</a></p>
+                    <p class="designation">{{session('loggedUser')}}</p>
                 </div>
             </div>
             <!-- Sidebar Menu-->
@@ -122,6 +122,10 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/plugins/pace.min.js"></script>
 <script src="js/main.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-datepicker.min.js"></script>
+
 @yield('js-content')
 
 </div>

@@ -60,7 +60,7 @@
                                             aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a>
                         <ul class="dropdown-menu settings-menu">
                             {{--                            <li><a href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>--}}
-                            <li><a href="/dSchProfile"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+                            <li><a href="/wsProfile"><i class="fa fa-user fa-lg"></i> Profile</a></li>
                             <li><a href="/"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
                         </ul>
                     </li>
@@ -77,8 +77,8 @@
                                                   src="images/user.png"
                                                   alt="User Image"></div>
                 <div class="pull-left info">
-                    <p><a href="/wsProfile">Welfare Name</a></p>
-                    <p class="designation">President Name</p>
+                    <p><a href=" ">{{session('loggedUserRole')}}</a></p>
+                    <p class="designation">{{session('loggedUser')}}</p>
                 </div>
             </div>
             <!-- Sidebar Menu-->
@@ -107,6 +107,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/pace.min.js"></script>
     <script src="js/main.js"></script>
+    <script type="text/javascript" src="js/plugins/bootstrap-notify.min.js"></script>
     @yield('js-content')
 
 </div>
