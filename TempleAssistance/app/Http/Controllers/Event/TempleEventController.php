@@ -6,6 +6,8 @@ use App\ExtraData\DefaultData;
 use App\Model\Event;
 use App\Model\EventHasPhone;
 use App\Model\EventImage;
+use App\Model\Phone;
+use App\Model\TempleHasPhone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -44,15 +46,15 @@ class TempleEventController extends Controller
             $EHP = EventHasPhone::join('phone','event_has_phone.phone_id','=','phone.id')
                 ->select('phone.id as id','phone.phoneName','phone.isPrimary')
                 ->where('event_has_phone.event_id',$item->id)
-                ->get();
+                ->first();
 
             $EI = EventImage::where('event_id',$item->id)
                 ->get();
 
             $res = [
-                'ehp' => $EHP,
-                'ei' => $EI,
-                "event_id" => $item->id,
+
+//                "event_id" => $item->id,
+                "id" => $item->id,
                 "eventName" => $item->eventName,
                 "eventInfo" => $item->eventInfo,
                 "eventDateFrom'" => $item->eventDateFrom ->format('d-m-Y'),
@@ -66,6 +68,9 @@ class TempleEventController extends Controller
                 "eventOrganizedName" => $item->eventOrganizedName,
                 "temple_id" => $item->temple_id,
                 "templeName" => $item->templeName,
+
+                'ehp' => $EHP,
+                'ei' => $EI,
 
             ];
 
@@ -104,12 +109,13 @@ class TempleEventController extends Controller
 
             'eventName' => 'required|min:1|max:45',
             'eventInfo' => 'required|min:1|max:345',
-            'eventDateFrom' => 'required|date_format:Y-m-d|after:today',
-            'eventDateTo' => 'required|date_format:Y-m-d|after:today',
+            'eventDateFrom' => 'required',
+            'eventDateTo' => 'required',
             'longitude' => 'required',
             'latitude' => 'required',
             'event_catergory_id' => 'required|numeric',
             'temple_id' => 'required|numeric',
+            'phone_number' => 'required|numeric',
 
 
         ];
@@ -118,7 +124,15 @@ class TempleEventController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+
+
+            $JsonRes=[
+                "message" => "Validation failure",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 400);
+
 
         } else {
 
@@ -132,7 +146,9 @@ class TempleEventController extends Controller
             $event_catergory_id = $request->event_catergory_id;
             $event_organized_id =DefaultData::$EVENT_ORGANIZATION_TEMPLE;
             $temple_id = $request->temple_id;
+            $phoneName = $request->phone_number;
             $isApproved =false;
+            $isPrimary=true;
 
 
 
@@ -150,6 +166,16 @@ class TempleEventController extends Controller
             $EV->temple_id = $temple_id;
             $EV->isApproved = $isApproved ;
             $EV->save();
+
+            $PN = new Phone();
+            $PN->phoneName = $phoneName ;
+            $PN->isPrimary = $isPrimary ;
+            $PN->save();
+
+            $TMHP = new EventHasPhone();
+            $TMHP ->phone_id = $PN -> id;
+            $TMHP ->event_id = $EV->id;
+            $TMHP ->save();
 
 //            return response()->json(["message"=>"Successfully Insert Temple Event"],200);
 
@@ -195,15 +221,15 @@ class TempleEventController extends Controller
         $EHP = EventHasPhone::join('phone','event_has_phone.phone_id','=','phone.id')
             ->select('phone.id as id','phone.phoneName','phone.isPrimary')
             ->where('event_has_phone.event_id',$id)
-            ->get();
+            ->first();
 
         $EI = EventImage::where('event_id',$id)
             ->get();
 
         $res = [
-            'ehp' => $EHP,
-            'ei' => $EI,
-            "event_id" => $EV->id,
+
+            "id" => $EV->id,
+//            "event_id" => $EV->id,
             "eventName" => $EV->eventName,
             "eventInfo" => $EV->eventInfo,
             "eventDateFrom'" => $EV->eventDateFrom ->format('d-m-Y'),
@@ -217,6 +243,9 @@ class TempleEventController extends Controller
             "eventOrganizedName" => $EV->eventOrganizedName,
             "temple_id" => $EV->temple_id,
             "templeName" => $EV->templeName,
+
+            'ehp' => $EHP,
+            'ei' => $EI,
 
         ];
 
@@ -260,6 +289,7 @@ class TempleEventController extends Controller
             'longitude' => 'required',
             'latitude' => 'required',
             'event_catergory_id' => 'required|numeric',
+            'phone_number' => 'required|numeric',
 
 
         ];
@@ -280,6 +310,7 @@ class TempleEventController extends Controller
             $longitude = $request->longitude;
             $latitude = $request->latitude;
             $event_catergory_id = $request->event_catergory_id;
+            $phoneName = $request->phone_number;
             $event_organized_id =DefaultData::$EVENT_ORGANIZATION_TEMPLE;
             $isApproved =false;
 
@@ -298,6 +329,15 @@ class TempleEventController extends Controller
             $EV->event_organized_id = $event_organized_id;
             $EV->isApproved = $isApproved ;
             $EV->update();
+
+            $EHP = EventHasPhone::where('event_id',$id)
+                ->first();
+
+            $PN = Phone::find($EHP->phone_id);
+            $PN->phoneName = $phoneName ;
+            $PN->update();
+
+
 
 //            return response()->json(["message"=>"Successfully Update Temple Event"],200);
             $JsonRes=[

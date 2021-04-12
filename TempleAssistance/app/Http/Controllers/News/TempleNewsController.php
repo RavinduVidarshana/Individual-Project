@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\News;
 
 use App\Model\News;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
+use DateTimeZone;
 
 class TempleNewsController extends Controller
 {
@@ -19,7 +21,7 @@ class TempleNewsController extends Controller
 
         $NS = News ::join('temple','news.temple_id','=','temple.id')
             ->where('news.isActive',1)
-            ->select('news.id as id','news.title','news.description','news.publishDate','temple.id as temple_id','temple.templeName')
+            ->select('news.id as id','news.title','news.description','news.publishDate','news.isApproved','temple.id as temple_id','temple.templeName')
             -> get();
 
         $JsonRes=[
@@ -54,7 +56,6 @@ class TempleNewsController extends Controller
 
             'title' => 'required|min:1|max:45',
             'description' => 'required|min:1|max:345',
-            'publishDate' => 'required|date_format:Y-m-d',
             'temple_id' => 'required|numeric'
         ];
         $validator = Validator::make(
@@ -62,12 +63,17 @@ class TempleNewsController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            $JsonRes=[
+                "message" => "Validation failure",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 400);
 
         } else {
             $title = $request->title;
             $description = $request->description;
-            $publishDate= $request->publishDate;
+            $publishDate=Carbon::now(new DateTimeZone('Asia/Colombo'));
             $temple_id = $request->temple_id;
             $isActive= true;
             $isApproved =false;
@@ -105,7 +111,7 @@ class TempleNewsController extends Controller
         $NS = News ::join('temple','news.temple_id','=','temple.id')
             ->where('news.isActive',1)
             -> where('news.id',$id)
-            ->select('news.id as id','news.title','news.description','news.publishDate','temple.id as temple_id','temple.templeName')
+            ->select('news.id as id','news.title','news.description','news.publishDate','news.isApproved','temple.id as temple_id','temple.templeName')
             -> first();
 
         $JsonRes=[
@@ -142,7 +148,6 @@ class TempleNewsController extends Controller
 
             'title' => 'required|min:1|max:45',
             'description' => 'required|min:1',
-            'publishDate' => 'required|date_format:Y-m-d',
 
 
         ];
@@ -151,12 +156,16 @@ class TempleNewsController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            $JsonRes=[
+                "message" => "Validation failure",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 400);
 
         } else {
             $title = $request->title;
             $description = $request->description;
-            $publishDate= $request->publishDate;
             $isActive= true;
             $isApproved =false;
 
@@ -164,7 +173,6 @@ class TempleNewsController extends Controller
             $NS = News::find($id);
             $NS->title = $title;
             $NS->description = $description;
-            $NS->publishDate= $publishDate;
             $NS->isActive= $isActive;
             $NS->isApproved = $isApproved ;
             $NS->update();
@@ -188,10 +196,11 @@ class TempleNewsController extends Controller
      */
     public function destroy($id)
     {
+        $isActive= false;
 
-        $NS = News:: where('isActive','isApproved',0)
-            -> where('id',$id)
-            -> delete();
+        $NS = News::find($id);
+        $NS->isActive= $isActive;
+        $NS->update();
 
         $JsonRes=[
             "message" => "Delete News",

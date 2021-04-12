@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ExtraData\DefaultData;
+use App\Http\Helpers\JwtDecoderHelper;
 use App\Model\Welfare;
 use App\Model\UserLogin;
 use App\Model\WelfareHasAddress;
@@ -19,9 +20,65 @@ class WelfareSocietyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+
+
+        $WF =Welfare:: join('temple', 'welfare.temple_id', '=', 'temple.id')
+            ->select("welfare.id as id","welfare.welfareName","welfare.welfareRegnum","welfare.welfareMemberCount","welfare.welfarePresident","welfare.welfareSecretary","welfare.welfareTreasure","temple.id as temple_id")
+            ->get();
+
+
+        $EVARY=array();
+            foreach ($WF as $item){
+
+
+                $WFHP = WelfareHasPhone::join('phone','welfare_has_phone.phone_id','=','phone.id')
+                    ->where('welfare_has_phone.welfare_id','=' , $item->id)
+                    ->select('phone.id as id','phone.phoneName','phone.isPrimary','welfare_has_phone.id as temporaryPhoneId')
+                    ->get();
+
+
+                $WFHE = WelfareHasEmail::join('email','welfare_has_email.email_id','=','email.id')
+                    ->where('welfare_has_email.welfare_id','=',$item->id)
+                    ->select('email.id as id','email.emailName','email.isPrimary','welfare_has_email.id as temporaryEmailId')
+                    ->get();
+
+
+                $WFHA = WelfareHasAddress::join('address','welfare_has_address.address_id','=','address.id')
+                    ->join('city','address.city_id','=','city.id')
+                    ->join('district','city.district_id','=','district.id')
+                    ->join('province','district.province_id','=','province.id')
+                    ->where('welfare_has_address.welfare_id','=',$item->id)
+                    ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
+                    ->get();
+
+                $res = [
+
+                    "id" => $item->id,
+                    "welfareName" => $item->welfareName,
+                    "welfareRegnum" => $item->welfareRegnum,
+                    "welfareMemberCount" => $item->welfareMemberCount,
+                    "welfarePresident" => $item->welfarePresident,
+                    "welfareSecretary" => $item->welfareSecretary,
+                    "welfareTreasure" => $item->welfareTreasure,
+                    "temple_id" => $item->temple_id,
+
+                    'wfhp' => $WFHP,
+                    'wfhe' => $WFHE,
+                    'wfha' => $WFHA,
+
+                ];
+
+                array_push($EVARY,$res);
+            }
+            $JsonRes=[
+                "message" => "Find all Temple Events",
+                "status" => 200,
+                "response" => $EVARY,
+            ];
+            return response()->json($JsonRes, 200);
     }
 
     /**
@@ -61,7 +118,12 @@ class WelfareSocietyController extends Controller
         );
 
         if($validator -> fails()){
-            return  response() -> json($validator ->errors(),400);
+            $JsonRes=[
+                "message" => "Validation failure",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 400);
 
         }else{
             $welfareName = $request-> welfareName;
@@ -113,11 +175,13 @@ class WelfareSocietyController extends Controller
     public function show($id)
     {
       $WF =Welfare::find($id);
-      $WFHP = WelfareHasPhone::join('phone','welfare_has_phone.phone_id', '=' , 'phone_id')
+      $WFHP = WelfareHasPhone::join('phone','welfare_has_phone.phone_id', '=' , 'phone.id')
+          ->where('welfare_has_phone.welfare_id','=',$id)
           -> select('phone_id as id', 'phone.phoneName','phone.isPrimary')
           -> get();
 
-      $WFHE = WelfareHasEmail::join('email','welfare_has_email.email_id', '=' , 'email_id')
+      $WFHE = WelfareHasEmail::join('email','welfare_has_email.email_id', '=' , 'email.id')
+          ->where('welfare_has_email.welfare_id','=',$id)
           -> select('email_id as id', 'email.emailName','email.isPrimary')
           -> get();
 
@@ -125,13 +189,12 @@ class WelfareSocietyController extends Controller
           ->join('city','address.city_id','=','city.id')
           ->join('district','city.district_id','=','district.id')
           ->join('province','district.province_id','=','province.id')
+          ->where('welfare_has_address.welfare_id','=',$id)
           ->select('address.id as id','address.addressLine1','address.addressLine2','city.id as city_id','city.cityName','district.id as district_id','district.districtName','province.id as province_id', 'province.provinceName')
           ->get();
 
         $res = [
-            'wfhp' => $WFHP,
-            'wfhe' => $WFHE,
-            'wfha' => $WFHA,
+            "id" => $WF->id,
             "welfareName" => $WF->welfareName,
             "welfareRegnum" => $WF->welfareRegnum,
             "welfareMemberCount" => $WF->welfareMemberCount,
@@ -139,6 +202,10 @@ class WelfareSocietyController extends Controller
             "welfareSecretary" => $WF->welfareSecretary,
             "welfareTreasure" => $WF->welfareTreasure,
             "temple_id" => $WF->temple_id,
+
+            'wfhp' => $WFHP,
+            'wfhe' => $WFHE,
+            'wfha' => $WFHA,
 
         ];
 
@@ -180,7 +247,7 @@ class WelfareSocietyController extends Controller
             'welfarePresident' => 'required|min:1|max:45',
             'welfareSecretary' => 'required|min:1|max:45',
             'welfareTreasure' => 'required|min:1|max:45',
-            'temple_id' => 'required|numeric',
+//            'temple_id' => 'required|numeric',
 
 
         ];
@@ -189,7 +256,12 @@ class WelfareSocietyController extends Controller
         );
 
         if($validator -> fails()){
-            return  response() -> json($validator ->errors(),400);
+            $JsonRes=[
+                "message" => "Validation failure",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 400);
 
         }else{
             $welfareName = $request-> welfareName;
