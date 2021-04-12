@@ -36,7 +36,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <h3 class="card-title">Temple News Table</h3>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="dataTable">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -55,15 +55,31 @@
                             <td>{{$row['title']}}</td>
                             <td>{{$row['description']}}</td>
                             <td>{{$row['publishDate']}}</td>
-                            <td><p class="text-success">Approved</p></td>
-                            <td>
-                                <button class="btn btn-success" data-toggle="modal" href="#viewModel"><i
-                                        class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning" onclick="viewUpdateModel({{$row['id']}})"><i
-                                        class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger" data-toggle="modal" href="#deleteModel"><i
-                                        class="fa fa-trash"></i></button>
-                            </td>
+                            @if($row['isApproved'])
+                                <td class="text-primary">Approved</td>
+                                <td>
+                                    <button class="btn btn-success" onclick="viewModel({{$row['id']}})"><i
+                                            class="fa fa-eye"></i></button>
+
+                                    <button class="btn btn-warning" onclick="viewUpdateModel({{$row['id']}})"><i
+                                            class="fa fa-edit"></i></button>
+
+                                    <button class="btn btn-danger" onclick="viewDeleteModel({{$row['id']}})"><i
+                                            class="fa fa-trash"></i></button>
+                                </td>
+                                @else
+                                <td class="text-warning">Not Approved</td>
+                                <td>
+                                    <button class="btn btn-success" onclick="viewModel({{$row['id']}})"><i
+                                            class="fa fa-eye"></i></button>
+
+                                    <button class="btn btn-warning" onclick="viewUpdateModel({{$row['id']}})"><i
+                                            class="fa fa-edit"></i></button>
+
+                                </td>
+                                @endif
+
+
                         </tr>
                             @endforeach
 
@@ -91,7 +107,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">News Title</label>
                                     <div class="col-md-7">
-                                        <textarea class="form-control" rows="3" type="text" id="newsTitle" name="title"
+                                        <textarea class="form-control" rows="3" type="text" id="title" name="title"
                                                   placeholder="Enter News Title"></textarea>
                                     </div>
                                 </div>
@@ -102,7 +118,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">News Description</label>
                                     <div class="col-md-7">
-                                        <textarea class="form-control" rows="10" type="text" id="newsInfo"
+                                        <textarea class="form-control" rows="10" type="text" id="description"
                                                   name="description" placeholder="Enter News Description"></textarea>
                                     </div>
                                 </div>
@@ -111,13 +127,13 @@
                                 </div>
 
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" for="inputSmall">Publish Date</label>
-                                    <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm" type="text" id="publishDate"
-                                               name="publishDate">
-                                    </div>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" for="inputSmall">Publish Date</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <input class="form-control col-md-7 input-sm" type="text" id="publishDate"--}}
+{{--                                               name="publishDate">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="form-group">
                                     <label class="control-label col-md-12"></label>
                                 </div>
@@ -163,7 +179,7 @@
                                     <label class="control-label col-md-5" for="inputSmall">News Title</label>
                                     <div class="col-md-7">
                                         <textarea class="form-control" rows="3" type="text" id="updateTitle"
-                                                  name="title" placeholder="Enter News Title"></textarea>
+                                                  name="updateTitle" placeholder="Enter News Title"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -174,7 +190,7 @@
                                     <label class="control-label col-md-5">News Description</label>
                                     <div class="col-md-7">
                                         <textarea class="form-control" rows="10" type="text" id="updateDescription"
-                                                  name="description" placeholder="Enter News Description"></textarea>
+                                                  name="updateDescription" placeholder="Enter News Description"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -185,8 +201,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">Publish Date</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm" type="text" id="updatePublishDate"
-                                               name="publishDate">
+                                        <input class="form-control col-md-7 input-sm" type="text" disabled="true" id="updatePublishDate"
+                                               name="updatePublishDate">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -226,16 +242,18 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">News</h4>
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeNews/{id}">
+
                     @csrf
                     <div class="model-body">
                         <div class="row">
+                            <input type="hidden" id="viewNewsID" name="id">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="inputSmall">News Title</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8" type="text" id="newsTitle"
-                                           name="newsTitle"></p>
+                                        <p class="form-control col-md-8" type="text" id="viewNewsTitle"
+                                           name="viewNewsTitle"></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -245,7 +263,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">News Description</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8" type="text" id="newsInfo" name="newsInfo"></p>
+                                        <p class="form-control col-md-8" type="text" id="viewNewsInfo" name="viewNewsInfo"></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -256,20 +274,20 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="inputSmall">Publish Date</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8" type="text" id="newsDate" name="newsDate"></p>
+                                        <p class="form-control col-md-8" type="text" id="viewNewsDate" name="viewNewsDate"></p>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12"></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12"></label>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-4" for="inputSmall">News Image</label>
-                                    <div class="col-md-8">
-                                        <P class="form-control col-md-8" type="imageView" id="newsImage"
-                                           name="newsImage"></P>
-                                    </div>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-4" for="inputSmall">News Image</label>--}}
+{{--                                    <div class="col-md-8">--}}
+{{--                                        <P class="form-control col-md-8" type="imageView" id="newsImage"--}}
+{{--                                           name="newsImage"></P>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="form-group">
                                     <label class="control-label col-md-12"></label>
                                 </div>
@@ -296,8 +314,9 @@
                     <h3 class="login-head" align="center"><i class="fa fa-times-circle"></i>Are you sure?</h3>
 
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeDeleteNews">
                     @csrf
+                    <input type="hidden" id="deleteNewsID" name="id">
                     <div class="model-body">
                         <div class="row">
                             <div class="col-md-12">
@@ -324,17 +343,17 @@
 
 @section('js-content')
     <script type="text/javascript">
-        $('#publishDate').datepicker({
-            format: "yyyy-mm-dd",
-            autoclose: true,
-            todayHighlight: true
-        });
-
-        $('#updatePublishDate').datepicker({
-            format: "yyyy-mm-dd",
-            autoclose: true,
-            todayHighlight: true
-        });
+        // $('#publishDate').datepicker({
+        //     format: "yyyy-mm-dd",
+        //     autoclose: true,
+        //     todayHighlight: true
+        // });
+        //
+        // $('#updatePublishDate').datepicker({
+        //     format: "yyyy-mm-dd",
+        //     autoclose: true,
+        //     todayHighlight: true
+        // });
 
         function viewUpdateModel(id){
             $.ajax({
@@ -347,6 +366,27 @@
                 $('#updateDescription').text(res['description']);
                 $('#updatePublishDate').val(res['publishDate']);
                 $('#updateModel').modal('show');
+            });
+
+
+        }
+
+        function viewDeleteModel(id){
+            $('#deleteNewsID').val(id);
+            $('#deleteModel').modal('show');
+        }
+
+        function viewModel(id){
+            $.ajax({
+                type: "GET",
+                url: '/templeNews/'+id,
+            }).done(function(res) {
+
+                $('#viewNewsID').val(id);
+                $('#viewNewsTitle').text(res['title']);
+                $('#viewNewsInfo').text(res['description']);
+                $('#viewNewsDate').text(res['publishDate']);
+                $('#viewModel').modal('show');
             });
 
 
@@ -368,4 +408,6 @@
 
         </script>
     @endif
+
+    <script type="text/javascript">$('#dataTable').DataTable();</script>
 @endsection

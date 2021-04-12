@@ -35,7 +35,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <h3 class="card-title">Temple Events Table</h3>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="dataTable">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -58,10 +58,11 @@
                             <td>2021/05/06</td>
                             <td>2021/05/18</td>
                             <td><p class="text-success">Approved</p></td>
-                            <td><button class="btn btn-success"data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
+                            <td><button class="btn btn-success" data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
+                                <button class="btn btn-warning" data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-danger" data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
                             </td>
+
                         </tr>
                         <tr>
                             <td>2</td>
@@ -96,7 +97,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">Create Temple Event</h4>
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeAddEvent">
                     @csrf
                     <div class="model-body">
                         <div class="row" >
@@ -108,7 +109,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">Select Start Date</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm"  type="Date" id="eventFromDate" name="eventFromDate" >
+                                        <input class="form-control col-md-7 input-sm"  type="text" id="eventFromDate" name="eventFromDate" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -117,7 +118,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">Select End Date</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm"  type="Date" id="eventEndDate" name="eventEndDate" >
+                                        <input class="form-control col-md-7 input-sm"  type="text" id="eventEndDate" name="eventEndDate" >
                                     </div>
                                 </div>
 
@@ -147,15 +148,15 @@
                                     <label class="control-label col-md-5">Select Event Category</label>
                                     <div class="col-md-7">
                                         <select class="form-control" id="eventCategory" name="eventCategory">
-                                            <option value="0">Darmadeshana</option>
-                                            <option value="1">KatinePinkan</option>
-                                            <option value="2">Bodi Pooja</option>
-                                            <option value="3">Ashirwada Pooja</option>
-                                            <option value="4">Repairing</option>
-                                            <option value="5">Shramadana</option>
-                                            <option value="6">DayakaSaba Reswim</option>
-                                            <option value="7">Bill Paymnet</option>
-                                            <option value="8">Others</option>
+                                            <option value="1">Darmadeshana</option>
+                                            <option value="2">KatinePinkan</option>
+                                            <option value="3">Bodi Pooja</option>
+                                            <option value="5">Ashirwada Pooja</option>
+{{--                                            <option value="4">Repairing</option>--}}
+{{--                                            <option value="5">Shramadana</option>--}}
+{{--                                            <option value="6">DayakaSaba Reswim</option>--}}
+{{--                                            <option value="7">Bill Paymnet</option>--}}
+{{--                                            <option value="8">Others</option>--}}
                                         </select>
                                     </div>
                                 </div>
@@ -183,6 +184,24 @@
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
+
+
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12" for="inputSmall"><u>Event About</u></label>
+                                    </div>
+
+                                <label class="control-label col-md-5">Event Phone</label>
+                                <div class="col-md-7">
+                                    <input class="form-control col-md-7" type="text" id="eventPhone" name="eventPhone" placeholder="Enter Event Phone"></input>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-12" ></label>
+                                </div>
+
+
                                 <div class="form-group">
                                     <label class="control-label col-md-12" for="inputSmall"><u>Event Location</u></label>
                                 </div>
@@ -199,26 +218,29 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
-                                </div>
+                                <div class="form-group">
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" for="inputSmall"><u>Image</u></label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" for="inputSmall">Event Image</label>
-                                    <div class="col-md-7">
-                                        <input class="form-control col-md-7" id="eventImage" name="eventImage" type="file">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                  <div>--}}
+{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Image</u></label>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" for="inputSmall">Event Image</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <input class="form-control col-md-7" id="eventImage" name="eventImage" type="file">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
                             </div>
                         </div>
                         <div class="modal-footer">
                             <a href="#" data-dismiss="modal" class="btn">Close</a>
                             <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
                         </div>
                     </div>
                 </form>
@@ -312,6 +334,7 @@
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
+
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Event Description</label>
                                     <div class="col-md-7">
@@ -321,6 +344,55 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
+
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-12" for="inputSmall"><u>Event About</u></label>
+                                </div>
+
+                                <label class="control-label col-md-5">Event Address</label>
+                                <div class="col-md-7">
+                                    <textarea class="form-control" rows="4" type="text" id="eventAddress" name="eventAddress" placeholder="Enter Event Address"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-12" ></label>
+                                </div>
+
+                                <label class="control-label col-md-5">Event Phone</label>
+                                <div class="col-md-7">
+                                    <input class="form-control col-md-7" type="text" id="eventPhone" name="eventPhone" placeholder="Enter Event Phone"></input>
+                                </div>
+                                <label class="control-label col-md-5">This is Primary Phone Number</label>
+                                <div class="col-md-7">
+                                    <div class="toggle lg">
+                                        <label>
+                                            <input type="checkbox" id="eventPhonePrimary" name="eventPhonePrimary"><span class="button-indecator"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-12" ></label>
+                                </div>
+
+                                <label class="control-label col-md-5">Event Email</label>
+                                <div class="col-md-7">
+                                    <input class="form-control col-md-7" type="text" id="eventEmail" name="eventEmail" placeholder="Enter Event Email"></input>
+                                </div>
+                                <label class="control-label col-md-5">This is Primary Email</label>
+                                <div class="col-md-7">
+                                    <div class="toggle lg">
+                                        <label>
+                                            <input type="checkbox" id="eventEmailPrimary" name="eventEmailPrimary"><span class="button-indecator"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-12" ></label>
+                                </div>
+
 
                                 <div class="form-group">
                                     <label class="control-label col-md-12" for="inputSmall"><u>Event Location</u></label>
@@ -340,18 +412,18 @@
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" for="inputSmall"><u>Image</u></label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-5" for="inputSmall">Event Image</label>
-                                    <div class="col-md-7">
-                                        <input class="form-control col-md-7" id="eventImage" name="eventImage" type="file">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Image</u></label>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5" for="inputSmall">Event Image</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <input class="form-control col-md-7" id="eventImage" name="eventImage" type="file">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
                             </div>
                         </div>
@@ -527,4 +599,40 @@
     </div>
 
 
+
+@endsection
+
+@section('js-content')
+    <script type="text/javascript">
+        $('#eventFromDate').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+        $('#eventEndDate').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+    </script>
+
+    @if(request()->get('msg'))
+        <script type="text/javascript">
+            $("document").ready(function () {
+                $.notify({
+                    title: "Oops..!",
+                    message: "{{request()->get('msg')}}",
+                    icon: 'fa fa-check'
+                }, {
+                    type: "warning"
+                });
+            });
+
+
+        </script>
+    @endif
+
+    <script type="text/javascript">$('#dataTable').DataTable();</script>
 @endsection

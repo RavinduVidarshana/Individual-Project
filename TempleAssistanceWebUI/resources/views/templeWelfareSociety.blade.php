@@ -35,7 +35,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <h3 class="card-title">Welfare Society</h3>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="dataTable">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -48,32 +48,22 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($response['tableData'] as $row)
                         <tr>
-                            <td>1</td>
-                            <td>Samamwatha maranadara samithiya</td>
-                            <td>SRN234</td>
-                            <td>203</td>
-                            <td>Karunananda mahatha</td>
+                            <td>{{$row['id']}}</td>
+                            <td>{{$row['welfareName']}}</td>
+                            <td>{{$row['welfareRegnum']}}</td>
+                            <td>{{$row['welfareMemberCount']}}</td>
+                            <td>{{$row['welfarePresident']}}</td>
                             <td>
                                 <button class="btn btn-success"data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-warning"onclick="viewUpdateModel({{$row['id']}})"><i
+                                        class="fa fa-edit"></i></button>
                                 <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
 
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Samamwatha maranadara samithiya</td>
-                            <td>SRN234</td>
-                            <td>203</td>
-                            <td>Karunananda mahatha</td>
-                            <td>
-                                <button class="btn btn-success"data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
-
-                            </td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -91,7 +81,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">Create Welfare Society</h4>
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeAddWelfare">
                     @csrf
                     <div class="model-body">
                         <div class="row" >
@@ -102,7 +92,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Welfare Society Name</label>
                                     <div class="col-md-7">
-                                        <textarea class="form-control" rows="2" type="text" id="welfareSocietyName" name="welfareSocietyName" placeholder="Welfare Society Name"></textarea>
+                                        <textarea class="form-control" rows="2" type="text" id="welfareName" name="welfareName" placeholder="Welfare Society Name"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -113,7 +103,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Registration Number</label>
                                     <div class="col-md-7">
-                                        <input class="form-control"  type="text" id="welfareSocietyRegNum"  name="welfareSocietyRegNum" placeholder="Enter Welfare Society Registration Number"></input>
+                                        <input class="form-control"  type="text" id="welfareRegnum"  name="welfareRegnum" placeholder="Enter Welfare Society Registration Number"></input>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -123,7 +113,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Member Count</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7" type="number" id="memberCount"  name="memberCount" placeholder="Enter Member Count">
+                                        <input class="form-control col-md-7" type="number" id="welfareMemberCount"  name="welfareMemberCount" placeholder="Enter Member Count"></input>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -133,7 +123,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">President Name</label>
                                     <div class="col-md-7">
-                                        <input class="form-control"  type="text" id="welfarePName"  name="welfarePName" placeholder="Enter President Name"></input>
+                                        <input class="form-control"  type="text" id="welfarePresident"  name="welfarePresident" placeholder="Enter President Name"></input>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -143,7 +133,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Secretary Name</label>
                                     <div class="col-md-7">
-                                        <input class="form-control"  type="text" id="welfareSName"  name="welfareSName" placeholder="Enter Secretary Name"></input>
+                                        <input class="form-control"  type="text" id="welfareSecretary"  name="welfareSecretary" placeholder="Enter Secretary Name"></input>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -153,85 +143,12 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Treasure Name</label>
                                     <div class="col-md-7">
-                                        <input class="form-control"  type="text" id="welfareTName"  name="welfareTName" placeholder="Enter Treasure Name"></input>
+                                        <input class="form-control"  type="text" id="welfareTreasure"  name="welfareTreasure" placeholder="Enter Treasure Name"></input>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
-
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society About</u></label>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-5" >Welfare Society Province</label>--}}
-{{--                                    <div class="col-md-7">--}}
-{{--                                        <select class="form-control" id="welfareSocietyProvince" name="welfareSocietyProvince">--}}
-{{--                                            <option value="0">Western</option>--}}
-{{--                                            <option value="1">Central</option>--}}
-{{--                                            <option value="2">Eastern</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" ></label>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-5" >Welfare Society District</label>--}}
-{{--                                    <div class="col-md-7">--}}
-{{--                                        <select class="form-control" id="welfareSocietyDistrict" name="welfareSocietyDistrict">--}}
-{{--                                            <option value="0">Gampaha</option>--}}
-{{--                                            <option value="1">Kandy</option>--}}
-{{--                                            <option value="2">Colombo</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" ></label>--}}
-{{--                                </div>--}}
-
-{{--                                <label class="control-label col-md-5">Welfare Society Address</label>--}}
-{{--                                <div class="col-md-7">--}}
-{{--                                    <textarea class="form-control" rows="4" type="text" id="welfareSocietyAddress" name="welfareSocietyAddress" placeholder="Enter Welfare Society Address"></textarea>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" ></label>--}}
-{{--                                </div>--}}
-
-{{--                                <label class="control-label col-md-5">Welfare Society Phone</label>--}}
-{{--                                <div class="col-md-7">--}}
-{{--                                    <input class="form-control col-md-7" type="text" id="welfareSocietyPhone" name="welfareSocietyPhone" placeholder="Enter Welfare Society Phone"></input>--}}
-{{--                                </div>--}}
-{{--                                <label class="control-label col-md-5">This is Primary Phone Number</label>--}}
-{{--                                <div class="col-md-7">--}}
-{{--                                    <div class="toggle lg">--}}
-{{--                                        <label>--}}
-{{--                                            <input type="checkbox" id="welfareSocietyPhonePrimary" name="welfareSocietyPhonePrimary"><span class="button-indecator"></span>--}}
-{{--                                        </label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" ></label>--}}
-{{--                                </div>--}}
-
-{{--                                <label class="control-label col-md-5">Welfare Society Email</label>--}}
-{{--                                <div class="col-md-7">--}}
-{{--                                    <input class="form-control col-md-7" type="text" id="welfareSocietyEmail" name="welfareSocietyEmail" placeholder="Enter Welfare Society Email"></input>--}}
-{{--                                </div>--}}
-{{--                                <label class="control-label col-md-5">This is Primary Email</label>--}}
-{{--                                <div class="col-md-7">--}}
-{{--                                    <div class="toggle lg">--}}
-{{--                                        <label>--}}
-{{--                                            <input type="checkbox" id="welfareSocietyEmailPrimary" name="welfareSocietyEmailPrimary"><span class="button-indecator"></span>--}}
-{{--                                        </label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" ></label>--}}
-{{--                                </div>--}}
-
 
 
                                 <div class="form-group">
@@ -239,14 +156,14 @@
                                 </div>
                                 <label class="control-label col-md-5">Welfare Society User Name</label>
                                 <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="welfareSocietyUN" name="welfareSocietyUN" placeholder="Enter User Name"></input>
+                                    <input class="form-control col-md-7" type="text" id="userName" name="userName" placeholder="Enter User Name"></input>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
                                 <label class="control-label col-md-5">Welfare Society Password</label>
                                 <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="password"  id="welfareSocietyPWD" name="welfareSocietyPWD" placeholder="Enter Password"></input>
+                                    <input class="form-control col-md-7" type="password"  id="password" name="password" placeholder="Enter Password"></input>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
@@ -274,16 +191,16 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">Update Welfare Society</h4>
                 </div>
-                <form method="PUT" action=" ">
+                <form method="POST" action="/templeUpdateWelfare">
                     @csrf
                     <div class="model-body">
                         <div class="row" >
                             <div class="col-md-12">
-
+                                <input type="hidden" id="updateWelfareID" name="id">
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Welfare Society Name</label>
                                     <div class="col-md-7">
-                                        <textarea class="form-control" rows="2" type="text" id="welfareSocietyName" name="welfareSocietyName" placeholder="Welfare Society Name"></textarea>
+                                        <textarea class="form-control" rows="2" type="text" id="updatewelfareName" name="updatewelfareName" placeholder="Welfare Society Name"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -294,7 +211,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Registration Number</label>
                                     <div class="col-md-7">
-                                        <input class="form-control"  type="text" id="welfareSocietyRegNum"  name="welfareSocietyRegNum" placeholder="Enter Welfare Society Registration Number"></input>
+                                        <input class="form-control"  type="text" id="updatewelfareRegnum"  name="updatewelfareRegnum" placeholder="Enter Welfare Society Registration Number"></input>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -304,7 +221,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Member Count</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7" type="number" id="memberCount"  name="memberCount" placeholder="Enter Member Count">
+                                        <input class="form-control col-md-7" type="number" id="updatewelfareMemberCount"  name="updatewelfareMemberCount" placeholder="Enter Member Count">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -314,7 +231,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">President Name</label>
                                     <div class="col-md-7">
-                                        <input class="form-control"  type="text" id="welfarePName"  name="welfarePName" placeholder="Enter President Name"></input>
+                                        <input class="form-control"  type="text" id="updatewelfarePresident"  name="updatewelfarePresident" placeholder="Enter President Name"></input>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -324,7 +241,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Secretary Name</label>
                                     <div class="col-md-7">
-                                        <input class="form-control"  type="text" id="welfareSName"  name="welfareSName" placeholder="Enter Secretary Name"></input>
+                                        <input class="form-control"  type="text" id="updatewelfareSecretary"  name="updatewelfareSecretary" placeholder="Enter Secretary Name"></input>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -334,104 +251,42 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Treasure Name</label>
                                     <div class="col-md-7">
-                                        <input class="form-control"  type="text" id="welfareTName"  name="welfareTName" placeholder="Enter Treasure Name"></input>
+                                        <input class="form-control"  type="text" id="updatewelfareTreasure"  name="updatewelfareTreasure" placeholder="Enter Treasure Name"></input>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society About</u></label>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-5" >Welfare Society Province</label>--}}
-{{--                                    <div class="col-md-7">--}}
-{{--                                        <select class="form-control" id="welfareSocietyProvince" name="welfareSocietyProvince">--}}
-{{--                                            <option value="0">Western</option>--}}
-{{--                                            <option value="1">Central</option>--}}
-{{--                                            <option value="2">Eastern</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" ></label>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-5" >Welfare Society District</label>--}}
-{{--                                    <div class="col-md-7">--}}
-{{--                                        <select class="form-control" id="welfareSocietyDistrict" name="welfareSocietyDistrict">--}}
-{{--                                            <option value="0">Gampaha</option>--}}
-{{--                                            <option value="1">Kandy</option>--}}
-{{--                                            <option value="2">Colombo</option>--}}
-{{--                                        </select>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" ></label>--}}
-{{--                                </div>--}}
-
-{{--                                <label class="control-label col-md-5">Welfare Society Address</label>--}}
-{{--                                <div class="col-md-7">--}}
-{{--                                    <textarea class="form-control" rows="4" type="text" id="welfareSocietyAddress" name="welfareSocietyAddress" placeholder="Enter Welfare Society Address"></textarea>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" ></label>--}}
-{{--                                </div>--}}
-
-{{--                                <label class="control-label col-md-5">Welfare Society Phone</label>--}}
-{{--                                <div class="col-md-7">--}}
-{{--                                    <input class="form-control col-md-7" type="text" id="welfareSocietyPhone" name="welfareSocietyPhone" placeholder="Enter Welfare Society Phone"></input>--}}
-{{--                                </div>--}}
-{{--                                <label class="control-label col-md-5">This is Primary Phone Number</label>--}}
-{{--                                <div class="col-md-7">--}}
-{{--                                    <div class="toggle lg">--}}
-{{--                                        <label>--}}
-{{--                                            <input type="checkbox" id="welfareSocietyPhonePrimary" name="welfareSocietyPhonePrimary"><span class="button-indecator"></span>--}}
-{{--                                        </label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" ></label>--}}
-{{--                                </div>--}}
-
-{{--                                <label class="control-label col-md-5">Welfare Society Email</label>--}}
-{{--                                <div class="col-md-7">--}}
-{{--                                    <input class="form-control col-md-7" type="text" id="welfareSocietyEmail" name="welfareSocietyEmail" placeholder="Enter Welfare Society Email"></input>--}}
-{{--                                </div>--}}
-{{--                                <label class="control-label col-md-5">This is Primary Email</label>--}}
-{{--                                <div class="col-md-7">--}}
-{{--                                    <div class="toggle lg">--}}
-{{--                                        <label>--}}
-{{--                                            <input type="checkbox" id="welfareSocietyEmailPrimary" name="welfareSocietyEmailPrimary"><span class="button-indecator"></span>--}}
-{{--                                        </label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label class="control-label col-md-12" ></label>--}}
-{{--                                </div>--}}
-
-
-
                                 <div class="form-group">
-                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society Permission</u></label>
-                                </div>
-                                <label class="control-label col-md-5">Welfare Society UserName</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="welfareSocietyUN" name="welfareSocietyUN" placeholder="Enter User Name"></input>
+                                    <label class="control-label col-md-5">Email</label>
+                                    <div class="col-md-7">
+                                        <input class="form-control"  type="text" id="updateEmail45"  name="updateEmail45" placeholder="Email"></input>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
-                                <label class="control-label col-md-5">Welfare Society Password</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="password"  id="welfareSocietyPWD" name="welfareSocietyPWD" placeholder="Enter Password"></input>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+
+
+                                {{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society Permission</u></label>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">Welfare Society User Name</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="updatepassword" name="updatepassword" placeholder="Enter User Name"></input>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">Welfare Society Password</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="password"  id="updatepassword" name="updatepassword" placeholder="Enter Password"></input>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
+
 
                             </div>
                         </div>
@@ -584,7 +439,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">UserName</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfareSocietyUN" name="welfareSocietyUN" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="updateuserName" name="updateuserName" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -637,4 +492,60 @@
         </div>
     </div>
 
+@endsection
+
+@section('js-content')
+    <script type="text/javascript">
+
+        function viewUpdateModel(id){
+            $.ajax({
+                type: "GET",
+                url: '/templeWelfareSociety/'+id,
+            }).done(function(res) {
+
+                $('#updateWelfareID').val(id);
+                $('#updatewelfareName').text(res['welfareName']);
+                $('#updatewelfareRegnum').val(res['welfareRegnum']);
+                $('#updatewelfareMemberCount').val(res['welfareMemberCount']);
+                $('#updatewelfarePresident').val(res['welfarePresident']);
+                $('#updatewelfareSecretary').val(res['welfareSecretary']);
+                $('#updatewelfareTreasure').val(res['welfareTreasure']);
+                // if(res['wfhp']!=[]){
+                //     $('#updateEmail45').val(res['wfhp'][0]['phoneName']);
+                // }
+
+                if(res['wfhe'].length!=0){
+                    $('#updateEmail45').val(res['wfhe'][0]['emailName']);
+                    // alert(res['wfhe'][0]['emailName']);
+                }
+
+                // alert(res['wfhe'][0]['emailName']);
+                $('#updateModel').modal('show');
+            });
+
+
+        }
+
+
+    </script>
+
+
+
+
+
+    @if(request()->get('msg'))
+        <script type="text/javascript">
+            $("document").ready(function () {
+                $.notify({
+                    title: "Oops..!",
+                    message: "{{request()->get('msg')}}",
+                    icon: 'fa fa-check'
+                }, {
+                    type: "warning"
+                });
+            });
+
+        </script>
+    @endif
+    <script type="text/javascript">$('#dataTable').DataTable();</script>
 @endsection

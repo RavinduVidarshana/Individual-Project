@@ -21,23 +21,39 @@ Route::get('/','Common\LoginController@index');
 Route::post('/userLogin','Common\LoginController@userLogin');
 
 Route::get('/templeDaneSchedule','Temple\DaneScheduleManageController@index');
-Route::post('/templeDaneScheduleSave','Temple\DaneScheduleManageController@save');
+Route::post('/templeAddDaneSchedule','Temple\DaneScheduleManageController@addDaneSchedule');
+
+
+
 Route::get('/templeDashboard','Temple\DashboardController@index');
 
 Route::get('/templeDhammaSchool','Temple\DSchManageController@index');
 Route::get('/templeDhammaEvent','Temple\DSEventManageController@index');
 
 Route::get('/templeEventManage','Temple\EventManageController@index');
+Route::post('/templeAddEvent','Temple\EventManageController@addEvent');
+
 Route::get('/templeNews','Temple\NewsManageController@index');
 Route::get('/templeNews/{id}','Temple\NewsManageController@find');
 Route::post('/templeAddNews','Temple\NewsManageController@addNews');
 Route::post('/templeUpdateNews','Temple\NewsManageController@updateNews');
+Route::post('/templeDeleteNews','Temple\NewsManageController@deleteNews');
+
+
+
 Route::get('/templeProfile','Temple\ProfileUpdateController@index');
 //Route::get('/templeProfile2','Temple\ProfileUpdateController@index2');
 Route::get('/templeRegistration','Temple\RegistrationController@index');
 
-Route::get('/templeWelfareSociety','Temple\WSEventManageController@index');
-Route::get('/templeWelfareEvent','Temple\WSocManageController@index');
+//Route::get('/templeWelfareSociety','Temple\WSEventManageController@index');
+//Route::get('/templeWelfareEvent','Temple\WSocManageController@index');
+
+Route::get('/templeWelfareSociety','Temple\WSocManageController@index');
+Route::get('/templeWelfareEvent','Temple\WSEventManageController@index');
+
+Route::get('/templeWelfareSociety/{id}','Temple\WSocManageController@find');
+Route::post('/templeAddWelfare','Temple\WSocManageController@addWelfare');
+Route::post('/templeUpdateWelfare','Temple\WSocManageController@updateWelfare');
 
 //*********************************************************************Admin
 
