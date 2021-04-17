@@ -21,8 +21,10 @@ Route::get('/','Common\LoginController@index');
 Route::post('/userLogin','Common\LoginController@userLogin');
 
 Route::get('/templeDaneSchedule','Temple\DaneScheduleManageController@index');
+Route::get('/templeDaneSchedule/{id}','Temple\DaneScheduleManageController@find');
 Route::post('/templeAddDaneSchedule','Temple\DaneScheduleManageController@addDaneSchedule');
-
+Route::post('/templeUpdateDaneSchedule','Temple\DaneScheduleManageController@updateDaneSchedule');
+Route::post('/templeDeleteDaneSchedule','Temple\DaneScheduleManageController@deleteDaneSchedule');
 
 
 Route::get('/templeDashboard','Temple\DashboardController@index');
@@ -31,7 +33,10 @@ Route::get('/templeDhammaSchool','Temple\DSchManageController@index');
 Route::get('/templeDhammaEvent','Temple\DSEventManageController@index');
 
 Route::get('/templeEventManage','Temple\EventManageController@index');
+Route::get('/templeEventManage/{id}','Temple\EventManageController@find');
 Route::post('/templeAddEvent','Temple\EventManageController@addEvent');
+Route::post('/templeUpdateEvent','Temple\EventManageController@updateEvent');
+Route::post('/templeDeleteEvent','Temple\EventManageController@deleteEvent');
 
 Route::get('/templeNews','Temple\NewsManageController@index');
 Route::get('/templeNews/{id}','Temple\NewsManageController@find');
@@ -50,7 +55,6 @@ Route::get('/templeRegistration','Temple\RegistrationController@index');
 
 Route::get('/templeWelfareSociety','Temple\WSocManageController@index');
 Route::get('/templeWelfareEvent','Temple\WSEventManageController@index');
-
 Route::get('/templeWelfareSociety/{id}','Temple\WSocManageController@find');
 Route::post('/templeAddWelfare','Temple\WSocManageController@addWelfare');
 Route::post('/templeUpdateWelfare','Temple\WSocManageController@updateWelfare');

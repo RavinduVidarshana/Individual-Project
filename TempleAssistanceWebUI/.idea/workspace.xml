@@ -14,6 +14,9 @@
       <executable path="composer" />
     </execution>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="TempleAssistanceWebUI" />
+  </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
@@ -190,6 +193,12 @@
       <workItem from="1618113948320" duration="19205000" />
       <workItem from="1618201874402" duration="12069000" />
       <workItem from="1618244226229" duration="14192000" />
+      <workItem from="1618465051366" duration="6150000" />
+      <workItem from="1618507650563" duration="5487000" />
+      <workItem from="1618548248308" duration="15579000" />
+      <workItem from="1618588584250" duration="10147000" />
+      <workItem from="1618656975984" duration="3070000" />
+      <workItem from="1618687351453" duration="1689000" />
     </task>
     <servers />
   </component>

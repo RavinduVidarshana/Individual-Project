@@ -36,7 +36,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <h3 class="card-title">Dane Schedule Table</h3>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="dataTable">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -50,32 +50,42 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2020/12/31</td>
-                            <td>Lunch</td>
-                            <td>20</td>
-                            <td>8</td>
-                            <td><p class="text-success">Booked</p></td>
-                            <td>
-                                <button class="btn btn-success"data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
+                        @foreach($response['tableData'] as $row)
+                            <tr>
+                                <td>{{$row['id']}}</td>
+                                <td>{{$row['date']}}</td>
+                                <td>{{$row['daneTimeName']}}</td>
+                                <td>{{$row['monkCount']}}</td>
+                                <td>{{$row['bfCount']}}</td>
+                                @if($row['isBook'])
+                                    <td class="text-primary">Approved</td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="viewModel({{$row['id']}})"><i
+                                                class="fa fa-eye"></i></button>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>2020/12/31</td>
-                            <td>Lunch</td>
-                            <td>20</td>
-                            <td>8</td>
-                            <td><p class="text-warning">Not Book yet</p></td>
-                            <td>
-                                <button class="btn btn-success" data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
+                                        <button class="btn btn-warning" onclick="viewUpdateModel({{$row['id']}})"><i
+                                                class="fa fa-edit"></i></button>
+
+
+                                    </td>
+                                @else
+                                    <td class="text-warning">Not Approved</td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="viewModel({{$row['id']}})"><i
+                                                class="fa fa-eye"></i></button>
+
+                                        <button class="btn btn-warning" onclick="viewUpdateModel({{$row['id']}})"><i
+                                                class="fa fa-edit"></i></button>
+                                        <button class="btn btn-danger" onclick="viewDeleteModel({{$row['id']}})"><i
+                                                class="fa fa-trash"></i></button>
+
+                                    </td>
+                                @endif
+
+
+                            </tr>
+                        @endforeach
+
                         </tbody>
                     </table>
                 </div>
@@ -170,15 +180,16 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">Update Dane Schedule</h4>
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeUpdateDaneSchedule">
                     @csrf
                     <div class="model-body">
                         <div class="row" >
                             <div class="col-md-12">
+                                <input type="hidden" id="updateDaneScheduleID" name="id">
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">Select Dane Date</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm"  type="Date" id="daneDate" name="daneDate" >
+                                        <input class="form-control col-md-7 input-sm"  type="text" id="updatedaneDate" name="updatedaneDate" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -188,7 +199,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5" >Select Dane Time</label>
                                     <div class="col-md-7">
-                                        <select class="form-control" id="daneTime" name="daneTime">
+                                        <select class="form-control" id="updatedaneTime" name="updatedaneTime">
                                             <option value="0">All</option>
                                             <option value="1">BreakFast</option>
                                             <option value="2">Lunch</option>
@@ -202,7 +213,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Available Monk Count</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7" type="number" id="monkCount"  name="monkCount" placeholder="Enter Monk Count">
+                                        <input class="form-control col-md-7" type="number" id="updatemonkCount"  name="updatemonkCount" placeholder="Enter Monk Count">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -211,7 +222,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Vegetarian Monk Count</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7" type="number" id="vegMonkCount" name="vegMonkCount"  placeholder="Enter Vegetarian Monk">
+                                        <input class="form-control col-md-7" type="number" id="updatevegMonkCount" name="updatevegMonkCount"  placeholder="Enter Vegetarian Monk">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -221,7 +232,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Non-Vegetarian Monk Count</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7" type="number"   id="nonVegMonkCount" name="nonVegMonkCount"  placeholder="Enter Non-Vegetarian Monk">
+                                        <input class="form-control col-md-7" type="number"   id="updatenonVegMonkCount" name="updatenonVegMonkCount"  placeholder="Enter Non-Vegetarian Monk">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -249,7 +260,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">Dane Schedule</h4>
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeDaneSchedule/{id}">
                     @csrf
                     <div class="model-body">
                         <div class="row" >
@@ -257,7 +268,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Dane Date</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="daneDate" name="daneDate" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewdaneDate" name="viewdaneDate" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -267,7 +278,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Dane Time</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="daneTime" name="daneTime" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewdaneTime" name="viewdaneTime" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -277,7 +288,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Available Monk Count</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="monkCount" name="monkCount" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewmonkCount" name="viewmonkCount" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -287,7 +298,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Vegetarian Monk Count</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="vegMonkCount" name="vegMonkCount" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewvegMonkCount" name="viewvegMonkCount" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -297,7 +308,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Non-Vegetarian Monk Count</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="nonVegMonkCount" name="nonVegMonkCount" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewnonVegMonkCount" name="viewnonVegMonkCount" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -307,7 +318,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Assigned Buddhist Followers Count</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="bfCount" name="bfCount" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewbfCount" name="viewbfCount" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -337,11 +348,14 @@
                     <h3 class="login-head"align="center"><i class="fa fa-times-circle" ></i>Are you sure?</h3>
 
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeDeleteDaneSchedule">
                     @csrf
                     <div class="model-body">
                         <div class="row" >
                             <div class="col-md-12">
+                                <input type="hidden" id="deleteDaneScheduleID" name="id">
+
+
                                 <div class="form-group">
 
                                     <div class="col-md-10">
@@ -369,6 +383,54 @@
             autoclose: true,
             todayHighlight: true
         });
+        $('#updatedaneDate').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayHighlight: true
+        });
+
+
+        function viewUpdateModel(id){
+            $.ajax({
+                type: "GET",
+                url: '/templeDaneSchedule/'+id,
+            }).done(function(res) {
+
+                $('#updateDaneScheduleID').val(id);
+                $('#updatedaneDate').val(res['date']);
+                $('#updatedaneTime').val(res['dane_time_id']);
+                $('#updatemonkCount').val(res['monkCount']);
+                $('#updatevegMonkCount').val(res['vegMonkCount']);
+                $('#updatenonVegMonkCount').val(res['nonVegMonkCount']);
+                $('#updateModel').modal('show');
+            });
+
+
+        }
+
+
+        function viewModel(id){
+            $.ajax({
+                type: "GET",
+                url: '/templeDaneSchedule/'+id,
+            }).done(function(res) {
+
+                $('#viewdaneDate').text(res['date']);
+                $('#viewdaneTime').text(res['daneTimeName']);
+                $('#viewmonkCount').text(res['monkCount']);
+                $('#viewvegMonkCount').text(res['vegMonkCount']);
+                $('#viewnonVegMonkCount').text(res['nonVegMonkCount']);
+                $('#viewbfCount').text(res['bfCount']);
+                $('#viewModel').modal('show');
+            });
+
+
+        }
+
+        function viewDeleteModel(id){
+            $('#deleteDaneScheduleID').val(id);
+            $('#deleteModel').modal('show');
+        }
 
     </script>
 
@@ -387,4 +449,6 @@
 
         </script>
     @endif
+
+    <script type="text/javascript">$('#dataTable').DataTable();</script>
 @endsection

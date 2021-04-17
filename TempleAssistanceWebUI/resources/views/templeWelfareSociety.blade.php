@@ -56,10 +56,10 @@
                             <td>{{$row['welfareMemberCount']}}</td>
                             <td>{{$row['welfarePresident']}}</td>
                             <td>
-                                <button class="btn btn-success"data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning"onclick="viewUpdateModel({{$row['id']}})"><i
-                                        class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
+{{--                                <button class="btn btn-success"data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>--}}
+                                <button class="btn btn-success"onclick="viewModel({{$row['id']}})"><i class="fa fa-eye"></i></button>
+                                <button class="btn btn-warning"onclick="viewUpdateModel({{$row['id']}})"><i class="fa fa-edit"></i></button>
+{{--                                <button class="btn btn-danger"data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>--}}
 
                             </td>
                         </tr>
@@ -258,15 +258,15 @@
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-5">Email</label>
-                                    <div class="col-md-7">
-                                        <input class="form-control"  type="text" id="updateEmail45"  name="updateEmail45" placeholder="Email"></input>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-5">Email</label>--}}
+{{--                                    <div class="col-md-7">--}}
+{{--                                        <input class="form-control"  type="text" id="updateEmail45"  name="updateEmail45" placeholder="Email"></input>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
 
                                 {{--                                <div class="form-group">--}}
@@ -311,7 +311,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">Welfare Society</h4>
                 </div>
-                <form method="PUT" action="">
+                <form method="POST" action="/templeWelfareSociety/{id}">
                     @csrf
                     <div class="model-body">
                         <div class="row" >
@@ -320,7 +320,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Welfare Society Name</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfareSocietyName" name="welfareSocietyName" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewwelfareSocietyName" name="viewwelfareSocietyName" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -331,7 +331,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Registration Number</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfareSocietyRegNum" name="welfareSocietyRegNum" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewwelfareSocietyRegNum" name="viewwelfareSocietyRegNum" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -341,7 +341,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Member Count</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="memberCount" name="memberCount" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewmemberCount" name="viewmemberCount" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -351,7 +351,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">President Name</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfarePName" name="welfarePName" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewwelfarePName" name="viewwelfarePName" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -361,7 +361,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Secretary Name</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfareSName" name="welfareSName" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewwelfareSName" name="viewwelfareSName" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -371,41 +371,41 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Treasure Name</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfareTName" name="welfareTName" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewwelfareTName" name="viewwelfareTName" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society About</u></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society About</u></label>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">Province</label>
-                                    <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfareSocietyProvince" name="welfareSocietyProvince" ></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-4">Province</label>--}}
+{{--                                    <div class="col-md-8">--}}
+{{--                                        <p class="form-control col-md-8"  type="text" id="viewwelfareSocietyProvince" name="viewwelfareSocietyProvince" ></p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">District</label>
-                                    <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfareSocietyDistrict" name="welfareSocietyDistrict" ></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-4">District</label>--}}
+{{--                                    <div class="col-md-8">--}}
+{{--                                        <p class="form-control col-md-8"  type="text" id="viewwelfareSocietyDistrict" name="viewwelfareSocietyDistrict" ></p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Address</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfareSocietyAddress" name="welfareSocietyAddress" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewwelfareSocietyAddress" name="viewwelfareSocietyAddress" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -415,7 +415,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Phone</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfareSocietyPhone" name="welfareSocietyPhone" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewwelfareSocietyPhone" name="viewwelfareSocietyPhone" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -425,26 +425,26 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Email</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="welfareSocietyEmail" name="welfareSocietyEmail" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="viewwelfareSocietyEmail" name="viewwelfareSocietyEmail" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society Permission</u></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Welfare Society Permission</u></label>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-4">UserName</label>
-                                    <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="updateuserName" name="updateuserName" ></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-4">UserName</label>--}}
+{{--                                    <div class="col-md-8">--}}
+{{--                                        <p class="form-control col-md-8"  type="text" id="viewuserName" name="viewuserName" ></p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
                             </div>
                         </div>
@@ -459,38 +459,38 @@
     </div>
 
 
-    {{-----------------------------------------------------------------------------------------------------Delete Welfare Society Model--}}
-    <div class="modal fade" id="deleteModel" data-backdrop="static" data-keyboard="false" tabindex="-1"
-         aria-labelledby="daneModelLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 class="login-head"align="center"><i class="fa fa-times-circle" ></i>Are you sure?</h3>
+{{--    --}}{{-----------------------------------------------------------------------------------------------------Delete Welfare Society Model--}}
+{{--    <div class="modal fade" id="deleteModel" data-backdrop="static" data-keyboard="false" tabindex="-1"--}}
+{{--         aria-labelledby="daneModelLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header">--}}
+{{--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>--}}
+{{--                    <h3 class="login-head"align="center"><i class="fa fa-times-circle" ></i>Are you sure?</h3>--}}
 
-                </div>
-                <form method="POST" action=" ">
-                    @csrf
-                    <div class="model-body">
-                        <div class="row" >
-                            <div class="col-md-12">
-                                <div class="form-group">
+{{--                </div>--}}
+{{--                <form method="POST" action=" ">--}}
+{{--                    @csrf--}}
+{{--                    <div class="model-body">--}}
+{{--                        <div class="row" >--}}
+{{--                            <div class="col-md-12">--}}
+{{--                                <div class="form-group">--}}
 
-                                    <div class="col-md-10">
-                                        <h5>Do you really want to delete these welfare? This process cannot be undone.</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" data-dismiss="modal" class="btn">Close</a>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+{{--                                    <div class="col-md-10">--}}
+{{--                                        <h5>Do you really want to delete these welfare? This process cannot be undone.</h5>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-footer">--}}
+{{--                            <a href="#" data-dismiss="modal" class="btn">Close</a>--}}
+{{--                            <button type="submit" class="btn btn-danger">Delete</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 @endsection
 
@@ -510,17 +510,55 @@
                 $('#updatewelfarePresident').val(res['welfarePresident']);
                 $('#updatewelfareSecretary').val(res['welfareSecretary']);
                 $('#updatewelfareTreasure').val(res['welfareTreasure']);
+
                 // if(res['wfhp']!=[]){
                 //     $('#updateEmail45').val(res['wfhp'][0]['phoneName']);
                 // }
 
+                // if(res['wfhe'].length!=0){
+                //     $('#updateEmail45').val(res['wfhe'][0]['emailName']);
+                //     // alert(res['wfhe'][0]['emailName']);
+                // }
+                //
+                // // alert(res['wfhe'][0]['emailName']);
+                $('#updateModel').modal('show');
+            });
+
+
+        }
+
+
+        function viewModel(id){
+            $.ajax({
+                type: "GET",
+                url: '/templeWelfareSociety/'+id,
+            }).done(function(res) {
+
+
+                $('#viewwelfareSocietyName').text(res['welfareName']);
+                $('#viewwelfareSocietyRegNum').text(res['welfareRegnum']);
+                $('#viewmemberCount').text(res['welfareMemberCount']);
+                $('#viewwelfarePName').text(res['welfarePresident']);
+                $('#viewwelfareSName').text(res['welfareSecretary']);
+                $('#viewwelfareTName').text(res['welfareTreasure']);
+
+
+                if(res['wfha'].length!=0){
+                    var address=(res['wfha'][0]['addressLine1'])+' , '+(res['wfha'][0]['addressLine2']);
+                    $('#viewwelfareSocietyAddress').text(address);
+                    // alert(res['wfha'][0]['emailName']);
+                }
+                if(res['wfhp'].length!=0){
+                    $('#viewwelfareSocietyPhone').text(res['wfhp'][0]['phoneName']);
+                    // alert(res['wfhe'][0]['emailName']);
+                }
                 if(res['wfhe'].length!=0){
-                    $('#updateEmail45').val(res['wfhe'][0]['emailName']);
+                    $('#viewwelfareSocietyEmail').text(res['wfhe'][0]['emailName']);
                     // alert(res['wfhe'][0]['emailName']);
                 }
 
-                // alert(res['wfhe'][0]['emailName']);
-                $('#updateModel').modal('show');
+                $('#viewModel').modal('show');
+
             });
 
 

@@ -50,33 +50,39 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($response['tableData'] as $row)
                         <tr>
-                            <td>1</td>
-                            <td>Budda Pooja</td>
-                            <td>2</td>
-                            <td>On Vesak Day, Buddhists all over the world events.</td>
-                            <td>2021/05/06</td>
-                            <td>2021/05/18</td>
-                            <td><p class="text-success">Approved</p></td>
-                            <td><button class="btn btn-success" data-toggle="modal" href="#viewModel"><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning" data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger" data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
-                            </td>
+                            <td>{{$row['id']}}</td>
+                            <td>{{$row['eventName']}}</td>
+                            <td>{{$row['eventCatergoryName']}}</td>
+                            <td>{{$row['eventInfo']}}</td>
+                            <td>{{$row['eventDateFrom']}}</td>
+                            <td>{{$row['eventDateTo']}}</td>
+                            @if($row['isApproved'])
+                                <td class="text-primary">Approved</td>
+                                <td>
+                                    <button class="btn btn-success" onclick="viewModel({{$row['id']}})"><i
+                                            class="fa fa-eye"></i></button>
 
+                                    <button class="btn btn-warning" onclick="viewUpdateModel({{$row['id']}})"><i
+                                            class="fa fa-edit"></i></button>
+
+                                    <button class="btn btn-danger" onclick="viewDeleteModel({{$row['id']}})"><i
+                                            class="fa fa-trash"></i></button>
+                                </td>
+                            @else
+                                <td class="text-warning">Not Approved</td>
+                                <td>
+                                    <button class="btn btn-success" onclick="viewModel({{$row['id']}})"><i
+                                            class="fa fa-eye"></i></button>
+
+                                    <button class="btn btn-warning" onclick="viewUpdateModel({{$row['id']}})"><i
+                                            class="fa fa-edit"></i></button>
+
+                                </td>
+                            @endif
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Budda Pooja</td>
-                            <td>2</td>
-                            <td>Buddhists all over the world events.</td>
-                            <td>2021/05/05</td>
-                            <td>2021/05/10</td>
-                            <td><p class="text-warning">Not-Approved</p></td>
-                            <td><button class="btn btn-success" data-toggle="modal" href="#viewModel" ><i class="fa fa-eye"></i></button>
-                                <button class="btn btn-warning" data-toggle="modal" href="#updateModel"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger" data-toggle="modal" href="#deleteModel"><i class="fa fa-trash"></i></button>
-                            </td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -148,15 +154,9 @@
                                     <label class="control-label col-md-5">Select Event Category</label>
                                     <div class="col-md-7">
                                         <select class="form-control" id="eventCategory" name="eventCategory">
-                                            <option value="1">Darmadeshana</option>
-                                            <option value="2">KatinePinkan</option>
-                                            <option value="3">Bodi Pooja</option>
-                                            <option value="5">Ashirwada Pooja</option>
-{{--                                            <option value="4">Repairing</option>--}}
-{{--                                            <option value="5">Shramadana</option>--}}
-{{--                                            <option value="6">DayakaSaba Reswim</option>--}}
-{{--                                            <option value="7">Bill Paymnet</option>--}}
-{{--                                            <option value="8">Others</option>--}}
+                                            @foreach($response['eventCategories'] as $option)
+                                            <option value="{{$option['id']}}">{{$option['eventCatergoryName']}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -257,11 +257,12 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">Update Temple Event</h4>
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeUpdateEvent ">
                     @csrf
                     <div class="model-body">
                         <div class="row" >
                             <div class="col-md-12">
+                                <input type="hidden" id="updateEventID" name="id">
 
                                 <div class="form-group">
                                     <label class="control-label col-md-12" for="inputSmall"><u>Event Date</u></label>
@@ -269,7 +270,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">Select Start Date</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm"  type="Date" id="eventFromDate" name="eventFromDate" >
+                                        <input class="form-control col-md-7 input-sm"  type="text" id="upeventFromDate" name="upeventFromDate" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -278,7 +279,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">Select End Date</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm"  type="Date" id="eventEndDate" name="eventEndDate" >
+                                        <input class="form-control col-md-7 input-sm"  type="text" id="upeventEndDate" name="upeventEndDate" >
                                     </div>
                                 </div>
 
@@ -288,7 +289,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">Select Start Time</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm"  type="Time" id="eventStartTime" name="eventStartTime" >
+                                        <input class="form-control col-md-7 input-sm"  type="Time" id="updateeventStartTime" name="updateeventStartTime" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -297,7 +298,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5" for="inputSmall">Select End Time</label>
                                     <div class="col-md-7">
-                                        <input class="form-control col-md-7 input-sm"  type="Time" id="eventEndTime" name="eventEndTime" >
+                                        <input class="form-control col-md-7 input-sm"  type="Time" id="updateeventEndTime" name="updateeventEndTime" >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -307,16 +308,10 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Select Event Category</label>
                                     <div class="col-md-7">
-                                        <select class="form-control" id="eventCategory" name="eventCategory">
-                                            <option value="0">Darmadeshana</option>
-                                            <option value="1">KatinePinkan</option>
-                                            <option value="2">Bodi Pooja</option>
-                                            <option value="3">Ashirwada Pooja</option>
-                                            <option value="4">Repairing</option>
-                                            <option value="5">Shramadana</option>
-                                            <option value="6">DayakaSaba Reswim</option>
-                                            <option value="7">Bill Paymnet</option>
-                                            <option value="8">Others</option>
+                                        <select class="form-control" id="updateeventCategory" name="updateeventCategory">
+                                            @foreach($response['eventCategories'] as $option)
+                                                <option value="{{$option['id']}}">{{$option['eventCatergoryName']}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -327,7 +322,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Event Name</label>
                                     <div class="col-md-7">
-                                        <textarea class="form-control" rows="2" type="text" id="eventName" name="eventName" placeholder="Enter Event Name"></textarea>
+                                        <textarea class="form-control" rows="2" type="text" id="updateeventName" name="updateeventName" placeholder="Enter Event Name"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -338,7 +333,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-5">Event Description</label>
                                     <div class="col-md-7">
-                                        <textarea class="form-control" rows="6" type="text" id="eventInfo" name="eventInfo" placeholder="Enter Event Description"></textarea>
+                                        <textarea class="form-control" rows="6" type="text" id="updateeventInfo" name="updateeventInfo" placeholder="Enter Event Description"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -352,43 +347,43 @@
                                     <label class="control-label col-md-12" for="inputSmall"><u>Event About</u></label>
                                 </div>
 
-                                <label class="control-label col-md-5">Event Address</label>
-                                <div class="col-md-7">
-                                    <textarea class="form-control" rows="4" type="text" id="eventAddress" name="eventAddress" placeholder="Enter Event Address"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <label class="control-label col-md-5">Event Address</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <textarea class="form-control" rows="4" type="text" id="eventAddress" name="eventAddress" placeholder="Enter Event Address"></textarea>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
                                 <label class="control-label col-md-5">Event Phone</label>
                                 <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="eventPhone" name="eventPhone" placeholder="Enter Event Phone"></input>
+                                    <input class="form-control col-md-7" type="text" id="updateeventPhone" name="updateeventPhone" placeholder="Enter Event Phone"></input>
                                 </div>
-                                <label class="control-label col-md-5">This is Primary Phone Number</label>
-                                <div class="col-md-7">
-                                    <div class="toggle lg">
-                                        <label>
-                                            <input type="checkbox" id="eventPhonePrimary" name="eventPhonePrimary"><span class="button-indecator"></span>
-                                        </label>
-                                    </div>
-                                </div>
+{{--                                <label class="control-label col-md-5">This is Primary Phone Number</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <div class="toggle lg">--}}
+{{--                                        <label>--}}
+{{--                                            <input type="checkbox" id="eventPhonePrimary" name="eventPhonePrimary"><span class="button-indecator"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
-                                <label class="control-label col-md-5">Event Email</label>
-                                <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="eventEmail" name="eventEmail" placeholder="Enter Event Email"></input>
-                                </div>
-                                <label class="control-label col-md-5">This is Primary Email</label>
-                                <div class="col-md-7">
-                                    <div class="toggle lg">
-                                        <label>
-                                            <input type="checkbox" id="eventEmailPrimary" name="eventEmailPrimary"><span class="button-indecator"></span>
-                                        </label>
-                                    </div>
-                                </div>
+{{--                                <label class="control-label col-md-5">Event Email</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <input class="form-control col-md-7" type="text" id="eventEmail" name="eventEmail" placeholder="Enter Event Email"></input>--}}
+{{--                                </div>--}}
+{{--                                <label class="control-label col-md-5">This is Primary Email</label>--}}
+{{--                                <div class="col-md-7">--}}
+{{--                                    <div class="toggle lg">--}}
+{{--                                        <label>--}}
+{{--                                            <input type="checkbox" id="eventEmailPrimary" name="eventEmailPrimary"><span class="button-indecator"></span>--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
@@ -399,18 +394,21 @@
                                 </div>
                                 <label class="control-label col-md-5">Event Longitude</label>
                                 <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text" id="eventLongitude" name="eventLongitude" placeholder="Enter Event Longitude"></input>
+                                    <input class="form-control col-md-7" type="text" id="updateeventLongitude" name="updateeventLongitude" placeholder="Enter Event Longitude"></input>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
+
+
                                 <label class="control-label col-md-5">Event Latitude</label>
                                 <div class="col-md-7">
-                                    <input class="form-control col-md-7" type="text"  id="eventLatitude" name="eventLatitude" placeholder="Enter Event Latitude"></input>
+                                    <input class="form-control col-md-7" type="text" id="updateeventLatitude" name="updateeventLatitude" placeholder="Enter Event Latitude"></input>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
+
 
 {{--                                <div class="form-group">--}}
 {{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Image</u></label>--}}
@@ -446,7 +444,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title" id="daneModelLabel" align="center">Temple Event</h4>
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeEventManage/{id}">
                     @csrf
                     <div class="model-body">
                         <div class="row" >
@@ -457,7 +455,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" >Start Date</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="eventFromDate" name="eventFromDate" ></p>
+                                        <p class="form-control col-md-8"  type="text" id="vieweventFromDate" name="vieweventFromDate" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -466,7 +464,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" for="inputSmall">End Date</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8 "  type="text" id="eventEndDate" name="eventEndDate" ></p>
+                                        <p class="form-control col-md-8 "  type="text" id="vieweventEndDate" name="vieweventEndDate" ></p>
                                     </div>
                                 </div>
 
@@ -476,7 +474,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Start Time</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8 "  ttype="text" id="eventStartTime" name="eventStartTime" ></p>
+                                        <p class="form-control col-md-8 "  type="text" id="vieweventStartTime" name="vieweventStartTime" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -485,7 +483,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4" >End Time</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8 "  type="text" id="eventEndTime" name="eventEndTime" ></p>
+                                        <p class="form-control col-md-8 "  type="text" id="vieweventEndTime" name="vieweventEndTime" ></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -495,7 +493,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Select Event Category</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8" type="text" id="eventCategory" name="eventCategory"></p>
+                                        <p class="form-control col-md-8" type="text" id="vieweventCategory" name="vieweventCategory"></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -505,7 +503,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Event Name</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="eventName" name="eventName"></p>
+                                        <p class="form-control col-md-8"  type="text" id="vieweventName" name="vieweventName"></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -515,43 +513,62 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Event Description</label>
                                     <div class="col-md-8">
-                                        <p class="form-control col-md-8"  type="text" id="eventInfo" name="eventInfo"></p>
+                                        <p class="form-control col-md-8"  type="text" id="vieweventInfo" name="vieweventInfo"></p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-12" for="inputSmall"><u>Event About</u></label>
+                                </div>
+
+                                <label class="control-label col-md-4">Event Phone</label>
+                                <div class="col-md-8">
+
+                                    <p class="form-control col-md-8"  type="text" id="vieweventPhone" name="vieweventPhone" ></p>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-12" ></label>
+                                </div>
+
+
 
                                 <div class="form-group">
                                     <label class="control-label col-md-12" for="inputSmall"><u>Event Location</u></label>
                                 </div>
                                 <label class="control-label col-md-4">Longitude</label>
                                 <div class="col-md-8">
-                                    <p class="form-control col-md-8" type="text" id="eventLongitude" name="eventLongitude" ></p>
+                                    <p class="form-control col-md-8" type="text" id="vieweventLongitude" name="vieweventLongitude" ></p>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
                                 <label class="control-label col-md-4">Latitude</label>
                                 <div class="col-md-8">
-                                    <p class="form-control col-md-8" type="textView"  id="eventLatitude" name="eventLatitude" ></p>
+                                    <p class="form-control col-md-8" type="text"  id="vieweventLatitude" name="vieweventLatitude" ></p>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-12" ></label>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" for="inputSmall"><u>Image</u></label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4" for="inputSmall">Event Image</label>
-                                    <div class="col-md-8">
-                                        <P class="form-control col-md-8" type="imageView"  id="eventImage" name="eventImage"></P>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12" ></label>
-                                </div>
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" for="inputSmall"><u>Image</u></label>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-4" for="inputSmall">Event Image</label>--}}
+{{--                                    <div class="col-md-8">--}}
+{{--                                        <P class="form-control col-md-8" type="imageView"  id="eventImage" name="eventImage"></P>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label class="control-label col-md-12" ></label>--}}
+{{--                                </div>--}}
 
                             </div>
                         </div>
@@ -575,8 +592,9 @@
                     <h3 class="login-head"align="center"><i class="fa fa-times-circle" ></i>Are you sure?</h3>
 
                 </div>
-                <form method="POST" action=" ">
+                <form method="POST" action="/templeDeleteEvent ">
                     @csrf
+                    <input type="hidden" id="deleteEventID" name="id">
                     <div class="model-body">
                         <div class="row" >
                             <div class="col-md-12">
@@ -607,14 +625,106 @@
         $('#eventFromDate').datepicker({
             format: "yyyy-mm-dd",
             autoclose: true,
-            todayHighlight: true
+            todayHighlight: true,
+            orientation: 'bottom'
         });
 
         $('#eventEndDate').datepicker({
             format: "yyyy-mm-dd",
             autoclose: true,
-            todayHighlight: true
+            todayHighlight: true,
+            orientation: 'bottom'
         });
+
+        $('#upeventFromDate').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayHighlight: true,
+            orientation: 'bottom'
+        });
+
+        $('#upeventEndDate').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true,
+            todayHighlight: true,
+            orientation: 'bottom'
+        });
+
+
+
+
+        function viewUpdateModel(id){
+            $.ajax({
+                type: "GET",
+                url: '/templeEventManage/'+id,
+            }).done(function(res) {
+                var from = res['eventDateFrom'].split(' ');
+                var end = res['eventDateTo'].split(' ');
+
+                $('#updateEventID').val(id);
+                $('#upeventFromDate').val(from[0]);
+                $('#upeventEndDate').val(end[0]);
+                $('#updateeventStartTime').val(from[1]);
+                $('#updateeventEndTime').val(end[1]);
+               // $('#updateeventCategory').text(res['eventCategory']);
+                $('#updateeventName').val(res['eventName']);
+                $('#updateeventInfo').val(res['eventInfo']);
+                $('#updateeventLongitude').val(res['longitude']);
+                $('#updateeventLatitude').val(res['latitude']);
+                $('#updateeventCategory').val(res['event_catergory_id']).change();
+
+                 if(res['ehp'].length!=0){
+                     $('#updateeventPhone').val(res['ehp'][0]['phoneName']);
+                    // alert(res['ehp'][0]['phoneName']);
+                 }
+
+
+                $('#updateModel').modal('show');
+            });
+
+
+        }
+
+
+
+
+        function viewModel(id) {
+            $.ajax({
+                type: "GET",
+                url: '/templeEventManage/' + id,
+            }).done(function (res) {
+
+                var fromV = res['eventDateFrom'].split(' ');
+                var endV = res['eventDateTo'].split(' ');
+
+                $('#vieweventFromDate').text(fromV[0]);
+                $('#vieweventEndDate').text(endV[0]);
+                $('#vieweventStartTime').text(fromV[1]);
+                $('#vieweventEndTime').text(endV[1]);
+                $('#vieweventCategory').text(res['eventCatergoryName']);
+                $('#vieweventName').text(res['eventName']);
+                $('#vieweventInfo').text(res['eventInfo']);
+                $('#vieweventLongitude').text(res['longitude']);
+                $('#vieweventLatitude').text(res['latitude']);
+
+                 if(res['ehp'].length!=0){
+                     $('#vieweventPhone').text(res['ehp'][0]['phoneName']);
+                    // alert(res['ehp'][0]['phoneName']);
+                 }
+
+
+
+                $('#viewModel').modal('show');
+            });
+        }
+
+
+
+        function viewDeleteModel(id){
+            $('#deleteEventID').val(id);
+            $('#deleteModel').modal('show');
+        }
+
 
     </script>
 
@@ -636,3 +746,5 @@
 
     <script type="text/javascript">$('#dataTable').DataTable();</script>
 @endsection
+
+
