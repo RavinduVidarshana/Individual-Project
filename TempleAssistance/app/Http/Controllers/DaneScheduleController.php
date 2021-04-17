@@ -28,7 +28,7 @@ class DaneScheduleController extends Controller
                 ->where('dane_schedule_has_bf.dane_shedule_id', $item->id)
                 ->select('buddhist_followers.id as bfid', 'buddhist_followers.firstName', 'buddhist_followers.lastName', 'buddhist_followers.NIC')
                 ->get();
-            $sub = array('dshb' => $DANS, "date" => $item->date->format('d-m-Y'), "monkCount" => $item->monkCount, "isBook" => $item->isBook, "vegMonkCount" => $item->vegMonkCount, "nonVegMonkCount" => $item->nonVegMonkCount, "bfCount" => $item->bfCount, "temple_id" => $item->temple_id, "dane_time_id" => $item->dane_time_id, "daneTimeName" =>$item->daneTimeName);
+            $sub = array('dshb' => $DANS,"id" => $item->id , "date" => $item->date->format('d-m-Y'), "monkCount" => $item->monkCount, "isBook" => $item->isBook, "vegMonkCount" => $item->vegMonkCount, "nonVegMonkCount" => $item->nonVegMonkCount, "bfCount" => $item->bfCount, "temple_id" => $item->temple_id, "dane_time_id" => $item->dane_time_id, "daneTimeName" =>$item->daneTimeName);
             array_push($DANAY, $sub);
         }
 
@@ -65,7 +65,7 @@ class DaneScheduleController extends Controller
             'monkCount' => 'required|min:1|numeric',
             'vegMonkCount' => 'required|min:1|numeric',
             'nonVegMonkCount' => 'required|min:1|numeric',
-            'temple_id' => 'required|numeric',
+//            'temple_id' => 'required|numeric',
             'dane_time_id' => 'required|numeric',
 
 
@@ -75,7 +75,14 @@ class DaneScheduleController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+
+            $JsonRes=[
+                "message" => "Validation Failure",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 400);
+
 
         } else {
             $date = $request->date;
@@ -187,7 +194,12 @@ class DaneScheduleController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            $JsonRes=[
+                "message" => "Validation Failure",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 400);
 
         } else {
             $date = $request->date;
@@ -226,16 +238,31 @@ class DaneScheduleController extends Controller
      */
     public function destroy($id)
     {
-        DaneShedule:: where('isBook', 0)
-            ->where('id', $id)
-            ->delete();
+//        DaneShedule:: where('isBook', 0)
+//            ->where('id', $id)
+//            ->delete();
+//
+//        $JsonRes=[
+//            "message" => "Delete Dane Shedule",
+//            "status" => 200,
+//            "response" => "",
+//        ];
+//        return response()->json($JsonRes, 200);
+//        return response()->json(["message" => "Delete Dane Shedule "], 200);
+
+        $isBook= false;
+
+        $DS = News::DaneShedule($id);
+        $DS->isActive= $isBook;
+        $DS->update();
 
         $JsonRes=[
-            "message" => "Delete Dane Shedule",
+            "message" => "Delete News",
             "status" => 200,
             "response" => "",
         ];
         return response()->json($JsonRes, 200);
-//        return response()->json(["message" => "Delete Dane Shedule "], 200);
+
+
     }
 }

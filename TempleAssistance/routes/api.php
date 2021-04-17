@@ -20,6 +20,7 @@ Route::apiResource("Test","TestController");
 
 Route::apiResource("TempleRegister","Common\TempleRegisterController");
 Route::apiResource("BFRegister","Common\BFRegisterController");
+Route::apiResource("DataLoad","Common\DataLoadController");
 
 Route::apiResource("Login","Common\LoginController");
 

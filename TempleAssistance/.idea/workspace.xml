@@ -209,6 +209,12 @@
       <workItem from="1618113841345" duration="9076000" />
       <workItem from="1618201387509" duration="8009000" />
       <workItem from="1618244190972" duration="10237000" />
+      <workItem from="1618464995661" duration="1615000" />
+      <workItem from="1618507443441" duration="2109000" />
+      <workItem from="1618547806822" duration="8863000" />
+      <workItem from="1618588313678" duration="9147000" />
+      <workItem from="1618657034890" duration="2013000" />
+      <workItem from="1618687324315" duration="1382000" />
     </task>
     <servers />
   </component>
@@ -248,16 +254,5 @@
     <state x="379" y="215" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1024.728@0.0.1366.728" timestamp="1616736868794" />
     <state x="1650" y="215" key="com.intellij.ide.util.TipDialog/0.0.1366.728/1366.0.1024.728@1366.0.1024.728" timestamp="1615810851772" />
     <state x="379" y="215" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1616774635724" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/app/Http/Controllers/Event/TempleEventController.php</url>
-          <line>4</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

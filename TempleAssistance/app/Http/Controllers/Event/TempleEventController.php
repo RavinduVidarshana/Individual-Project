@@ -11,6 +11,7 @@ use App\Model\TempleHasPhone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class TempleEventController extends Controller
@@ -26,12 +27,14 @@ class TempleEventController extends Controller
             ->join('event_organized','event_organized.id','=','event.event_organized_id')
             ->join('temple','temple.id','=','event.temple_id')
             ->where('event.event_organized_id',DefaultData::$EVENT_ORGANIZATION_TEMPLE)
+            ->where('event.eventIsActive',1)
             ->select('event.id as id',
                 'event.eventName',
                 'event.eventInfo',
                 'event.eventDateFrom',
                 'event.eventDateTo',
                 'event.eventIsActive',
+                'event.isApproved',
                 'event.longitude',
                 'event.latitude',
                 'event_catergory.id as event_catergory_id',
@@ -57,11 +60,12 @@ class TempleEventController extends Controller
                 "id" => $item->id,
                 "eventName" => $item->eventName,
                 "eventInfo" => $item->eventInfo,
-                "eventDateFrom'" => $item->eventDateFrom ->format('d-m-Y'),
+                "eventDateFrom" => $item->eventDateFrom ->format('d-m-Y'),
                 "eventDateTo" => $item->eventDateTo ->format('d-m-Y'),
                 "eventIsActive" => $item->eventIsActive,
+                "isApproved" => $item->isApproved,
                 "longitude" => $item->longitude,
-                "latitude'" => $item->latitude,
+                "latitude" => $item->latitude,
                 "event_catergory_id" => $item->event_catergory_id,
                 "eventCatergoryName" => $item->eventCatergoryName,
                 "event_organized_id" => $item->event_organized_id,
@@ -140,7 +144,7 @@ class TempleEventController extends Controller
             $eventInfo = $request->eventInfo;
             $eventDateFrom = $request->eventDateFrom;
             $eventDateTo = $request->eventDateTo;
-            $eventIsActive = false;
+            $eventIsActive = true;
             $longitude = $request->longitude;
             $latitude = $request->latitude;
             $event_catergory_id = $request->event_catergory_id;
@@ -221,7 +225,7 @@ class TempleEventController extends Controller
         $EHP = EventHasPhone::join('phone','event_has_phone.phone_id','=','phone.id')
             ->select('phone.id as id','phone.phoneName','phone.isPrimary')
             ->where('event_has_phone.event_id',$id)
-            ->first();
+            ->get();
 
         $EI = EventImage::where('event_id',$id)
             ->get();
@@ -232,11 +236,11 @@ class TempleEventController extends Controller
 //            "event_id" => $EV->id,
             "eventName" => $EV->eventName,
             "eventInfo" => $EV->eventInfo,
-            "eventDateFrom'" => $EV->eventDateFrom ->format('d-m-Y'),
-            "eventDateTo" => $EV->eventDateTo ->format('d-m-Y'),
+            "eventDateFrom" => $EV->eventDateFrom ->format('Y-m-d h:i A'),
+            "eventDateTo" => $EV->eventDateTo ->format('Y-m-d h:i A'),
             "eventIsActive" => $EV->eventIsActive,
             "longitude" => $EV->longitude,
-            "latitude'" => $EV->latitude,
+            "latitude" => $EV->latitude,
             "event_catergory_id" => $EV->event_catergory_id,
             "eventCatergoryName" => $EV->eventCatergoryName,
             "event_organized_id" => $EV->event_organized_id,
@@ -284,8 +288,8 @@ class TempleEventController extends Controller
 
             'eventName' => 'required|min:1|max:45',
             'eventInfo' => 'required|min:1|max:345',
-            'eventDateFrom' => 'required|date_format:Y-m-d|after:today',
-            'eventDateTo' => 'required|date_format:Y-m-d|after:today',
+            'eventDateFrom' => 'required',
+            'eventDateTo' => 'required',
             'longitude' => 'required',
             'latitude' => 'required',
             'event_catergory_id' => 'required|numeric',
@@ -298,7 +302,12 @@ class TempleEventController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            $JsonRes=[
+                "message" => "Validation Failure",
+                "status" => 401,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 400);
 
         } else {
 
@@ -322,7 +331,6 @@ class TempleEventController extends Controller
             $EV->eventInfo = $eventInfo;
             $EV->eventDateFrom= $eventDateFrom;
             $EV->eventDateTo= $eventDateTo;
-            $EV->eventIsActive =$eventIsActive;
             $EV->longitude= $longitude;
             $EV->latitude= $latitude;
             $EV->event_catergory_id = $event_catergory_id;
@@ -333,13 +341,25 @@ class TempleEventController extends Controller
             $EHP = EventHasPhone::where('event_id',$id)
                 ->first();
 
-            $PN = Phone::find($EHP->phone_id);
-            $PN->phoneName = $phoneName ;
-            $PN->update();
+            if($EHP) {
+                $PN = Phone::find($EHP->phone_id);
+                $PN->phoneName = $phoneName;
+                $PN->update();
+            }else{
+                $isPrimary=false;
+
+                $PN = new Phone();
+                $PN->phoneName = $phoneName ;
+                $PN->isPrimary = $isPrimary ;
+                $PN->save();
+
+                $TMHP = new EventHasPhone();
+                $TMHP ->phone_id = $PN -> id;
+                $TMHP ->event_id = $EV->id;
+                $TMHP ->save();
+            }
 
 
-
-//            return response()->json(["message"=>"Successfully Update Temple Event"],200);
             $JsonRes=[
                 "message" => "Successfully Update Temple Event",
                 "status" => 200,
@@ -358,18 +378,39 @@ class TempleEventController extends Controller
      */
     public function destroy($id)
     {
-        Event:: where('eventIsActive','isApproved',1)
-            -> where('id',$id)
-            -> delete();
+//        Event:: where('eventIsActive','isApproved',1)
+//            -> where('id',$id)
+//            -> delete();
+//
+////        return response()->json(["message"=>"Delete Event "],200);
+//        $JsonRes=[
+//            "message" => "Delete Event",
+//            "status" => 200,
+//            "response" => "",
+//        ];
+//        return response()->json($JsonRes, 200);
 
-//        return response()->json(["message"=>"Delete Event "],200);
-        $JsonRes=[
-            "message" => "Delete Event",
-            "status" => 200,
-            "response" => "",
-        ];
-        return response()->json($JsonRes, 200);
 
 
+
+        {
+            $eventIsActive= false;
+
+            $EV = Event::find($id);
+            $EV->eventIsActive= $eventIsActive;
+            $EV->update();
+
+            $JsonRes=[
+                "message" => "Delete Event",
+                "status" => 200,
+                "response" => "",
+            ];
+            return response()->json($JsonRes, 200);
+//        return response()->json(["message"=>"Delete News "],200);
+        }
     }
+
+
+
+
 }
